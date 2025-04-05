@@ -1,0 +1,178 @@
+---
+import Layout from './Layout.astro';
+import { Image } from 'astro:assets';
+import { format } from 'date-fns';
+
+const { frontmatter } = Astro.props;
+
+function formatDate(date: Date) {
+  return format(date, 'MMMM yyyy');
+}
+---
+
+<Layout title={`${frontmatter.title} | Projects`}>
+  <article class="max-w-4xl mx-auto py-20 px-6">
+    <header class="mb-12">
+      <div class="relative aspect-video mb-8 overflow-hidden rounded-lg">
+        <Image
+          src={frontmatter.image}
+          alt={frontmatter.title}
+          width={800}
+          height={450}
+          class="object-cover w-full h-full"
+        />
+        <div class="absolute top-4 right-4 px-3 py-1 bg-garden-accent text-white text-sm font-medium rounded-full">
+          {frontmatter.status}
+        </div>
+      </div>
+
+      <h1 class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">{frontmatter.title}</h1>
+      <p class="text-xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body">{frontmatter.description}</p>
+
+      <div class="flex flex-wrap gap-4 mb-6">
+        {frontmatter.link && (
+          <a 
+            href={frontmatter.link}
+            target="_blank"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-garden-accent text-white rounded-lg hover:bg-opacity-90 transition-colors font-ui"
+          >
+            <span>Visit Project</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+            </svg>
+          </a>
+        )}
+        {frontmatter.github && (
+          <a 
+            href={frontmatter.github}
+            target="_blank"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-garden-dark-background text-gray-800 dark:text-garden-dark-primary rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-garden-dark-surface transition-colors font-ui"
+          >
+            <span>View Source</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+        )}
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-6">
+        {frontmatter.tags.map((tag: string) => (
+          <span class="px-3 py-1 bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary text-sm rounded-full font-ui">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div class="text-garden-secondary dark:text-garden-dark-secondary font-ui">
+        <time datetime={frontmatter.startDate.toISOString()}>
+          {formatDate(frontmatter.startDate)}
+        </time>
+        {frontmatter.endDate && (
+          <span> - {formatDate(frontmatter.endDate)}</span>
+        )}
+      </div>
+    </header>
+
+    <div class="prose prose-lg dark:prose-dark max-w-none mb-12">
+      <slot />
+    </div>
+
+    {frontmatter.features && (
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary mb-6 font-ui">Key Features</h2>
+        <ul class="space-y-2">
+          {frontmatter.features.map((feature: string) => (
+            <li class="flex items-start gap-2">
+              <svg class="w-6 h-6 text-garden-accent dark:text-garden-dark-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-garden-secondary dark:text-garden-dark-secondary font-body">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {frontmatter.techStack && (
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary mb-6 font-ui">Tech Stack</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          {frontmatter.techStack.map((tech: { category: string; items: string[] }) => (
+            <div>
+              <h3 class="text-xl font-semibold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">{tech.category}</h3>
+              <div class="flex flex-wrap gap-2">
+                {tech.items.map((item: string) => (
+                  <span class="px-3 py-1 bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary text-sm rounded-full font-ui">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {(frontmatter.challenges || frontmatter.learnings) && (
+      <section class="mb-12">
+        <div class="grid md:grid-cols-2 gap-8">
+          {frontmatter.challenges && (
+            <div>
+              <h2 class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary mb-6 font-ui">Challenges</h2>
+              <ul class="space-y-2">
+                {frontmatter.challenges.map((challenge: string) => (
+                  <li class="flex items-start gap-2">
+                    <svg class="w-6 h-6 text-garden-accent dark:text-garden-dark-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    <span class="text-garden-secondary dark:text-garden-dark-secondary font-body">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {frontmatter.learnings && (
+            <div>
+              <h2 class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary mb-6 font-ui">Key Learnings</h2>
+              <ul class="space-y-2">
+                {frontmatter.learnings.map((learning: string) => (
+                  <li class="flex items-start gap-2">
+                    <svg class="w-6 h-6 text-garden-accent dark:text-garden-dark-accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span class="text-garden-secondary dark:text-garden-dark-secondary font-body">{learning}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {frontmatter.gallery && (
+      <section>
+        <h2 class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary mb-6 font-ui">Gallery</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          {frontmatter.gallery.map((item: { image: string; caption: string }) => (
+            <figure>
+              <Image
+                src={item.image}
+                alt={item.caption}
+                width={800}
+                height={450}
+                class="rounded-lg shadow-md"
+              />
+              <figcaption class="mt-2 text-center text-sm text-garden-secondary dark:text-garden-dark-secondary font-body">
+                {item.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</Layout>

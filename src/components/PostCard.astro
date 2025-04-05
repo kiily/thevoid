@@ -1,0 +1,45 @@
+---
+import { format } from 'date-fns';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  updateDate?: Date;
+  url: string;
+  tags?: string[];
+}
+
+const { title, description, publishDate, updateDate, url, tags } = Astro.props;
+---
+
+<article class="bg-garden-surface dark:bg-garden-dark-surface p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+  <a href={url}>
+    <h2 class="text-xl font-bold text-garden-primary dark:text-garden-dark-primary mb-2 hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors font-ui">
+      {title}
+    </h2>
+  </a>
+  <p class="text-garden-secondary dark:text-garden-dark-secondary mb-4 font-body">{description}</p>
+  
+  <div class="flex flex-wrap gap-2 mb-4">
+    {tags?.map(tag => (
+      <a 
+        href={`/tag/${tag}`}
+        class="px-2 py-1 text-sm bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors font-ui"
+      >
+        {tag}
+      </a>
+    ))}
+  </div>
+
+  <div class="text-sm text-garden-secondary dark:text-garden-dark-secondary font-ui">
+    <time datetime={publishDate.toISOString()}>
+      Published: {format(publishDate, 'MMMM d, yyyy')}
+    </time>
+    {updateDate && (
+      <time datetime={updateDate.toISOString()} class="ml-4">
+        Updated: {format(updateDate, 'MMMM d, yyyy')}
+      </time>
+    )}
+  </div>
+</article>

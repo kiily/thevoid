@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Search from '../../components/Search.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('garden');
+const sortedPosts = posts.sort((a, b) => 
+  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+// Get unique categories and tags
+const categories = [...new Set(posts.map(post => post.data.category))];
+const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+---
+
+<Layout title="Digital Garden | Miguel Marin">
+  <div class="container mx-auto max-w-4xl px-6 py-20">
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">Digital Garden</h1>
+      <p class="text-xl text-garden-secondary dark:text-garden-dark-secondary font-body">A space where ideas grow and thoughts interconnect.</p>
+    </header>
+
+    <div class="grid md:grid-cols-[250px,1fr] gap-8">
+      <aside class="space-y-8">
+        <div>
+          <h2 class="text-lg font-semibold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">Categories</h2>
+          <ul class="space-y-2">
+            {categories.map(category => (
+              <li>
+                <a 
+                  href={`/category/${category}`}
+                  class="text-garden-secondary dark:text-garden-dark-secondary hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors font-body"
+                >
+                  {category}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-semibold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">Tags</h2>
+          <div class="flex flex-wrap gap-2">
+            {tags.map(tag => (
+              <a 
+                href={`/tag/${tag}`}
+                class="px-2 py-1 text-sm bg-garden-surface dark:bg-garden-dark-surface text-garden-secondary dark:text-garden-dark-secondary rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors font-ui"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      <div>
+        <div class="mb-8">
+          <Search />
+        </div>
+        <div class="space-y-8">
+          {sortedPosts.map(post => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              publishDate={post.data.publishDate}
+              updateDate={post.data.updateDate}
+              url={`/garden/${post.slug}`}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

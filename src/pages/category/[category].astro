@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('garden');
+  const categories = [...new Set(posts.map(post => post.data.category))];
+  
+  return categories.map(category => ({
+    params: { category },
+    props: { 
+      posts: posts.filter(post => post.data.category === category)
+        .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()),
+      categories: [...new Set(posts.map(post => post.data.category))].sort(),
+      currentCategory: category
+    },
+  }));
+}
+
+const { category } = Astro.params;
+const { posts, categories, currentCategory } = Astro.props;
+---
+
+<Layout title={`${category} | Digital Garden`}>
+  <div class="container mx-auto max-w-4xl px-6 py-20">
+    <div class="grid md:grid-cols-[200px,1fr] gap-8">
+      <aside class="space-y-6">
+        <div>
+          <h2 class="text-lg font-semibold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">Categories</h2>
+          <ul class="space-y-2">
+            {categories.map(cat => (
+              <li>
+                <a 
+                  href={`/category/${cat}`}
+                  class={`block py-1 px-2 rounded transition-colors ${
+                    cat === currentCategory 
+                      ? 'bg-garden-accent text-white' 
+                      : 'text-garden-secondary dark:text-garden-dark-secondary hover:text-garden-accent dark:hover:text-garden-dark-accent'
+                  }`}
+                >
+                  {cat}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-8">
+          <a 
+            href="/garden"
+            class="text-garden-accent dark:text-garden-dark-accent hover:underline inline-flex items-center gap-2 font-ui"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back to Garden
+          </a>
+        </div>
+      </aside>
+
+      <div>
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">
+            {category}
+          </h1>
+          <p class="text-xl text-garden-secondary dark:text-garden-dark-secondary font-body">
+            {posts.length} {posts.length === 1 ? 'post' : 'posts'} in this category
+          </p>
+        </header>
+
+        <div class="space-y-8">
+          {posts.map(post => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              publishDate={post.data.publishDate}
+              updateDate={post.data.updateDate}
+              url={`/garden/${post.slug}`}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
