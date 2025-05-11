@@ -1,84 +1,87 @@
 ---
-import Search from './Search.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
-  { label: 'About', href: '/#about' },
-  { label: 'Technologies', href: '/#technologies' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Writing', href: '/#writing' },
-  { label: 'Contact', href: '/#contact' },
+	{ label: 'About', href: '/#about' },
+	{ label: 'Technologies', href: '/#technologies' },
+	{ label: 'Projects', href: '/#projects' },
+	{ label: 'Writing', href: '/#writing' },
+	{ label: 'Contact', href: '/#contact' },
 ];
 
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === '/';
 ---
 
-<header class="fixed w-full bg-white/80 dark:bg-garden-dark-surface/80 backdrop-blur-sm z-50 shadow-sm">
-  <nav class="container mx-auto px-6 py-4">
-    <div class="flex items-center justify-between gap-4">
-      <a href="/" class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary">The void</a>
-      
-      <div class="flex-1 max-w-xl">
-        <Search />
-      </div>
+<header
+	class="fixed w-full bg-white/80 dark:bg-garden-dark-surface/80 backdrop-blur-sm z-50 shadow-sm"
+>
+	<nav class="container mx-auto px-6 py-4">
+		<div class="flex items-center justify-between gap-4">
+			<a
+				href="/"
+				class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary"
+				>The void</a
+			>
 
-      <div class="flex items-center gap-4">
-        <ThemeToggle />
-        <ul class="hidden md:flex space-x-8">
-          {navItems.map(item => (
-            <li>
-              <a 
-                href={isHomePage ? item.href : `/${item.href.slice(1)}`}
-                class="text-garden-secondary hover:text-garden-accent dark:text-garden-dark-secondary dark:hover:text-garden-dark-accent transition-colors"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </nav>
+			<div class="flex items-center gap-4">
+				<ThemeToggle />
+				<ul class="hidden md:flex space-x-8">
+					{
+						navItems.map((item) => (
+							<li>
+								<a
+									href={isHomePage ? item.href : `/${item.href.slice(1)}`}
+									class="text-garden-secondary hover:text-garden-accent dark:text-garden-dark-secondary dark:hover:text-garden-dark-accent transition-colors"
+								>
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</nav>
 </header>
 
 <script>
-  // Handle navigation and smooth scrolling
-  document.addEventListener('DOMContentLoaded', () => {
-    const isHomePage = window.location.pathname === '/';
-    const navLinks = document.querySelectorAll('header nav a[href*="#"]');
+	// Handle navigation and smooth scrolling
+	document.addEventListener('DOMContentLoaded', () => {
+		const isHomePage = window.location.pathname === '/';
+		const navLinks = document.querySelectorAll('header nav a[href*="#"]');
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (!href) return;
+		navLinks.forEach((link) => {
+			link.addEventListener('click', (e) => {
+				const href = link.getAttribute('href');
+				if (!href) return;
 
-        // If we're on the home page and it's a hash link
-        if (isHomePage && href.startsWith('#')) {
-          e.preventDefault();
-          const targetId = href.slice(1);
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-        // If we're not on the home page, redirect to home with hash
-        else if (!isHomePage && href.includes('#')) {
-          e.preventDefault();
-          window.location.href = href;
-        }
-      });
-    });
+				// If we're on the home page and it's a hash link
+				if (isHomePage && href.startsWith('#')) {
+					e.preventDefault();
+					const targetId = href.slice(1);
+					const targetElement = document.getElementById(targetId);
+					if (targetElement) {
+						targetElement.scrollIntoView({ behavior: 'smooth' });
+					}
+				}
+				// If we're not on the home page, redirect to home with hash
+				else if (!isHomePage && href.includes('#')) {
+					e.preventDefault();
+					window.location.href = href;
+				}
+			});
+		});
 
-    // Handle hash in URL when coming from another page
-    if (!isHomePage && window.location.hash) {
-      const targetId = window.location.hash.slice(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        setTimeout(() => {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
-  });
+		// Handle hash in URL when coming from another page
+		if (!isHomePage && window.location.hash) {
+			const targetId = window.location.hash.slice(1);
+			const targetElement = document.getElementById(targetId);
+			if (targetElement) {
+				setTimeout(() => {
+					targetElement.scrollIntoView({ behavior: 'smooth' });
+				}, 100);
+			}
+		}
+	});
 </script>
