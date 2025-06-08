@@ -4,8 +4,8 @@ import { SearchService } from '../../lib/search-service';
 export const GET: APIRoute = async ({ url }) => {
 	try {
 		const query = url.searchParams.get('q');
-		if (!query) {
-			return new Response(JSON.stringify({ results: [] }), {
+		if (!query || query.trim().length < 1) {
+			return new Response(JSON.stringify({ suggestions: [] }), {
 				status: 200,
 				headers: {
 					'Content-Type': 'application/json',
@@ -13,19 +13,22 @@ export const GET: APIRoute = async ({ url }) => {
 			});
 		}
 
-		// Use the cached search service - much faster!
-		const results = await SearchService.search(query, 5);
-		return new Response(JSON.stringify({ results }), {
+		// Get search suggestions using cached index
+		const suggestions = await SearchService.getSuggestions(query.trim(), 5);
+
+		return new Response(JSON.stringify({ suggestions }), {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/json',
+				'Cache-Control': 'public, max-age=300', // Cache for 5 minutes
 			},
 		});
 	} catch (error) {
-		console.error('Search error:', error);
+		console.error('Suggestions API error:', error);
 		return new Response(
 			JSON.stringify({
-				error: 'An error occurred while searching',
+				error: 'An error occurred while getting suggestions',
+				suggestions: [],
 			}),
 			{
 				status: 500,
