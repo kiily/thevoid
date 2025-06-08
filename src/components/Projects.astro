@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { DataService, type Project } from '../lib/data-service';
 import { Image } from 'astro:assets';
 
-const projects = await getCollection('projects');
-const sortedProjects = projects.sort((a: any, b: any) => {
+const projects = await DataService.getProjects();
+const sortedProjects = projects.sort((a: Project, b: Project) => {
 	// Current projects first, then by start date
 	if (
 		a.data.status === 'Current Project' &&
@@ -37,7 +37,7 @@ const sortedProjects = projects.sort((a: any, b: any) => {
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
 			{
-				sortedProjects.map((project: any) => (
+				sortedProjects.map((project: Project) => (
 					<div class="group">
 						<a href={`/projects/${project.slug}`} class="block">
 							<div class="relative aspect-video mb-6 overflow-hidden rounded-lg">
@@ -71,7 +71,7 @@ const sortedProjects = projects.sort((a: any, b: any) => {
 								class="flex flex-wrap gap-2"
 								data-remaining={project.data.tags.length - 5}
 							>
-								{project.data.tags.slice(0, 5).map((tag: any) => (
+								{project.data.tags.slice(0, 5).map((tag: string) => (
 									<span class="px-3 py-1 bg-garden-background text-garden-secondary text-sm rounded-full">
 										{tag}
 									</span>
@@ -85,7 +85,7 @@ const sortedProjects = projects.sort((a: any, b: any) => {
 									</button>
 								)}
 								<div class="hidden expanded:flex flex-wrap gap-2">
-									{project.data.tags.slice(5).map((tag: any) => (
+									{project.data.tags.slice(5).map((tag: string) => (
 										<span class="px-3 py-1 bg-garden-background text-garden-secondary text-sm rounded-full">
 											{tag}
 										</span>

@@ -1,7 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
-
-const posts = await getCollection('garden');
+// Search component now relies on the API endpoint for data
+// No need to fetch posts at build time since search is handled via API
 ---
 
 <div class="mb-6">
