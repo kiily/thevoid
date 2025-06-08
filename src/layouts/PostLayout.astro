@@ -6,50 +6,88 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <article class="max-w-4xl mx-auto">
-    <header class="mb-8">
-      <h1 class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">{frontmatter.title}</h1>
-      
-      <div class="flex flex-wrap gap-2 mb-4">
-        {frontmatter.tags?.map((tag: string) => (
-          <a 
-            href={`/tag/${tag}`}
-            class="px-2 py-1 text-sm bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors font-ui"
-          >
-            {tag}
-          </a>
-        ))}
-      </div>
+	<article class="max-w-4xl mx-auto">
+		<header class="mb-8">
+			<h1
+				class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
+			>
+				{frontmatter.title}
+			</h1>
 
-      <div class="text-garden-secondary dark:text-garden-dark-secondary font-ui">
-        <time datetime={frontmatter.publishDate}>
-          Published: {format(new Date(frontmatter.publishDate), 'MMMM d, yyyy')}
-        </time>
-        {frontmatter.updateDate && (
-          <time datetime={frontmatter.updateDate} class="ml-4">
-            Updated: {format(new Date(frontmatter.updateDate), 'MMMM d, yyyy')}
-          </time>
-        )}
-      </div>
-    </header>
+			<div class="flex flex-wrap gap-2 mb-4">
+				{
+					frontmatter.tags?.map((tag: string) => (
+						<a
+							href={`/tag/${tag}`}
+							class="tag px-2 py-1 text-sm rounded-md transition-colors font-ui"
+						>
+							{tag}
+						</a>
+					))
+				}
+			</div>
 
-    <div class="prose prose-lg dark:prose-dark max-w-none">
-      <slot />
-    </div>
+			<div
+				class="text-garden-secondary dark:text-garden-dark-secondary font-ui"
+			>
+				<time datetime={frontmatter.publishDate}>
+					Published: {format(new Date(frontmatter.publishDate), 'MMMM d, yyyy')}
+				</time>
+				{
+					frontmatter.updateDate && (
+						<time datetime={frontmatter.updateDate} class="ml-4">
+							Updated:{' '}
+							{format(new Date(frontmatter.updateDate), 'MMMM d, yyyy')}
+						</time>
+					)
+				}
+			</div>
+		</header>
 
-    {frontmatter.connections && frontmatter.connections.length > 0 && (
-      <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <h2 class="text-xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">Connected Notes</h2>
-        <ul class="space-y-2">
-          {frontmatter.connections.map((connection: any) => (
-            <li>
-              <a href={connection.url} class="text-garden-accent dark:text-garden-dark-accent hover:underline font-body">
-                {connection.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </footer>
-    )}
-  </article>
+		<div class="prose prose-lg dark:prose-dark max-w-none">
+			<slot />
+		</div>
+
+		{
+			frontmatter.connections && frontmatter.connections.length > 0 && (
+				<footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+					<h2 class="text-xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">
+						Connected Notes
+					</h2>
+					<ul class="space-y-2">
+						{frontmatter.connections.map((connection: any) => (
+							<li>
+								<a
+									href={connection.url}
+									class="text-garden-accent dark:text-garden-dark-accent hover:underline font-body"
+								>
+									{connection.title}
+								</a>
+							</li>
+						))}
+					</ul>
+				</footer>
+			)
+		}
+	</article>
 </Layout>
+
+<style>
+	.tag {
+		background-color: #f0f0f0; /* Light gray for unselected */
+		color: #666666; /* Darker text for contrast */
+		margin-right: 5px;
+	}
+	.tag:hover {
+		background-color: #8bc34a; /* Green for hover */
+		color: white;
+	}
+	.dark .tag {
+		background-color: #333333; /* Darker gray for dark mode */
+		color: #cccccc; /* Lighter text for contrast in dark mode */
+	}
+	.dark .tag:hover {
+		background-color: #8bc34a; /* Green for hover in dark mode */
+		color: white;
+	}
+</style>

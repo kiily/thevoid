@@ -3,56 +3,99 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
 const projects = await getCollection('projects');
-const sortedProjects = projects.sort((a, b) => {
-  // Current projects first, then by start date
-  if (a.data.status === 'Current Project' && b.data.status !== 'Current Project') return -1;
-  if (a.data.status !== 'Current Project' && b.data.status === 'Current Project') return 1;
-  return b.data.startDate.getTime() - a.data.startDate.getTime();
+const sortedProjects = projects.sort((a: any, b: any) => {
+	// Current projects first, then by start date
+	if (
+		a.data.status === 'Current Project' &&
+		b.data.status !== 'Current Project'
+	)
+		return -1;
+	if (
+		a.data.status !== 'Current Project' &&
+		b.data.status === 'Current Project'
+	)
+		return 1;
+	return b.data.startDate.getTime() - a.data.startDate.getTime();
 });
 ---
 
+<script>
+	function toggleTags(button: HTMLButtonElement) {
+		const tagsContainer = button.previousElementSibling as HTMLElement;
+		if (tagsContainer) {
+			const isExpanded = tagsContainer.classList.toggle('expanded');
+			button.textContent = isExpanded
+				? 'Show less'
+				: `+${tagsContainer.dataset.remaining} more`;
+		}
+	}
+</script>
+
 <section id="projects" class="py-20 bg-white">
-  <div class="container mx-auto max-w-4xl px-6">
-    <h2 class="text-3xl font-bold text-gray-800 mb-12">Projects</h2>
-    
-    <div class="space-y-16">
-      {sortedProjects.map(project => (
-        <div class="group">
-          <a href={`/projects/${project.slug}`} class="block">
-            <div class="relative aspect-video mb-6 overflow-hidden rounded-lg">
-              <Image
-                src={project.data.image}
-                alt={project.data.title}
-                width={800}
-                height={450}
-                class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
-              />
-              {project.data.status && (
-                <div class="absolute top-4 right-4 px-3 py-1 bg-garden-accent text-white text-sm font-medium rounded-full">
-                  {project.data.status}
-                </div>
-              )}
-            </div>
-          </a>
-          
-          <div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-2">
-              <a href={`/projects/${project.slug}`} class="hover:text-garden-accent transition-colors">
-                {project.data.title}
-              </a>
-            </h3>
-            <p class="text-gray-600 mb-4">{project.data.description}</p>
-            
-            <div class="flex flex-wrap gap-2">
-              {project.data.tags.map(tag => (
-                <span class="px-3 py-1 bg-garden-background text-garden-secondary text-sm rounded-full">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
+	<div class="container mx-auto max-w-4xl px-6">
+		<h2 class="text-3xl font-bold text-gray-800 mb-12">Projects</h2>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+			{
+				sortedProjects.map((project: any) => (
+					<div class="group">
+						<a href={`/projects/${project.slug}`} class="block">
+							<div class="relative aspect-video mb-6 overflow-hidden rounded-lg">
+								<Image
+									src={project.data.image}
+									alt={project.data.title}
+									width={800}
+									height={450}
+									class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+								/>
+								{project.data.status && (
+									<div class="absolute top-4 right-4 px-3 py-1 bg-garden-accent text-white text-sm font-medium rounded-full">
+										{project.data.status}
+									</div>
+								)}
+							</div>
+						</a>
+
+						<div>
+							<h3 class="text-2xl font-bold text-gray-800 mb-2">
+								<a
+									href={`/projects/${project.slug}`}
+									class="hover:text-garden-accent transition-colors"
+								>
+									{project.data.title}
+								</a>
+							</h3>
+							<p class="text-gray-600 mb-4">{project.data.description}</p>
+
+							<div
+								class="flex flex-wrap gap-2"
+								data-remaining={project.data.tags.length - 5}
+							>
+								{project.data.tags.slice(0, 5).map((tag: any) => (
+									<span class="px-3 py-1 bg-garden-background text-garden-secondary text-sm rounded-full">
+										{tag}
+									</span>
+								))}
+								{project.data.tags.length > 5 && (
+									<button
+										onclick="toggleTags(this)"
+										class="px-3 py-1 bg-garden-background text-garden-secondary text-sm rounded-full"
+									>
+										+{project.data.tags.length - 5} more
+									</button>
+								)}
+								<div class="hidden expanded:flex flex-wrap gap-2">
+									{project.data.tags.slice(5).map((tag: any) => (
+										<span class="px-3 py-1 bg-garden-background text-garden-secondary text-sm rounded-full">
+											{tag}
+										</span>
+									))}
+								</div>
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
 </section>
