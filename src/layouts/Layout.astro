@@ -1,114 +1,76 @@
 ---
+import { Font } from 'astro:assets';
 import Navigation from '../components/Navigation.astro';
 import Header from '../components/Header.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
-interface Props {
-  title: string;
+export interface Props {
+	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = 'A digital garden exploring web development, design, and technology.',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Digital Garden - A space for growing ideas" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <ViewTransitions />
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light';
-      })();
-    
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
-  </head>
-  <body class="font-body bg-garden-background text-garden-primary dark:bg-garden-dark-background dark:text-garden-dark-primary min-h-screen transition-colors duration-300">
-    <Header />
-    <div class="flex pt-16">
-      <Navigation />
-      <main class="flex-1 px-6 py-8 md:px-12 lg:px-16 transition-[margin] duration-300">
-        <slot />
-      </main>
-    </div>
-  </body>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!-- SEO -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Astro Font API - handles optimization automatically -->
+		<Font cssVariable="--font-inter" preload />
+		<Font cssVariable="--font-merriweather" preload />
+
+		<ClientRouter />
+	</head>
+	<body
+		class="font-body bg-garden-background text-garden-primary dark:bg-garden-dark-background dark:text-garden-dark-primary min-h-screen transition-colors duration-300"
+	>
+		<Header />
+		<div class="flex pt-16">
+			<Navigation />
+			<main
+				class="flex-1 px-6 py-8 md:px-12 lg:px-16 transition-[margin] duration-300"
+			>
+				<slot />
+			</main>
+		</div>
+	</body>
 </html>
 
 <style is:global>
-  :root {
-    --font-body: 'Merriweather', serif;
-    --font-ui: 'Inter', sans-serif;
-  }
+	:root {
+		/* Fonts are automatically optimized by Astro */
+		--font-sans: var(--font-inter), system-ui, sans-serif;
+		--font-serif: var(--font-merriweather), Georgia, serif;
+	}
 
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
+	body {
+		font-family: var(--font-sans);
+		line-height: 1.6;
+		color: #333;
+		background-color: #fff;
+	}
 
-  /* Fade in animation for page transitions */
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  main {
-    view-transition-name: main;
-    animation: fade-in 0.5s ease-out;
-  }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-serif);
+		font-weight: 700;
+		line-height: 1.2;
+		margin: 1.5rem 0 0.5rem;
+	}
 </style>
-
-<script>
-  // Handle smooth scrolling for hash links
-  document.addEventListener('astro:page-load', () => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const href = this.getAttribute('href');
-        if (!href) return;
-        
-        const target = document.querySelector(href);
-        if (!target) return;
-
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-
-        // Update URL without triggering scroll
-        history.pushState(null, '', href);
-      });
-    });
-
-    // Handle initial hash navigation
-    if (window.location.hash) {
-      const target = document.querySelector(window.location.hash);
-      if (target) {
-        setTimeout(() => {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }, 100);
-      }
-    }
-  });
-</script>
