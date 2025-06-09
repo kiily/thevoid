@@ -1,15 +1,19 @@
 ---
 title: "Photos and polaroids"
 description: "A reflection on the nature of experience versus representation, exploring how photos capture only fractions of reality and serve as glimpses into the flaws of the conceptual world."
-publishDate: "2023-03-26"
+publishDate: 2023-03-26
 category: "Philosophy"
 tags: ["experience", "conceptual", "meditation", "photography", "emptiness", "reality"]
-connections: ["https://kiily.substack.com/p/photos-and-polaroids"]
+connections: [
+  {
+    title: "Original Substack Post",
+    url: "https://kiily.substack.com/p/photos-and-polaroids"
+  }
+]
 ---
 
 import { Image } from "astro:assets";
-import sunsetPhoneImage from "../../assets/garden/sunset-phone.webp";
-import sunsetPrintedImage from "../../assets/garden/sunset-printed.webp";
+import sunsetImage from "../../assets/garden/photos-polaroids.webp";
 
 *26/03/2023 - A sudden urge to write arises.*
 
@@ -20,14 +24,6 @@ This photo is a good glimpse into the flaws of the conceptual world, and if for 
 *Below, the two images side-by-side. Left, the photo on my phone. Right, the printed version.*
 
 <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
-  <div class="flex flex-col items-center">
-    <Image src={sunsetPhoneImage} alt="Sunset with double rainbow - phone photo" width={300} height={400} />
-    <figcaption class="mt-2 text-center text-sm text-garden-secondary dark:text-garden-dark-secondary font-body">Phone photo</figcaption>
-  </div>
-  <div class="flex flex-col items-center">
-    <Image src={sunsetPrintedImage} alt="Sunset with double rainbow - printed version" width={300} height={400} />
-    <figcaption class="mt-2 text-center text-sm text-garden-secondary dark:text-garden-dark-secondary font-body">Printed version</figcaption>
-  </div>
+    <Image src={sunsetImage} alt="Sunset with double rainbow - phone photo (left) - polaroid (right)" width={300} height={400} class="w-full max-w-sm h-auto" />
+    <figcaption class="mt-2 text-center text-sm text-garden-secondary dark:text-garden-dark-secondary font-body">Which one is real?</figcaption>
 </div>
-
-Which one is real? 

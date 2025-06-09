@@ -6,6 +6,7 @@ import PostCard from '../../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('garden');
+console.log("🚀 ~ posts:", posts.length);
 const sortedPosts = posts.sort((a, b) => 
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
@@ -13,6 +14,28 @@ const sortedPosts = posts.sort((a, b) =>
 // Get unique categories and tags
 const categories = [...new Set(posts.map(post => post.data.category))];
 const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+
+// Pagination setup
+const POSTS_PER_PAGE = 10;
+const url = new URL(Astro.request.url);
+const currentPage = parseInt(url.searchParams.get('page') || '1');
+const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+
+// Calculate start and end indices for current page
+const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+const endIndex = startIndex + POSTS_PER_PAGE;
+const paginatedPosts = sortedPosts.slice(startIndex, endIndex);
+
+// Generate pagination URLs
+const generatePageUrl = (page: number) => {
+  const newUrl = new URL(Astro.request.url);
+  if (page === 1) {
+    newUrl.searchParams.delete('page');
+  } else {
+    newUrl.searchParams.set('page', page.toString());
+  }
+  return newUrl.pathname + newUrl.search;
+};
 ---
 
 <Layout title="Digital Garden | Miguel Marin">
@@ -59,8 +82,17 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
         <div class="mb-8">
           <Search />
         </div>
+        
+        <!-- Posts count and pagination info -->
+        <div class="mb-6 text-sm text-garden-secondary dark:text-garden-dark-secondary font-ui">
+          Showing {startIndex + 1}-{Math.min(endIndex, sortedPosts.length)} of {sortedPosts.length} posts
+          {totalPages > 1 && (
+            <span class="ml-2">• Page {currentPage} of {totalPages}</span>
+          )}
+        </div>
+
         <div class="space-y-8">
-          {sortedPosts.map(post => (
+          {paginatedPosts.map(post => (
             <PostCard
               title={post.data.title}
               description={post.data.description}
@@ -71,6 +103,57 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
             />
           ))}
         </div>
+
+        <!-- Pagination Navigation -->
+        {totalPages > 1 && (
+          <nav class="mt-12 flex justify-center items-center space-x-4" aria-label="Pagination">
+            <!-- Previous Button -->
+            {currentPage > 1 ? (
+              <a 
+                href={generatePageUrl(currentPage - 1)}
+                class="px-4 py-2 bg-garden-surface dark:bg-garden-dark-surface text-garden-primary dark:text-garden-dark-primary border border-gray-200 dark:border-gray-700 rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors font-ui"
+              >
+                ← Previous
+              </a>
+            ) : (
+              <span class="px-4 py-2 text-garden-muted dark:text-garden-dark-muted cursor-not-allowed font-ui">
+                ← Previous
+              </span>
+            )}
+
+            <!-- Page Numbers -->
+            <div class="flex space-x-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                page === currentPage ? (
+                  <span class="px-3 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white rounded-md font-ui">
+                    {page}
+                  </span>
+                ) : (
+                  <a 
+                    href={generatePageUrl(page)}
+                    class="px-3 py-2 bg-garden-surface dark:bg-garden-dark-surface text-garden-primary dark:text-garden-dark-primary border border-gray-200 dark:border-gray-700 rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors font-ui"
+                  >
+                    {page}
+                  </a>
+                )
+              ))}
+            </div>
+
+            <!-- Next Button -->
+            {currentPage < totalPages ? (
+              <a 
+                href={generatePageUrl(currentPage + 1)}
+                class="px-4 py-2 bg-garden-surface dark:bg-garden-dark-surface text-garden-primary dark:text-garden-dark-primary border border-gray-200 dark:border-gray-700 rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors font-ui"
+              >
+                Next →
+              </a>
+            ) : (
+              <span class="px-4 py-2 text-garden-muted dark:text-garden-dark-muted cursor-not-allowed font-ui">
+                Next →
+              </span>
+            )}
+          </nav>
+        )}
       </div>
     </div>
   </div>
