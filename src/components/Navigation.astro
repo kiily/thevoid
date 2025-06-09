@@ -94,33 +94,38 @@ const tags = await DataService.getTags();
 >
 </div>
 
-<script>
-	function setupNavigation() {
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', function () {
 		const toggleNav = document.getElementById('toggle-nav');
 		const navigation = document.getElementById('side-navigation');
 		const overlay = document.getElementById('nav-overlay');
 		const mainContent = document.querySelector('main');
 
+		if (!toggleNav || !navigation || !overlay) {
+			console.error('Navigation elements not found');
+			return;
+		}
+
 		function closeNav() {
-			navigation?.classList.add('-translate-x-full');
-			overlay?.classList.add('opacity-0', 'pointer-events-none');
+			navigation.classList.add('-translate-x-full');
+			overlay.classList.add('opacity-0', 'pointer-events-none');
 			document.body.classList.remove('overflow-hidden');
 			mainContent?.classList.remove('md:ml-64');
-			toggleNav?.classList.remove('translate-x-64');
+			toggleNav.classList.remove('translate-x-64');
 			localStorage.setItem('navOpen', 'false');
 		}
 
 		function openNav() {
-			navigation?.classList.remove('-translate-x-full');
-			overlay?.classList.remove('opacity-0', 'pointer-events-none');
+			navigation.classList.remove('-translate-x-full');
+			overlay.classList.remove('opacity-0', 'pointer-events-none');
 			document.body.classList.add('overflow-hidden', 'md:overflow-auto');
 			mainContent?.classList.add('md:ml-64');
-			toggleNav?.classList.add('translate-x-64');
+			toggleNav.classList.add('translate-x-64');
 			localStorage.setItem('navOpen', 'true');
 		}
 
 		function toggleNavigation() {
-			const isOpen = !navigation?.classList.contains('-translate-x-full');
+			const isOpen = !navigation.classList.contains('-translate-x-full');
 			if (isOpen) {
 				closeNav();
 			} else {
@@ -134,11 +139,11 @@ const tags = await DataService.getTags();
 			openNav();
 		}
 
-		toggleNav?.addEventListener('click', toggleNavigation);
-		overlay?.addEventListener('click', closeNav);
+		toggleNav.addEventListener('click', toggleNavigation);
+		overlay.addEventListener('click', closeNav);
 
 		// Close navigation when clicking on links (mobile)
-		navigation?.querySelectorAll('a').forEach((link) => {
+		navigation.querySelectorAll('a').forEach((link) => {
 			link.addEventListener('click', () => {
 				if (window.innerWidth < 768) {
 					closeNav();
@@ -160,12 +165,5 @@ const tags = await DataService.getTags();
 				document.body.classList.remove('md:overflow-auto');
 			}
 		});
-	}
-
-	// Run setup when the DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', setupNavigation);
-	} else {
-		setupNavigation();
-	}
+	});
 </script>
