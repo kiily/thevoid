@@ -7,8 +7,8 @@ const tags = await DataService.getTags();
 ---
 
 <button
-	id="toggle-nav"
-	class="fixed top-20 left-6 z-50 p-2 bg-white dark:bg-garden-dark-surface rounded-lg shadow-md text-garden-secondary dark:text-garden-dark-secondary hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors transform transition-transform duration-300"
+	id="nav-toggle"
+	class="fixed top-20 left-6 z-50 p-2 bg-white dark:bg-garden-dark-surface rounded-lg shadow-md text-garden-secondary dark:text-garden-dark-secondary hover:text-garden-accent dark:hover:text-garden-dark-accent transition-all duration-300"
 	aria-label="Toggle Navigation"
 >
 	<svg
@@ -27,8 +27,8 @@ const tags = await DataService.getTags();
 </button>
 
 <nav
-	id="side-navigation"
-	class="fixed md:fixed top-0 left-0 w-64 h-screen -translate-x-full transition-transform duration-300 ease-in-out z-40 bg-garden-surface dark:bg-garden-dark-surface border-r border-gray-200 dark:border-gray-700"
+	id="nav-menu"
+	class="fixed top-0 left-0 w-64 h-screen -translate-x-full transition-transform duration-300 ease-in-out z-40 bg-garden-surface dark:bg-garden-dark-surface border-r border-gray-200 dark:border-gray-700"
 >
 	<div class="p-6">
 		<div class="mb-8 mt-16">
@@ -55,7 +55,7 @@ const tags = await DataService.getTags();
 							<li>
 								<a
 									href={`/category/${category}`}
-									class="text-garden-primary dark:text-garden-dark-primary hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors"
+									class="nav-link text-garden-primary dark:text-garden-dark-primary hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors"
 								>
 									{category}
 								</a>
@@ -76,7 +76,7 @@ const tags = await DataService.getTags();
 						tags.map((tag) => (
 							<a
 								href={`/tag/${tag}`}
-								class="px-2 py-1 text-sm bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors"
+								class="nav-link px-2 py-1 text-sm bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors"
 							>
 								{tag}
 							</a>
@@ -94,76 +94,84 @@ const tags = await DataService.getTags();
 >
 </div>
 
-<script is:inline>
-	document.addEventListener('DOMContentLoaded', function () {
-		const toggleNav = document.getElementById('toggle-nav');
-		const navigation = document.getElementById('side-navigation');
-		const overlay = document.getElementById('nav-overlay');
-		const mainContent = document.querySelector('main');
+<script>
+	class NavigationMenu {
+		private isOpen = false;
+		private toggle: HTMLElement;
+		private menu: HTMLElement;
+		private overlay: HTMLElement;
+		private main: HTMLElement | null;
 
-		if (!toggleNav || !navigation || !overlay) {
-			console.error('Navigation elements not found');
-			return;
+		constructor() {
+			this.toggle = document.getElementById('nav-toggle')!;
+			this.menu = document.getElementById('nav-menu')!;
+			this.overlay = document.getElementById('nav-overlay')!;
+			this.main = document.querySelector('main');
+
+			this.init();
 		}
 
-		function closeNav() {
-			navigation.classList.add('-translate-x-full');
-			overlay.classList.add('opacity-0', 'pointer-events-none');
-			document.body.classList.remove('overflow-hidden');
-			mainContent?.classList.remove('md:ml-64');
-			toggleNav.classList.remove('translate-x-64');
+		private init() {
+			// Load saved state
+			this.isOpen = localStorage.getItem('navOpen') === 'true';
+			this.updateUI();
+
+			// Event listeners
+			this.toggle.addEventListener('click', () => this.toggleMenu());
+			this.overlay.addEventListener('click', () => this.closeMenu());
+
+			// Close on mobile when clicking links
+			document.querySelectorAll('.nav-link').forEach((link) => {
+				link.addEventListener('click', () => {
+					if (window.innerWidth < 768) this.closeMenu();
+				});
+			});
+
+			// Keyboard and resize events
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') this.closeMenu();
+			});
+
+			window.addEventListener('resize', () => {
+				if (window.innerWidth < 768 && this.isOpen) this.closeMenu();
+			});
+		}
+
+		private toggleMenu() {
+			this.isOpen = !this.isOpen;
+			this.updateUI();
+			localStorage.setItem('navOpen', this.isOpen.toString());
+		}
+
+		private closeMenu() {
+			this.isOpen = false;
+			this.updateUI();
 			localStorage.setItem('navOpen', 'false');
 		}
 
-		function openNav() {
-			navigation.classList.remove('-translate-x-full');
-			overlay.classList.remove('opacity-0', 'pointer-events-none');
-			document.body.classList.add('overflow-hidden', 'md:overflow-auto');
-			mainContent?.classList.add('md:ml-64');
-			toggleNav.classList.add('translate-x-64');
-			localStorage.setItem('navOpen', 'true');
+		private updateUI() {
+			// Toggle classes based on state
+			this.menu.classList.toggle('-translate-x-full', !this.isOpen);
+			this.toggle.classList.toggle('translate-x-64', this.isOpen);
+			this.overlay.classList.toggle('opacity-0', !this.isOpen);
+			this.overlay.classList.toggle('pointer-events-none', !this.isOpen);
+
+			// Body overflow
+			document.body.classList.toggle('overflow-hidden', this.isOpen);
+			document.body.classList.toggle('md:overflow-auto', this.isOpen);
+
+			// Main content margin
+			this.main?.classList.toggle('md:ml-64', this.isOpen);
 		}
+	}
 
-		function toggleNavigation() {
-			const isOpen = !navigation.classList.contains('-translate-x-full');
-			if (isOpen) {
-				closeNav();
-			} else {
-				openNav();
-			}
-		}
+	// Initialize when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => new NavigationMenu());
+	} else {
+		new NavigationMenu();
+	}
 
-		// Initialize navigation state from localStorage
-		const navOpen = localStorage.getItem('navOpen') === 'true';
-		if (navOpen) {
-			openNav();
-		}
-
-		toggleNav.addEventListener('click', toggleNavigation);
-		overlay.addEventListener('click', closeNav);
-
-		// Close navigation when clicking on links (mobile)
-		navigation.querySelectorAll('a').forEach((link) => {
-			link.addEventListener('click', () => {
-				if (window.innerWidth < 768) {
-					closeNav();
-				}
-			});
-		});
-
-		// Handle escape key
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape') {
-				closeNav();
-			}
-		});
-
-		// Handle resize events
-		window.addEventListener('resize', () => {
-			if (window.innerWidth < 768) {
-				closeNav();
-				document.body.classList.remove('md:overflow-auto');
-			}
-		});
-	});
+	// Re-initialize on page navigation
+	document.addEventListener('astro:page-load', () => new NavigationMenu());
 </script>
