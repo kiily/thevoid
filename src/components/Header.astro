@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
@@ -20,9 +21,18 @@ const isHomePage = currentPath === '/';
 		<div class="flex items-center justify-between gap-4">
 			<a
 				href="/"
-				class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary"
-				>The void</a
+				class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary flex items-center gap-2"
 			>
+				<Image
+					src="/void.svg"
+					alt="The void logo"
+					class="w-6 h-6 rounded-lg"
+					width={24}
+					height={24}
+					quality="high"
+				/>
+				The void
+			</a>
 
 			<div class="flex items-center gap-4">
 				<ThemeToggle />

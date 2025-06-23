@@ -29,6 +29,7 @@ alwaysApply: true
   - Implement proper component composition and reusability.
   - Use Astro's component props for data passing.
   - Leverage Astro's built-in components like <Markdown /> when appropriate.
+  - Always use Astro's Image and make sure new images are always optimized
 
   Routing and Pages
   - Utilize Astro's file-based routing system in the src/pages/ directory.
