@@ -156,12 +156,10 @@ const tags = await DataService.getTags();
 			this.overlay.classList.toggle('opacity-0', !this.isOpen);
 			this.overlay.classList.toggle('pointer-events-none', !this.isOpen);
 
-			// Body overflow
-			document.body.classList.toggle('overflow-hidden', this.isOpen);
-			document.body.classList.toggle('md:overflow-auto', this.isOpen);
-
-			// Main content margin
-			this.main?.classList.toggle('md:ml-64', this.isOpen);
+			// Body overflow for mobile
+			if (window.innerWidth < 768) {
+				document.body.classList.toggle('overflow-hidden', this.isOpen);
+			}
 		}
 	}
 
