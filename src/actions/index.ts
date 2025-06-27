@@ -10,15 +10,25 @@ export const server = {
 			limit: z.number().default(8),
 			types: z.array(z.enum(['post', 'category', 'tag'])).optional(),
 			exact: z.boolean().default(false),
+			contentFilter: z
+				.enum(['all', 'garden-only', 'projects-only'])
+				.default('all'),
 		}),
 		handler: async (input) => {
-			const { q: query, limit, types: includeTypes, exact: exactMatch } = input;
+			const {
+				q: query,
+				limit,
+				types: includeTypes,
+				exact: exactMatch,
+				contentFilter,
+			} = input;
 
 			console.log('🔍 Search Action:', {
 				query,
 				limit,
 				includeTypes,
 				exactMatch,
+				contentFilter,
 			});
 
 			try {
@@ -28,58 +38,73 @@ export const server = {
 				const categories = await DataService.getCategories();
 				const tags = await DataService.getTags();
 
-				// Build search items
-				const searchItems = [
-					// Garden posts
-					...posts.map((post) => ({
-						title: post.data.title,
-						description: post.data.description,
-						url: `/garden/${post.slug}`,
-						type: 'post' as const,
-						category: post.data.category,
-						tags: post.data.tags || [],
-						content: `${post.data.title} ${post.data.description} ${
-							post.data.category
-						} ${(post.data.tags || []).join(' ')}`,
-					})),
+				// Build search items based on content filter
+				let searchItems = [];
 
-					// Projects
-					...projects.map((project) => ({
-						title: project.data.title,
-						description: project.data.description,
-						url: `/projects/${project.slug}`,
-						type: 'post' as const,
-						category: 'Projects',
-						tags: project.data.tags || [],
-						content: `${project.data.title} ${
-							project.data.description
-						} Projects ${(project.data.tags || []).join(' ')}`,
-					})),
+				// Add garden posts if not filtered out
+				if (contentFilter === 'all' || contentFilter === 'garden-only') {
+					searchItems.push(
+						...posts.map((post) => ({
+							title: post.data.title,
+							description: post.data.description,
+							url: `/garden/${post.slug}`,
+							type: 'post' as const,
+							category: post.data.category,
+							tags: post.data.tags || [],
+							content: `${post.data.title} ${post.data.description} ${
+								post.data.category
+							} ${(post.data.tags || []).join(' ')}`,
+						}))
+					);
+				}
 
-					// Categories
-					...categories.map((category) => ({
-						title: category,
-						description: `Browse all posts in ${category}`,
-						url: `/category/${category}`,
-						type: 'category' as const,
-						category: undefined,
-						tags: [],
-						content: `${category} category browse posts`,
-					})),
+				// Add projects if not filtered out
+				if (contentFilter === 'all' || contentFilter === 'projects-only') {
+					searchItems.push(
+						...projects.map((project) => ({
+							title: project.data.title,
+							description: project.data.description,
+							url: `/projects/${project.slug}`,
+							type: 'post' as const,
+							category: 'Projects',
+							tags: project.data.tags || [],
+							content: `${project.data.title} ${
+								project.data.description
+							} Projects ${(project.data.tags || []).join(' ')}`,
+						}))
+					);
+				}
 
-					// Tags
-					...tags.map((tag) => ({
-						title: tag,
-						description: `Browse all posts tagged with ${tag}`,
-						url: `/tag/${tag}`,
-						type: 'tag' as const,
-						category: undefined,
-						tags: [],
-						content: `${tag} tag browse posts`,
-					})),
-				];
+				// Add categories and tags only if showing all content (not filtered)
+				if (contentFilter === 'all') {
+					searchItems.push(
+						// Categories
+						...categories.map((category) => ({
+							title: category,
+							description: `Browse all posts in ${category}`,
+							url: `/category/${category}`,
+							type: 'category' as const,
+							category: undefined,
+							tags: [],
+							content: `${category} category browse posts`,
+						})),
 
-				console.log(`🔍 Built ${searchItems.length} search items`);
+						// Tags
+						...tags.map((tag) => ({
+							title: tag,
+							description: `Browse all posts tagged with ${tag}`,
+							url: `/tag/${tag}`,
+							type: 'tag' as const,
+							category: undefined,
+							tags: [],
+							content: `${tag} tag browse posts`,
+						}))
+					);
+				}
+
+				console.log(
+					`🔍 Built ${searchItems.length} search items (filter: ${contentFilter})`
+				);
 
 				// Configure Fuse.js
 				const fuseOptions = {
@@ -141,6 +166,7 @@ export const server = {
 						limit,
 						types: includeTypes,
 						exact: exactMatch,
+						contentFilter,
 					},
 				};
 			} catch (error) {

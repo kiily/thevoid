@@ -7,6 +7,7 @@ interface Props {
 	placeholder?: string;
 	className?: string;
 	showTypes?: boolean;
+	contentFilter?: 'all' | 'garden-only' | 'projects-only';
 }
 
 const {
@@ -14,6 +15,7 @@ const {
 	placeholder = 'Search...',
 	className = '',
 	showTypes = true,
+	contentFilter = 'all',
 } = Astro.props;
 
 // Generate unique IDs to avoid conflicts when multiple search components exist
@@ -21,7 +23,11 @@ const searchId = `${id}-input`;
 const resultsId = `${id}-results`;
 ---
 
-<div class={`search-container relative ${className}`} data-search-id={id}>
+<div
+	class={`search-container relative ${className}`}
+	data-search-id={id}
+	data-content-filter={contentFilter}
+>
 	<div class="relative">
 		<input
 			type="search"
@@ -120,9 +126,18 @@ const resultsId = `${id}-results`;
 					if (query !== currentQuery) return;
 
 					try {
+						const container = searchInput.closest(
+							'.search-container'
+						) as HTMLElement;
+						const contentFilter = container?.dataset.contentFilter || 'all';
+
 						const { data, error } = await actions.search({
 							q: query,
 							limit: 12,
+							contentFilter: contentFilter as
+								| 'all'
+								| 'garden-only'
+								| 'projects-only',
 						});
 
 						if (loadingIndicator) loadingIndicator.classList.add('hidden');
@@ -159,7 +174,13 @@ const resultsId = `${id}-results`;
 							resultsDiv.innerHTML = html + footer;
 							resultsDiv.classList.remove('hidden');
 						} else {
-							resultsDiv.innerHTML = `<div class="p-4 text-garden-muted dark:text-garden-dark-muted">No results found for "${query}"</div>`;
+							const filterText =
+								contentFilter === 'garden-only'
+									? 'garden posts'
+									: contentFilter === 'projects-only'
+										? 'projects'
+										: 'content';
+							resultsDiv.innerHTML = `<div class="p-4 text-garden-muted dark:text-garden-dark-muted">No ${filterText} found for "${query}"</div>`;
 							resultsDiv.classList.remove('hidden');
 						}
 					} catch (error) {
