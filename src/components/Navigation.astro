@@ -40,7 +40,12 @@ const tags = await DataService.getTags();
 			</a>
 		</div>
 
-		<Search />
+		<Search
+			id="nav-search"
+			placeholder="Search garden..."
+			className="mb-6"
+			showTypes={false}
+		/>
 
 		<div class="space-y-6">
 			<div>
@@ -94,82 +99,51 @@ const tags = await DataService.getTags();
 >
 </div>
 
-<script>
-	class NavigationMenu {
-		private isOpen = false;
-		private toggle: HTMLElement;
-		private menu: HTMLElement;
-		private overlay: HTMLElement;
-		private main: HTMLElement | null;
+<script is:inline>
+	// Navigation toggle functionality
+	function initializeNavigation() {
+		const navToggle = document.getElementById('nav-toggle');
+		const navMenu = document.getElementById('nav-menu');
+		const navOverlay = document.getElementById('nav-overlay');
 
-		constructor() {
-			this.toggle = document.getElementById('nav-toggle')!;
-			this.menu = document.getElementById('nav-menu')!;
-			this.overlay = document.getElementById('nav-overlay')!;
-			this.main = document.querySelector('main');
-
-			this.init();
+		if (!navToggle || !navMenu || !navOverlay) {
+			console.warn('Navigation elements not found');
+			return;
 		}
 
-		private init() {
-			// Load saved state
-			this.isOpen = localStorage.getItem('navOpen') === 'true';
-			this.updateUI();
-
-			// Event listeners
-			this.toggle.addEventListener('click', () => this.toggleMenu());
-			this.overlay.addEventListener('click', () => this.closeMenu());
-
-			// Close on mobile when clicking links
-			document.querySelectorAll('.nav-link').forEach((link) => {
-				link.addEventListener('click', () => {
-					if (window.innerWidth < 768) this.closeMenu();
-				});
-			});
-
-			// Keyboard and resize events
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') this.closeMenu();
-			});
-
-			window.addEventListener('resize', () => {
-				if (window.innerWidth < 768 && this.isOpen) this.closeMenu();
-			});
+		function openNav() {
+			navMenu.classList.remove('-translate-x-full');
+			navOverlay.classList.remove('opacity-0', 'pointer-events-none');
+			document.body.style.overflow = 'hidden';
 		}
 
-		private toggleMenu() {
-			this.isOpen = !this.isOpen;
-			this.updateUI();
-			localStorage.setItem('navOpen', this.isOpen.toString());
+		function closeNav() {
+			navMenu.classList.add('-translate-x-full');
+			navOverlay.classList.add('opacity-0', 'pointer-events-none');
+			document.body.style.overflow = '';
 		}
 
-		private closeMenu() {
-			this.isOpen = false;
-			this.updateUI();
-			localStorage.setItem('navOpen', 'false');
-		}
+		navToggle.addEventListener('click', openNav);
+		navOverlay.addEventListener('click', closeNav);
 
-		private updateUI() {
-			// Toggle classes based on state
-			this.menu.classList.toggle('-translate-x-full', !this.isOpen);
-			this.toggle.classList.toggle('translate-x-64', this.isOpen);
-			this.overlay.classList.toggle('opacity-0', !this.isOpen);
-			this.overlay.classList.toggle('pointer-events-none', !this.isOpen);
-
-			// Body overflow for mobile
-			if (window.innerWidth < 768) {
-				document.body.classList.toggle('overflow-hidden', this.isOpen);
+		// Close on escape key
+		document.addEventListener('keydown', (e) => {
+			if (
+				e.key === 'Escape' &&
+				!navMenu.classList.contains('-translate-x-full')
+			) {
+				closeNav();
 			}
-		}
+		});
 	}
 
 	// Initialize when DOM is ready
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', () => new NavigationMenu());
+		document.addEventListener('DOMContentLoaded', initializeNavigation);
 	} else {
-		new NavigationMenu();
+		initializeNavigation();
 	}
 
-	// Re-initialize on page navigation
-	document.addEventListener('astro:page-load', () => new NavigationMenu());
+	// Re-initialize on Astro page navigation
+	document.addEventListener('astro:page-load', initializeNavigation);
 </script>

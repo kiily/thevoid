@@ -69,7 +69,11 @@ const tags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
 
       <div>
         <div class="mb-8">
-          <Search />
+          <Search 
+            id="garden-search"
+            placeholder="Search posts, categories, and tags..."
+            showTypes={true}
+          />
         </div>
         
         <!-- Posts count and pagination info -->
