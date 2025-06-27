@@ -12,7 +12,7 @@ interface Props {
 
 const {
 	id = 'search',
-	placeholder = 'Search...',
+	placeholder = 'Search garden posts...',
 	className = '',
 	showTypes = true,
 	contentFilter = 'all',
@@ -28,38 +28,50 @@ const resultsId = `${id}-results`;
 	data-search-id={id}
 	data-content-filter={contentFilter}
 >
-	<div class="relative">
-		<input
-			type="search"
-			id={searchId}
-			placeholder={placeholder}
-			class="w-full px-3 py-1.5 pr-8 text-sm text-garden-primary dark:text-garden-dark-primary bg-white dark:bg-garden-dark-surface border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-garden-accent dark:focus:ring-garden-dark-accent focus:border-transparent placeholder-garden-secondary dark:placeholder-garden-dark-secondary"
-			autocomplete="off"
-			spellcheck="false"
-		/>
-		<div
-			class="absolute right-2 top-1/2 -translate-y-1/2 text-garden-secondary dark:text-garden-dark-secondary pointer-events-none"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="h-4 w-4"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
+	<!-- Airbnb-style search bar -->
+	<div
+		class="relative bg-white dark:bg-garden-dark-surface rounded-full shadow-lg border border-gray-200 dark:border-gray-600 hover:shadow-xl transition-shadow duration-300"
+	>
+		<div class="flex items-center">
+			<div class="flex-1 pl-6 pr-2">
+				<input
+					type="search"
+					id={searchId}
+					placeholder={placeholder}
+					class="w-full py-4 text-base text-garden-primary dark:text-garden-dark-primary bg-transparent border-0 focus:outline-none placeholder-garden-secondary dark:placeholder-garden-dark-secondary font-medium"
+					autocomplete="off"
+					spellcheck="false"
+				/>
+			</div>
+
+			<!-- Search button -->
+			<button
+				type="button"
+				class="search-button mr-2 p-3 bg-garden-accent dark:bg-garden-dark-accent hover:bg-garden-accent/90 dark:hover:bg-garden-dark-accent/90 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center group"
+				aria-label="Search"
 			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-			</svg>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5 group-hover:scale-110 transition-transform duration-200"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2.5"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+				</svg>
+			</button>
 		</div>
+
 		<!-- Loading indicator -->
 		<div
-			class="search-loading absolute right-8 top-1/2 -translate-y-1/2 text-garden-accent dark:text-garden-dark-accent hidden"
+			class="search-loading absolute right-16 top-1/2 -translate-y-1/2 text-garden-accent dark:text-garden-dark-accent hidden"
 		>
 			<svg
-				class="animate-spin h-4 w-4"
+				class="animate-spin h-5 w-5"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"
@@ -83,7 +95,7 @@ const resultsId = `${id}-results`;
 	<!-- Results dropdown -->
 	<div
 		id={resultsId}
-		class="search-results absolute w-full mt-1 bg-white dark:bg-garden-dark-surface border border-gray-200 dark:border-gray-700 rounded-md shadow-lg hidden max-h-80 overflow-y-auto z-50"
+		class="search-results absolute w-full mt-3 bg-white dark:bg-garden-dark-surface border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl hidden max-h-96 overflow-y-auto z-50"
 	>
 	</div>
 </div>
@@ -99,11 +111,86 @@ const resultsId = `${id}-results`;
 			const container = searchInput.closest('.search-container');
 			const resultsDiv = container?.querySelector('.search-results');
 			const loadingIndicator = container?.querySelector('.search-loading');
+			const searchButton = container?.querySelector('.search-button');
 
 			if (!resultsDiv) return;
 
 			let debounceTimeout: number;
 			let currentQuery = '';
+
+			const performSearch = async (query: string) => {
+				if (query.length === 0) {
+					resultsDiv.classList.add('hidden');
+					return;
+				}
+
+				// Show loading
+				if (loadingIndicator) loadingIndicator.classList.remove('hidden');
+
+				try {
+					const container = searchInput.closest(
+						'.search-container'
+					) as HTMLElement;
+					const contentFilter = container?.dataset.contentFilter || 'all';
+
+					const { data, error } = await actions.search({
+						q: query,
+						limit: 12,
+						contentFilter: contentFilter as
+							| 'all'
+							| 'garden-only'
+							| 'projects-only',
+					});
+
+					if (loadingIndicator) loadingIndicator.classList.add('hidden');
+
+					if (error) {
+						resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search error</div>`;
+						resultsDiv.classList.remove('hidden');
+						return;
+					}
+
+					if (data?.results?.length > 0) {
+						const html = data.results
+							.map(
+								(result) => `
+							<a href="${result.item.url}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl">
+								<div class="font-semibold text-garden-primary dark:text-garden-dark-primary mb-1">${result.item.title}</div>
+								<div class="text-sm text-garden-secondary dark:text-garden-dark-secondary line-clamp-2 mb-2">${result.item.description}</div>
+								<div class="flex items-center justify-between">
+									<div class="text-xs text-garden-accent dark:text-garden-dark-accent capitalize font-medium px-2 py-1 bg-garden-accent/10 dark:bg-garden-dark-accent/20 rounded-full">${result.item.type}</div>
+								</div>
+							</a>
+						`
+							)
+							.join('');
+
+						// Add a footer if there are many results
+						const footer =
+							data.results.length >= 10
+								? `<div class="p-4 text-sm text-center text-garden-secondary dark:text-garden-dark-secondary border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-b-2xl">
+								Showing ${data.results.length} of ${data.meta?.total || data.results.length} results
+							   </div>`
+								: '';
+
+						resultsDiv.innerHTML = html + footer;
+						resultsDiv.classList.remove('hidden');
+					} else {
+						const filterText =
+							contentFilter === 'garden-only'
+								? 'garden posts'
+								: contentFilter === 'projects-only'
+									? 'projects'
+									: 'content';
+						resultsDiv.innerHTML = `<div class="p-6 text-garden-secondary dark:text-garden-dark-secondary text-center">No ${filterText} found for "${query}"</div>`;
+						resultsDiv.classList.remove('hidden');
+					}
+				} catch (error) {
+					if (loadingIndicator) loadingIndicator.classList.add('hidden');
+					resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search failed</div>`;
+					resultsDiv.classList.remove('hidden');
+				}
+			};
 
 			searchInput.addEventListener('input', async (e) => {
 				const target = e.target as HTMLInputElement;
@@ -114,81 +201,35 @@ const resultsId = `${id}-results`;
 
 				clearTimeout(debounceTimeout);
 
-				if (query.length === 0) {
-					resultsDiv.classList.add('hidden');
-					return;
-				}
-
-				// Show loading
-				if (loadingIndicator) loadingIndicator.classList.remove('hidden');
-
 				debounceTimeout = window.setTimeout(async () => {
 					if (query !== currentQuery) return;
-
-					try {
-						const container = searchInput.closest(
-							'.search-container'
-						) as HTMLElement;
-						const contentFilter = container?.dataset.contentFilter || 'all';
-
-						const { data, error } = await actions.search({
-							q: query,
-							limit: 12,
-							contentFilter: contentFilter as
-								| 'all'
-								| 'garden-only'
-								| 'projects-only',
-						});
-
-						if (loadingIndicator) loadingIndicator.classList.add('hidden');
-
-						if (error) {
-							resultsDiv.innerHTML = `<div class="p-4 text-red-500">Search error</div>`;
-							resultsDiv.classList.remove('hidden');
-							return;
-						}
-
-						if (data?.results?.length > 0) {
-							const html = data.results
-								.map(
-									(result) => `
-								<a href="${result.item.url}" class="block p-3 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
-									<div class="font-medium text-sm text-garden-primary dark:text-garden-dark-primary">${result.item.title}</div>
-									<div class="text-xs text-garden-secondary dark:text-garden-dark-secondary mt-1 line-clamp-2">${result.item.description}</div>
-									<div class="flex items-center justify-between mt-2">
-										<div class="text-xs text-garden-accent dark:text-garden-dark-accent capitalize">${result.item.type}</div>
-									</div>
-								</a>
-							`
-								)
-								.join('');
-
-							// Add a footer if there are many results
-							const footer =
-								data.results.length >= 10
-									? `<div class="p-3 text-xs text-center text-garden-muted dark:text-garden-dark-muted border-t border-gray-100 dark:border-gray-700">
-									Showing ${data.results.length} of ${data.meta?.total || data.results.length} results
-								   </div>`
-									: '';
-
-							resultsDiv.innerHTML = html + footer;
-							resultsDiv.classList.remove('hidden');
-						} else {
-							const filterText =
-								contentFilter === 'garden-only'
-									? 'garden posts'
-									: contentFilter === 'projects-only'
-										? 'projects'
-										: 'content';
-							resultsDiv.innerHTML = `<div class="p-4 text-garden-muted dark:text-garden-dark-muted">No ${filterText} found for "${query}"</div>`;
-							resultsDiv.classList.remove('hidden');
-						}
-					} catch (error) {
-						if (loadingIndicator) loadingIndicator.classList.add('hidden');
-						resultsDiv.innerHTML = `<div class="p-4 text-red-500">Search failed</div>`;
-						resultsDiv.classList.remove('hidden');
-					}
+					await performSearch(query);
 				}, 300);
+			});
+
+			// Handle search button click
+			searchButton?.addEventListener('click', async () => {
+				const input = searchInput as HTMLInputElement;
+				const query = input.value.trim();
+				if (query) {
+					await performSearch(query);
+				}
+			});
+
+			// Handle Enter key
+			searchInput.addEventListener('keydown', async (e) => {
+				const keyEvent = e as KeyboardEvent;
+				const input = e.target as HTMLInputElement;
+				if (keyEvent.key === 'Enter') {
+					e.preventDefault();
+					const query = input.value.trim();
+					if (query) {
+						await performSearch(query);
+					}
+				} else if (keyEvent.key === 'Escape') {
+					resultsDiv.classList.add('hidden');
+					input.blur();
+				}
 			});
 
 			// Hide results when clicking outside
@@ -196,16 +237,6 @@ const resultsId = `${id}-results`;
 				const target = e.target as Node;
 				if (!container?.contains(target)) {
 					resultsDiv.classList.add('hidden');
-				}
-			});
-
-			// Handle Escape key
-			searchInput.addEventListener('keydown', (e) => {
-				const keyEvent = e as KeyboardEvent;
-				const input = e.target as HTMLInputElement;
-				if (keyEvent.key === 'Escape') {
-					resultsDiv.classList.add('hidden');
-					input.blur();
 				}
 			});
 		});
@@ -218,7 +249,7 @@ const resultsId = `${id}-results`;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
-		line-height: 1.3;
-		max-height: 2.6em;
+		line-height: 1.4;
+		max-height: 2.8em;
 	}
 </style>
