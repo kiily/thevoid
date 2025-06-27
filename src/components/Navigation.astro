@@ -114,12 +114,14 @@ const tags = await DataService.getTags();
 		function openNav() {
 			navMenu.classList.remove('-translate-x-full');
 			navOverlay.classList.remove('opacity-0', 'pointer-events-none');
+			navToggle.classList.add('opacity-0', 'pointer-events-none');
 			document.body.style.overflow = 'hidden';
 		}
 
 		function closeNav() {
 			navMenu.classList.add('-translate-x-full');
 			navOverlay.classList.add('opacity-0', 'pointer-events-none');
+			navToggle.classList.remove('opacity-0', 'pointer-events-none');
 			document.body.style.overflow = '';
 		}
 
