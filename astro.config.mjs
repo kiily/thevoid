@@ -6,8 +6,11 @@ import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
+import vercel from '@astrojs/vercel';
+
 export default defineConfig({
   site: 'https://your-domain.com',
+
   experimental: {
     fonts: [
       {
@@ -30,6 +33,7 @@ export default defineConfig({
       }
     ]
   },
+
   integrations: [
     mdx({
       remarkPlugins: [remarkToc],
@@ -41,5 +45,7 @@ export default defineConfig({
     }),
     tailwind(),
     sitemap()
-  ]
+  ],
+
+  adapter: vercel()
 });
