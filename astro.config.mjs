@@ -9,7 +9,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://your-domain.com',
+  site: 'https://thevoid-five.vercel.app/',
 
   experimental: {
     fonts: [
