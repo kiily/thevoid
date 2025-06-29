@@ -11,7 +11,7 @@ export default {
       colors: {
         garden: {
           primary: '#2D3A3A',
-          secondary: '#4A5568',
+          secondary: '#374151',
           accent: '#006400',
           background: '#F7F7F2',
           surface: '#FFFFFF',
