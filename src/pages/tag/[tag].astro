@@ -4,16 +4,19 @@ import PostCard from '../../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('garden');
-  const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
-  
-  return tags.map(tag => ({
-    params: { tag },
-    props: { 
-      posts: posts.filter(post => post.data.tags?.includes(tag))
-        .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-    },
-  }));
+	const posts = await getCollection('garden');
+	const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
+
+	return tags.map((tag) => ({
+		params: { tag },
+		props: {
+			posts: posts
+				.filter((post) => post.data.tags?.includes(tag))
+				.sort(
+					(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+				),
+		},
+	}));
 }
 
 const { tag } = Astro.params;
@@ -21,39 +24,54 @@ const { posts } = Astro.props;
 ---
 
 <Layout title={`Posts tagged with ${tag} | Digital Garden`}>
-  <div class="container mx-auto max-w-4xl px-6 py-20">
-    <header class="mb-12">
-      <h1 class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">
-        Posts tagged with "{tag}"
-      </h1>
-      <p class="text-xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body">
-        {posts.length} {posts.length === 1 ? 'post' : 'posts'} found
-      </p>
-    </header>
+	<div class="container mx-auto max-w-4xl px-6 py-20">
+		<header class="mb-12">
+			<h1
+				class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
+			>
+				Posts tagged with "{tag}"
+			</h1>
+			<p
+				class="text-xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body"
+			>
+				{posts.length}
+				{posts.length === 1 ? 'post' : 'posts'} found
+			</p>
+		</header>
 
-    <div class="space-y-8">
-      {posts.map(post => (
-        <PostCard
-          title={post.data.title}
-          description={post.data.description}
-          publishDate={post.data.publishDate}
-          updateDate={post.data.updateDate}
-          url={`/garden/${post.slug}`}
-          tags={post.data.tags}
-        />
-      ))}
-    </div>
+		<div class="space-y-8">
+			{
+				posts.map((post) => (
+					<PostCard
+						title={post.data.title}
+						description={post.data.description}
+						publishDate={post.data.publishDate}
+						updateDate={post.data.updateDate}
+						url={`/garden/${post.slug}`}
+						tags={post.data.tags}
+					/>
+				))
+			}
+		</div>
 
-    <div class="mt-12">
-      <a 
-        href="/garden"
-        class="inline-flex items-center gap-2 text-garden-accent dark:text-garden-dark-accent hover:underline font-ui transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-        </svg>
-        <span>Back to Garden</span>
-      </a>
-    </div>
-  </div>
+		<div class="mt-12">
+			<a
+				href="/garden"
+				class="inline-flex items-center gap-2 text-garden-accent dark:text-garden-dark-accent underline hover:no-underline font-ui transition-colors"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+						clip-rule="evenodd"></path>
+				</svg>
+				<span>Back to Garden</span>
+			</a>
+		</div>
+	</div>
 </Layout>

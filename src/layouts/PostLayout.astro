@@ -59,7 +59,7 @@ const { frontmatter } = Astro.props;
 							<li>
 								<a
 									href={connection.url}
-									class="text-garden-accent dark:text-garden-dark-accent hover:underline font-body"
+									class="text-garden-accent dark:text-garden-dark-accent underline hover:no-underline font-body"
 								>
 									{connection.title}
 								</a>
@@ -69,6 +69,13 @@ const { frontmatter } = Astro.props;
 				</footer>
 			)
 		}
+
+		<a
+			href="/garden"
+			class="text-garden-accent dark:text-garden-dark-accent underline hover:no-underline font-body"
+		>
+			← Back to Garden
+		</a>
 	</article>
 </Layout>
 
