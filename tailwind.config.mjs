@@ -12,12 +12,12 @@ export default {
         garden: {
           primary: '#2D3A3A',
           secondary: '#5C6B73',
-          accent: '#5A8D16',
+          accent: '#006400',
           background: '#F7F7F2',
           surface: '#FFFFFF',
           'dark-primary': '#E1E1E1',
           'dark-secondary': '#A1A1A1',
-          'dark-accent': '#7BC143',
+          'dark-accent': '#90EE90',
           'dark-background': '#1A1A1A',
           'dark-surface': '#2D2D2D'
         }
@@ -56,14 +56,14 @@ export default {
               color: '#2D3A3A',
             },
             a: {
-              color: '#5A8D16',
+              color: '#006400',
               '&:hover': {
                 color: '#5C6B73',
               },
             },
             blockquote: {
               color: '#5C6B73',
-              borderLeftColor: '#5A8D16',
+              borderLeftColor: '#006400',
             },
             code: {
               color: '#2D3A3A',
@@ -100,7 +100,7 @@ export default {
           css: {
             color: '#E1E1E1',
             a: {
-              color: '#7BC143',
+              color: '#90EE90',
               '&:hover': {
                 color: '#A1A1A1',
               },
@@ -142,7 +142,7 @@ export default {
             },
             blockquote: {
               color: '#A1A1A1',
-              borderLeftColor: '#7BC143',
+              borderLeftColor: '#90EE90',
             },
             ul: {
               color: '#E1E1E1',
