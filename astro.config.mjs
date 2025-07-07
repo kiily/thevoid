@@ -17,16 +17,16 @@ export default defineConfig({
         provider: fontProviders.google(),
         name: 'Inter',
         cssVariable: '--font-inter',
-        weights: [400, 500, 600, 700],
+        weights: [400, 500, 600, 700, 800],
         styles: ['normal'],
         display: 'swap',
         fallbacks: ['system-ui', 'sans-serif']
       },
       {
         provider: fontProviders.google(),
-        name: 'Merriweather',
-        cssVariable: '--font-merriweather',
-        weights: [300, 400, 700],
+        name: 'Source Serif 4',
+        cssVariable: '--font-source-serif-4',
+        weights: [300, 400, 500, 600, 700],
         styles: ['normal', 'italic'],
         display: 'swap',
         fallbacks: ['Georgia', 'serif']

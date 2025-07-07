@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Merriweather', 'serif'],
-        ui: ['Inter', 'sans-serif']
+        body: ['Source Serif 4', 'Georgia', 'serif'],
+        ui: ['Inter', 'system-ui', 'sans-serif']
       },
       colors: {
         garden: {
@@ -27,30 +27,36 @@ export default {
           css: {
             maxWidth: '100ch',
             color: '#2D3A3A',
-            fontFamily: 'Merriweather, serif',
+            fontFamily: 'Source Serif 4, Georgia, serif',
             h1: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
               color: '#2D3A3A',
+              fontWeight: '800',
             },
             h2: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
               color: '#2D3A3A',
+              fontWeight: '700',
             },
             h3: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
               color: '#2D3A3A',
+              fontWeight: '600',
             },
             h4: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
               color: '#2D3A3A',
+              fontWeight: '600',
             },
             h5: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
               color: '#2D3A3A',
+              fontWeight: '600',
             },
             h6: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
               color: '#2D3A3A',
+              fontWeight: '600',
             },
             strong: {
               color: '#2D3A3A',
@@ -77,22 +83,22 @@ export default {
         lg: {
           css: {
             h1: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h2: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h3: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h4: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h5: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h6: {
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
           },
         },
@@ -107,27 +113,27 @@ export default {
             },
             h1: {
               color: '#E1E1E1',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h2: {
               color: '#E1E1E1',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h3: {
               color: '#E1E1E1',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h4: {
               color: '#E1E1E1',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h5: {
               color: '#E1E1E1',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             h6: {
               color: '#E1E1E1',
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'Inter, system-ui, sans-serif',
             },
             strong: {
               color: '#E1E1E1',

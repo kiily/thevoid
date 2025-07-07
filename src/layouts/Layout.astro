@@ -28,7 +28,7 @@ const {
 
 		<!-- Astro Font API - handles optimization automatically -->
 		<Font cssVariable="--font-inter" preload />
-		<Font cssVariable="--font-merriweather" preload />
+		<Font cssVariable="--font-source-serif-4" preload />
 
 		<ClientRouter />
 	</head>
@@ -49,9 +49,9 @@ const {
 
 <style is:global>
 	:root {
-		/* Fonts are automatically optimized by Astro */
-		--font-sans: var(--font-inter), system-ui, sans-serif;
-		--font-serif: var(--font-merriweather), Georgia, serif;
+		--font-serif: var(--font-source-serif-4), 'Source Serif 4', Georgia, serif;
+		--font-sans: var(--font-inter), 'Inter', system-ui, -apple-system,
+			sans-serif;
 	}
 
 	html {
@@ -59,10 +59,15 @@ const {
 	}
 
 	body {
-		font-family: var(--font-sans);
+		font-family: var(--font-serif);
 		line-height: 1.6;
-		color: #333;
-		background-color: #fff;
+		color: #2d3a3a;
+		background-color: #f7f7f2;
+	}
+
+	.dark body {
+		color: #e1e1e1;
+		background-color: #1a1a1a;
 	}
 
 	h1,
@@ -71,9 +76,31 @@ const {
 	h4,
 	h5,
 	h6 {
-		font-family: var(--font-serif);
+		font-family: var(--font-sans);
 		font-weight: 700;
 		line-height: 1.2;
 		margin: 1.5rem 0 0.5rem;
+		letter-spacing: -0.025em;
+	}
+
+	h1 {
+		font-weight: 800;
+		font-size: 2.5rem;
+	}
+
+	h2 {
+		font-weight: 700;
+		font-size: 2rem;
+	}
+
+	h3 {
+		font-weight: 600;
+		font-size: 1.5rem;
+	}
+
+	h4,
+	h5,
+	h6 {
+		font-weight: 600;
 	}
 </style>
