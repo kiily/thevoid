@@ -78,6 +78,16 @@ export default {
               backgroundColor: '#F7F7F2',
               color: '#2D3A3A',
             },
+            // Custom class to override specific links
+            '.prose-override-links a': {
+              color: '#000000 !important',
+              fontWeight: '700 !important',
+              textDecoration: 'none !important',
+              '&:hover': {
+                color: '#000000 !important',
+                fontWeight: '700 !important',
+              },
+            },
           },
         },
         lg: {
@@ -109,6 +119,16 @@ export default {
               color: '#90EE90',
               '&:hover': {
                 color: '#A1A1A1',
+              },
+            },
+            // Custom class to override specific links
+            '.prose-override-links a': {
+              color: '#E1E1E1 !important',
+              fontWeight: '700 !important',
+              textDecoration: 'none !important',
+              '&:hover': {
+                color: '#E1E1E1 !important',
+                fontWeight: '700 !important',
               },
             },
             h1: {
