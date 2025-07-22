@@ -1,0 +1,12 @@
+{
+	"rewrites": [
+		{
+			"source": "/emptiness-0AgS/static/(.*)",
+			"destination": "https://us-assets.i.posthog.com/static/$1"
+		},
+		{
+			"source": "/emptiness-0AgS/(.*)",
+			"destination": "https://us.i.posthog.com/$1"
+		}
+	]
+}
