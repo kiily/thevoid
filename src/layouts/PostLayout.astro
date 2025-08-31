@@ -7,6 +7,13 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.title}>
 	<article class="max-w-4xl mx-auto">
+		<a
+			href="/garden"
+			class="inline-block mb-6 text-garden-accent dark:text-garden-dark-accent underline hover:no-underline font-body"
+		>
+			← Back to Garden
+		</a>
+
 		<header class="mb-8">
 			<h1
 				class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
