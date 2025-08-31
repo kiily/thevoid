@@ -1,48 +1,188 @@
-# Astro Starter Kit: Basics
+# The Void - Digital Garden
 
-```sh
-npm create astro@latest -- --template basics
+A minimalist digital garden built with Astro, showcasing thoughts on technology, design, and development.
+
+## 🚀 Features
+
+- **Static Site Generation** with Astro
+- **Content Collections** for organized writing
+- **Dark/Light Theme** with system preference detection
+- **Responsive Design** optimized for all devices
+- **SEO Optimized** with meta tags and structured data
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Simple Analytics** with PostHog integration
+
+## 📊 Analytics Setup
+
+Clean PostHog integration following best practices:
+
+### Quick Setup
+1. **Get PostHog API Key** from [PostHog](https://posthog.com)
+2. **Add Environment Variable**:
+   ```bash
+   PUBLIC_POSTHOG_KEY=phc_your_project_api_key_here
+   ```
+3. **Deploy** - Analytics start working automatically!
+
+### Usage
+```javascript
+// User identification (when they sign in)
+posthog.identify('user-123', { email: 'user@example.com' });
+
+// Custom events (simple one-liner as needed)
+posthog.capture('my event', { property: 'value' });
+
+// Feature flags
+if (posthog.isFeatureEnabled('new-feature')) {
+  // Show new feature
+}
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### What's Tracked Automatically
+- **Page views** - All navigation
+- **User sessions** - Automatic session management  
+- **Device/Browser data** - Technical information
+- **Geographic data** - Location insights
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+For detailed setup, see:
+- [`ai-docs/simple-analytics-setup.md`](ai-docs/simple-analytics-setup.md) - Basic usage
+- [`ai-docs/environment-setup.md`](ai-docs/environment-setup.md) - Complete environment setup
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🛠️ Development
 
-## 🚀 Project Structure
+### Prerequisites
+- Node.js 18+
+- npm or yarn
 
-Inside of your Astro project, you'll see the following folders and files:
+### Installation
+```bash
+# Clone and install
+git clone <repository-url>
+cd thevoid
+npm install
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+# Add your PostHog API key
+echo "PUBLIC_POSTHOG_KEY=phc_your_key_here" > .env.local
+
+# Start development
+npm run dev
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### Available Scripts
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run astro        # Run Astro CLI commands
+```
 
-## 🧞 Commands
+### Project Structure
+```
+src/
+├── components/          # Reusable Astro components
+│   ├── posthog.astro   # Analytics integration
+│   └── ...
+├── content/            # Content collections
+│   ├── garden/         # Blog posts/thoughts
+│   └── projects/       # Project showcases
+├── layouts/            # Page layouts
+├── lib/                # Utility functions
+├── pages/              # File-based routing
+└── styles/             # Global styles
+```
 
-All commands are run from the root of the project, from a terminal:
+## 📝 Content Management
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Adding Blog Posts
+Create `.mdx` files in `src/content/garden/`:
 
-## 👀 Want to learn more?
+```mdx
+---
+title: "Your Post Title"
+description: "Brief description"
+publishDate: 2024-01-15
+category: "technology"
+tags: ["astro", "web-development"]
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Your content here...
+```
+
+### Adding Projects
+Create `.mdx` files in `src/content/projects/`:
+
+```mdx
+---
+title: "Project Name"
+description: "Project description"
+image: "path/to/image.jpg"
+link: "https://project-url.com"
+github: "https://github.com/username/repo"
+startDate: 2024-01-01
+status: "completed"
+tags: ["react", "typescript"]
+---
+
+Project details...
+```
+
+## 🎨 Customization
+
+### Theme Colors
+Modify in `tailwind.config.mjs`:
+
+```javascript
+theme: {
+  extend: {
+    colors: {
+      'garden-primary': '#2d3a3a',
+      'garden-secondary': '#5a6c6c',
+      'garden-accent': '#8b5a3c',
+      // ... more colors
+    }
+  }
+}
+```
+
+### Fonts
+- **Inter** for headings and UI elements
+- **Source Serif 4** for body text
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+```bash
+vercel
+
+# Add environment variables in dashboard:
+# PUBLIC_POSTHOG_KEY=phc_your_key_here
+```
+
+### Netlify
+```bash
+# Build command: npm run build
+# Publish directory: dist
+# Add PUBLIC_POSTHOG_KEY in environment variables
+```
+
+### Other Platforms
+Static files in `dist/` can be hosted anywhere that supports static sites.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- Built with [Astro](https://astro.build)
+- Analytics by [PostHog](https://posthog.com)
+- Styled with [Tailwind CSS](https://tailwindcss.com)
+- Fonts from [Google Fonts](https://fonts.google.com)
