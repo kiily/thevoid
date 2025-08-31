@@ -4,7 +4,7 @@ const posthogKey = import.meta.env.NEXT_PUBLIC_POSTHOG_KEY;
 const posthogHost = import.meta.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com';
 
 // Only load PostHog in production or if explicitly enabled
-const shouldLoadPostHog = posthogKey && (import.meta.env.PROD || import.meta.env.PUBLIC_POSTHOG_ENABLED === 'true');
+const shouldLoadPostHog = posthogKey && import.meta.env.NEXT_PUBLIC_POSTHOG_ENABLED === 'true';
 ---
 
 {shouldLoadPostHog && (
