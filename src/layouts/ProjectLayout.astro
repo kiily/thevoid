@@ -10,7 +10,12 @@ function formatDate(date: Date) {
 }
 ---
 
-<Layout title={`${frontmatter.title} | Projects`}>
+<Layout 
+	title={`${frontmatter.title} | Projects`}
+	description={frontmatter.description}
+	ogType="article"
+	category="project"
+>
 	<article class="max-w-4xl mx-auto py-20 px-6">
 		<header class="mb-12">
 			<div class="relative aspect-video mb-8 overflow-hidden rounded-lg">

@@ -5,7 +5,12 @@ import { format } from 'date-fns';
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout 
+	title={frontmatter.title}
+	description={frontmatter.description}
+	ogType="article"
+	category={frontmatter.category}
+>
 	<article class="max-w-4xl mx-auto">
 		<a
 			href="/garden"
