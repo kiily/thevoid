@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Import family-chart CSS - let library handle styling
+import 'family-chart/styles/family-chart.css';
+---
+
+<Layout
+	title="Family Tree | The void"
+	description="Interactive family tree visualization"
+>
+	<div class="container mx-auto px-6 py-8 max-w-7xl">
+		<header class="mb-8">
+			<h1
+				class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
+			>
+				Family Tree (Proof of Concept)
+			</h1>
+			<p
+				class="text-xl text-garden-secondary dark:text-garden-dark-secondary font-body"
+			>
+				Testing family-chart library integration with Astro
+			</p>
+		</header>
+
+		<div class="mb-6 flex gap-4 items-center">
+			<button
+				id="zoom-in-btn"
+				class="px-4 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white rounded-lg hover:opacity-90 transition-opacity font-ui"
+			>
+				Zoom In
+			</button>
+			<button
+				id="zoom-out-btn"
+				class="px-4 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white rounded-lg hover:opacity-90 transition-opacity font-ui"
+			>
+				Zoom Out
+			</button>
+			<button
+				id="reset-btn"
+				class="px-4 py-2 bg-garden-secondary dark:bg-garden-dark-secondary text-white rounded-lg hover:opacity-90 transition-opacity font-ui"
+			>
+				Reset View
+			</button>
+			<div
+				class="text-sm text-garden-secondary dark:text-garden-dark-secondary font-body ml-auto"
+			>
+				12 family members across 5 generations
+			</div>
+		</div>
+
+		<div
+			class="family-tree-container bg-white dark:bg-garden-dark-surface rounded-lg shadow-lg overflow-hidden"
+		>
+			<div id="family-tree-canvas"></div>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	import { familyMembers } from '../features/family-tree/data/family-members';
+
+	document.addEventListener('DOMContentLoaded', async () => {
+		try {
+			const container = document.getElementById('family-tree-canvas');
+			if (!container) return;
+
+			const { createChart } = await import('family-chart');
+			const chart = createChart(container, familyMembers);
+
+			// Configure chart with proper spacing (matching basic example)
+			chart.setTransitionTime(1000);
+			chart.setCardXSpacing(250);
+			chart.setCardYSpacing(150);
+
+			// Configure card display
+			chart
+				.setCardHtml()
+				.setCardDisplay([['first_name', 'last_name'], ['birthday']]);
+
+			// Initial render
+			chart.updateTree({ initial: true });
+
+			const originalMainId = '1';
+
+			// Reset button - go back to original view
+			document.getElementById('reset-btn')?.addEventListener('click', () => {
+				chart.updateMainId(originalMainId);
+				chart.updateTree({ tree_position: 'main_to_middle' });
+			});
+
+			// Zoom In - center on main person
+			document.getElementById('zoom-in-btn')?.addEventListener('click', () => {
+				chart.updateTree({ tree_position: 'main_to_middle' });
+			});
+
+			// Zoom Out - fit entire tree in view
+			document.getElementById('zoom-out-btn')?.addEventListener('click', () => {
+				chart.updateTree({ tree_position: 'fit' });
+			});
+		} catch (error) {
+			console.error('Family chart error:', error);
+		}
+	});
+</script>
+
+<style>
+	.family-tree-container {
+		position: relative;
+		height: 70vh;
+		min-height: 500px;
+	}
+
+	#family-tree-canvas {
+		width: 100%;
+		height: 100%;
+	}
+</style>
