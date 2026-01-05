@@ -23,36 +23,11 @@ import 'family-chart/styles/family-chart.css';
 			</p>
 		</header>
 
-		<div class="mb-6 flex gap-4 items-center">
-			<button
-				id="zoom-in-btn"
-				class="px-4 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white rounded-lg hover:opacity-90 transition-opacity font-ui"
-			>
-				Zoom In
-			</button>
-			<button
-				id="zoom-out-btn"
-				class="px-4 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white rounded-lg hover:opacity-90 transition-opacity font-ui"
-			>
-				Zoom Out
-			</button>
-			<button
-				id="reset-btn"
-				class="px-4 py-2 bg-garden-secondary dark:bg-garden-dark-secondary text-white rounded-lg hover:opacity-90 transition-opacity font-ui"
-			>
-				Reset View
-			</button>
-			<div
-				class="text-sm text-garden-secondary dark:text-garden-dark-secondary font-body ml-auto"
-			>
-				12 family members across 5 generations
-			</div>
-		</div>
-
 		<div
-			class="family-tree-container bg-white dark:bg-garden-dark-surface rounded-lg shadow-lg overflow-hidden"
+			id="family-tree-canvas"
+			class="f3 family-tree-container rounded-lg shadow-lg"
 		>
-			<div id="family-tree-canvas"></div>
+			<!-- Search and controls rendered inside by script -->
 		</div>
 	</div>
 </Layout>
@@ -65,39 +40,151 @@ import 'family-chart/styles/family-chart.css';
 			const container = document.getElementById('family-tree-canvas');
 			if (!container) return;
 
+			const d3 = await import('d3');
 			const { createChart } = await import('family-chart');
+
 			const chart = createChart(container, familyMembers);
 
-			// Configure chart with proper spacing (matching basic example)
+			// Configure chart (matching big-tree example)
 			chart.setTransitionTime(1000);
 			chart.setCardXSpacing(250);
 			chart.setCardYSpacing(150);
 
-			// Configure card display
+			// Configure card display with shorter height
 			chart
 				.setCardHtml()
-				.setCardDisplay([['first_name', 'last_name'], ['birthday']]);
+				.setCardDisplay([['first_name', 'last_name'], ['birthday']])
+				.setCardDim({ h: 70 });
+
+			const originalMainId = '1';
 
 			// Initial render
 			chart.updateTree({ initial: true });
 
-			const originalMainId = '1';
+			// Navigate to a specific person
+			function navigateToPerson(personId: string, animate = true) {
+				chart.updateMainId(personId);
+				chart.updateTree({ initial: animate });
+			}
 
-			// Reset button - go back to original view
-			document.getElementById('reset-btn')?.addEventListener('click', () => {
-				chart.updateMainId(originalMainId);
-				chart.updateTree({ tree_position: 'main_to_middle' });
-			});
+			// Build search options from family data
+			const searchOptions = familyMembers.map((member) => ({
+				id: member.id,
+				label: `${member.data.first_name} ${member.data.last_name}`.trim(),
+			}));
 
-			// Zoom In - center on main person
-			document.getElementById('zoom-in-btn')?.addEventListener('click', () => {
-				chart.updateTree({ tree_position: 'main_to_middle' });
-			});
+			// Create controls container
+			const controlsContainer = d3
+				.select(container)
+				.append('div')
+				.attr(
+					'style',
+					'position: absolute; top: 10px; left: 10px; right: 10px; z-index: 1000; display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none;'
+				);
 
-			// Zoom Out - fit entire tree in view
-			document.getElementById('zoom-out-btn')?.addEventListener('click', () => {
-				chart.updateTree({ tree_position: 'fit' });
-			});
+			// Search container (left side)
+			const searchCont = controlsContainer
+				.append('div')
+				.attr('style', 'width: 200px; pointer-events: auto;')
+				.on('focusout', () => {
+					setTimeout(() => {
+						if (!searchCont.node()?.contains(document.activeElement)) {
+							updateDropdown([]);
+						}
+					}, 200);
+				});
+
+			const searchInput = searchCont
+				.append('input')
+				.attr(
+					'style',
+					'width: 100%; padding: 8px 12px; border-radius: 6px; border: none; background: rgba(255,255,255,0.9); color: #333; font-size: 14px;'
+				)
+				.attr('type', 'text')
+				.attr('placeholder', 'Search family members...')
+				.on('focus', activateDropdown)
+				.on('input', activateDropdown);
+
+			const dropdown = searchCont
+				.append('div')
+				.attr(
+					'style',
+					'overflow-y: auto; max-height: 200px; background-color: rgba(0,0,0,0.9); border-radius: 6px; margin-top: 4px;'
+				)
+				.attr('tabindex', '0')
+				.on('wheel', (e: WheelEvent) => {
+					e.stopPropagation();
+				});
+
+			function activateDropdown() {
+				const inputNode = searchInput.node() as HTMLInputElement | null;
+				const searchValue = inputNode?.value?.toLowerCase() || '';
+				const filtered = searchOptions.filter((opt) =>
+					opt.label.toLowerCase().includes(searchValue)
+				);
+				updateDropdown(filtered);
+			}
+
+			function updateDropdown(options: { id: string; label: string }[]) {
+				dropdown
+					.selectAll('div')
+					.data(options)
+					.join('div')
+					.attr(
+						'style',
+						'padding: 8px 12px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 13px;'
+					)
+					.on('click', (_e: MouseEvent, d: { id: string; label: string }) => {
+						navigateToPerson(d.id, true);
+						updateDropdown([]);
+						const inputNode = searchInput.node() as HTMLInputElement | null;
+						if (inputNode) inputNode.value = '';
+					})
+					.text((d: { id: string; label: string }) => d.label);
+			}
+
+			// Buttons container (right side)
+			const buttonsCont = controlsContainer
+				.append('div')
+				.attr('style', 'display: flex; gap: 8px; pointer-events: auto;');
+
+			const buttonStyle =
+				'padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: opacity 0.2s;';
+
+			// Reset button
+			buttonsCont
+				.append('button')
+				.text('Reset')
+				.attr(
+					'style',
+					buttonStyle + 'background: rgba(255,255,255,0.9); color: #333;'
+				)
+				.on('click', () => {
+					navigateToPerson(originalMainId, true);
+				});
+
+			// Fit View button
+			buttonsCont
+				.append('button')
+				.text('Fit View')
+				.attr(
+					'style',
+					buttonStyle + 'background: rgba(255,255,255,0.9); color: #333;'
+				)
+				.on('click', () => {
+					chart.updateTree({ tree_position: 'fit' });
+				});
+
+			// Random button
+			buttonsCont
+				.append('button')
+				.text('Random')
+				.attr('style', buttonStyle + 'background: #90ee90; color: #333;')
+				.on('click', () => {
+					const randomMember =
+						familyMembers[Math.floor(Math.random() * familyMembers.length)];
+					navigateToPerson(randomMember.id, false);
+				});
 		} catch (error) {
 			console.error('Family chart error:', error);
 		}
@@ -107,12 +194,10 @@ import 'family-chart/styles/family-chart.css';
 <style>
 	.family-tree-container {
 		position: relative;
-		height: 70vh;
-		min-height: 500px;
-	}
-
-	#family-tree-canvas {
 		width: 100%;
-		height: 100%;
+		height: 80vh;
+		min-height: 600px;
+		background-color: rgb(33, 33, 33);
+		color: #fff;
 	}
 </style>
