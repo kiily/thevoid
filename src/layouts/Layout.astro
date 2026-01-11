@@ -62,9 +62,11 @@ const {
 
 	body {
 		font-family: var(--font-serif);
-		line-height: 1.6;
+		line-height: 1.7;
 		color: #2d3a3a;
 		background-color: #f7f7f2;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	.dark body {
@@ -80,29 +82,59 @@ const {
 	h6 {
 		font-family: var(--font-sans);
 		font-weight: 700;
-		line-height: 1.2;
-		margin: 1.5rem 0 0.5rem;
-		letter-spacing: -0.025em;
+		line-height: 1.15;
+		margin: 0;
+		letter-spacing: -0.03em;
 	}
 
 	h1 {
 		font-weight: 800;
-		font-size: 2.5rem;
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
 	}
 
 	h2 {
 		font-weight: 700;
-		font-size: 2rem;
+		font-size: clamp(1.75rem, 3vw, 2.25rem);
 	}
 
 	h3 {
 		font-weight: 600;
-		font-size: 1.5rem;
+		font-size: clamp(1.25rem, 2vw, 1.5rem);
 	}
 
 	h4,
 	h5,
 	h6 {
 		font-weight: 600;
+	}
+
+	/* Section number styling */
+	.section-number {
+		font-family: var(--font-sans);
+		font-size: 0.875rem;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		color: #a1a1a1;
+		margin-bottom: 1rem;
+	}
+
+	.dark .section-number {
+		color: #6b6b6b;
+	}
+
+	/* Refined link styles */
+	a {
+		transition: color 0.2s ease, opacity 0.2s ease;
+	}
+
+	/* Selection styling */
+	::selection {
+		background-color: #006400;
+		color: white;
+	}
+
+	.dark ::selection {
+		background-color: #90EE90;
+		color: #1a1a1a;
 	}
 </style>

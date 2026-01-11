@@ -1,118 +1,75 @@
 ---
-import { Image } from 'astro:assets';
-
 const technologies = {
-	code: [
-		{ name: 'TypeScript', color: '2bbc8a' },
-		{ name: 'JavaScript', color: '2bbc8a' },
-		{ name: 'React', color: '2bbc8a' },
-		{ name: 'Python', color: '2bbc8a' },
-		{ name: 'Bash', color: '2bbc8a' },
-	],
-	frameworks: [
-		{ name: 'Next.js', color: '2bbc8a' },
-		{ name: 'Angular', color: '2bbc8a' },
-		{ name: 'Flutter', color: '2bbc8a' },
-	],
-	tools: [
-		{ name: 'MongoDB', color: '2bbc8a' },
-		{ name: 'PostgreSQL', color: '2bbc8a' },
-		{ name: 'Docker', color: '2bbc8a' },
-		{ name: 'Kubernetes', color: '2bbc8a' },
-		{ name: 'Datadog', color: '2bbc8a' },
-	],
-	cloud: [
-		{ name: 'Vercel', color: '2bbc8a' },
-		{ name: 'Digital_Ocean', color: '2bbc8a' },
-		{ name: 'AWS', color: '2bbc8a' },
-		{ name: 'Bitrise', color: '2bbc8a' },
-	],
+	code: ['TypeScript', 'JavaScript', 'React', 'Python', 'Bash'],
+	frameworks: ['Next.js', 'Angular', 'Flutter'],
+	tools: ['MongoDB', 'PostgreSQL', 'Docker', 'Kubernetes', 'Datadog'],
+	cloud: ['Vercel', 'Digital Ocean', 'AWS', 'Bitrise'],
 };
 ---
 
-<section id="technologies" class="py-20 bg-white">
-	<div class="container mx-auto max-w-4xl px-6">
-		<h2 class="text-3xl font-bold text-gray-800 mb-12">Technologies</h2>
+<section id="technologies" class="py-24 md:py-32">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<span class="section-number block">04</span>
+		<header class="mb-12">
+			<h2 class="text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">
+				Technologies
+			</h2>
+			<p class="text-lg text-garden-secondary dark:text-garden-dark-secondary font-body max-w-xl">
+				Tools and technologies I work with daily.
+			</p>
+		</header>
 
-		<div class="space-y-8">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 			<div>
-				<h3 class="text-xl font-semibold text-gray-700 mb-4">Code</h3>
-				<div class="flex flex-wrap gap-2">
-					{
-						technologies.code.map((tech) => (
-							<Image
-								src={`https://img.shields.io/badge/Code-${tech.name}-informational?style=flat&logo=${tech.name.toLowerCase()}&logoColor=white&color=${tech.color}`}
-								alt={`${tech.name} badge`}
-								width={100}
-								height={20}
-								loading="lazy"
-								decoding="async"
-								class="h-5 w-auto"
-								quality="high"
-							/>
-						))
-					}
-				</div>
+				<h3 class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-4 font-ui">
+					Languages
+				</h3>
+				<ul class="space-y-2">
+					{technologies.code.map((tech) => (
+						<li class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+							{tech}
+						</li>
+					))}
+				</ul>
 			</div>
 
 			<div>
-				<h3 class="text-xl font-semibold text-gray-700 mb-4">Frameworks</h3>
-				<div class="flex flex-wrap gap-2">
-					{
-						technologies.frameworks.map((tech) => (
-							<Image
-								src={`https://img.shields.io/badge/Framework-${tech.name}-informational?style=flat&logo=${tech.name.toLowerCase()}&logoColor=white&color=${tech.color}`}
-								alt={`${tech.name} framework badge`}
-								width={120}
-								height={20}
-								loading="lazy"
-								decoding="async"
-								class="h-5 w-auto"
-								quality="high"
-							/>
-						))
-					}
-				</div>
+				<h3 class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-4 font-ui">
+					Frameworks
+				</h3>
+				<ul class="space-y-2">
+					{technologies.frameworks.map((tech) => (
+						<li class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+							{tech}
+						</li>
+					))}
+				</ul>
 			</div>
 
 			<div>
-				<h3 class="text-xl font-semibold text-gray-700 mb-4">Tools</h3>
-				<div class="flex flex-wrap gap-2">
-					{
-						technologies.tools.map((tech) => (
-							<Image
-								src={`https://img.shields.io/badge/Tools-${tech.name}-informational?style=flat&logo=${tech.name.toLowerCase()}&logoColor=white&color=${tech.color}`}
-								alt={`${tech.name} tool badge`}
-								width={100}
-								height={20}
-								loading="lazy"
-								decoding="async"
-								class="h-5 w-auto"
-								quality="high"
-							/>
-						))
-					}
-				</div>
+				<h3 class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-4 font-ui">
+					Tools
+				</h3>
+				<ul class="space-y-2">
+					{technologies.tools.map((tech) => (
+						<li class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+							{tech}
+						</li>
+					))}
+				</ul>
 			</div>
 
 			<div>
-				<h3 class="text-xl font-semibold text-gray-700 mb-4">Cloud</h3>
-				<div class="flex flex-wrap gap-2">
-					{
-						technologies.cloud.map((tech) => (
-							<Image
-								src={`https://img.shields.io/badge/Cloud-${tech.name}-informational?style=flat&logo=${tech.name.toLowerCase()}&logoColor=white&color=${tech.color}`}
-								alt={`${tech.name} cloud badge`}
-								width={100}
-								height={20}
-								loading="lazy"
-								decoding="async"
-								class="h-5 w-auto"
-								quality="high"
-							/>
-						))
-					}
-				</div>
+				<h3 class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-4 font-ui">
+					Cloud
+				</h3>
+				<ul class="space-y-2">
+					{technologies.cloud.map((tech) => (
+						<li class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+							{tech}
+						</li>
+					))}
+				</ul>
 			</div>
 		</div>
 	</div>

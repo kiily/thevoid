@@ -4,9 +4,8 @@ import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
 	{ label: 'About', href: '/#about' },
-	{ label: 'Digital Garden', href: '/#garden' },
+	{ label: 'Garden', href: '/#garden' },
 	{ label: 'Projects', href: '/#projects' },
-	{ label: 'Technologies', href: '/#technologies' },
 	{ label: 'Contact', href: '/#contact' },
 ];
 
@@ -15,34 +14,33 @@ const isHomePage = currentPath === '/';
 ---
 
 <header
-	class="fixed w-full bg-white/80 dark:bg-garden-dark-surface/80 backdrop-blur-sm z-50 shadow-sm"
+	class="fixed w-full bg-garden-background/95 dark:bg-garden-dark-background/95 backdrop-blur-md z-50 border-b border-gray-200/50 dark:border-gray-800/50"
 >
-	<nav class="container mx-auto px-6 py-4">
-		<div class="flex items-center justify-between gap-4">
+	<nav class="container mx-auto max-w-5xl px-6 md:px-8 py-4">
+		<div class="flex items-center justify-between">
 			<a
 				href="/"
-				class="text-2xl font-bold text-garden-primary dark:text-garden-dark-primary flex items-center gap-2"
+				class="text-lg font-semibold text-garden-primary dark:text-garden-dark-primary flex items-center gap-2.5 font-ui hover:opacity-70 transition-opacity"
 			>
 				<Image
 					src="/void.svg"
 					alt="The void logo"
-					class="w-6 h-6 rounded-lg"
-					width={24}
-					height={24}
+					class="w-5 h-5"
+					width={20}
+					height={20}
 					quality="high"
 				/>
 				The void
 			</a>
 
-			<div class="flex items-center gap-4">
-				<ThemeToggle />
-				<ul class="hidden md:flex space-x-8">
+			<div class="flex items-center gap-6">
+				<ul class="hidden md:flex items-center gap-6">
 					{
 						navItems.map((item) => (
 							<li>
 								<a
 									href={isHomePage ? item.href : `/${item.href.slice(1)}`}
-									class="text-garden-secondary hover:text-garden-accent dark:text-garden-dark-secondary dark:hover:text-garden-dark-accent transition-colors"
+									class="text-sm font-medium text-garden-secondary hover:text-garden-primary dark:text-garden-dark-secondary dark:hover:text-garden-dark-primary transition-colors font-ui"
 								>
 									{item.label}
 								</a>
@@ -50,6 +48,7 @@ const isHomePage = currentPath === '/';
 						))
 					}
 				</ul>
+				<ThemeToggle />
 			</div>
 		</div>
 	</nav>

@@ -20,50 +20,61 @@ const recentPosts = posts
 <Layout title="The void">
 	<Hero />
 
-	<section id="about" class="py-20 bg-white dark:bg-garden-dark-surface">
-		<div class="container mx-auto max-w-4xl px-6">
+	<!-- About Section -->
+	<section id="about" class="py-24 md:py-32">
+		<div class="container mx-auto max-w-5xl px-6 md:px-8">
+			<span class="section-number block">01</span>
 			<h2
-				class="text-3xl font-bold text-garden-primary dark:text-garden-dark-primary mb-8 font-ui"
+				class="text-garden-primary dark:text-garden-dark-primary mb-8 font-ui"
 			>
-				About Me
+				About
 			</h2>
-			<p
-				class="text-xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body leading-relaxed"
-			>
-				I'm Miguel. A polyglot biologist turned software engineer with a passion
-				for building products and making the world a better place.
-			</p>
-			<p
-				class="text-xl text-garden-secondary dark:text-garden-dark-secondary font-body leading-relaxed"
-			>
-				Currently serving as CTO at <a
-					href="https://flown.com?referral=miguel-marinvermelho-9f20e"
-					class="text-garden-accent dark:text-garden-dark-accent underline hover:no-underline"
-					target="_blank">FLOWN</a
-				>, where we're reimagining the future of work and productivity.
-			</p>
+			<div class="max-w-2xl">
+				<p
+					class="text-xl md:text-2xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body leading-relaxed"
+				>
+					I'm Miguel. A polyglot biologist turned software engineer with a passion
+					for building products and making the world a better place.
+				</p>
+				<p
+					class="text-xl md:text-2xl text-garden-secondary dark:text-garden-dark-secondary font-body leading-relaxed"
+				>
+					Currently serving as CTO at <a
+						href="https://flown.com?referral=miguel-marinvermelho-9f20e"
+						class="text-garden-accent dark:text-garden-dark-accent hover:opacity-70 transition-opacity"
+						target="_blank">FLOWN</a
+					>, where we're reimagining the future of work and productivity.
+				</p>
+			</div>
 		</div>
 	</section>
 
+	<!-- Divider -->
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<hr class="border-gray-200 dark:border-gray-800" />
+	</div>
+
+	<!-- Garden Section -->
 	<section
 		id="garden"
-		class="py-20 bg-garden-background dark:bg-garden-dark-background"
+		class="py-24 md:py-32"
 	>
-		<div class="container mx-auto max-w-4xl px-6">
+		<div class="container mx-auto max-w-5xl px-6 md:px-8">
+			<span class="section-number block">02</span>
 			<header class="mb-12">
 				<h2
-					class="text-3xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
+					class="text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
 				>
-					Digital Garden
+					Garden
 				</h2>
 				<p
-					class="text-xl text-garden-secondary dark:text-garden-dark-secondary font-body"
+					class="text-lg text-garden-secondary dark:text-garden-dark-secondary font-body max-w-xl"
 				>
 					A space where ideas grow and thoughts interconnect.
 				</p>
 			</header>
 
-			<div class="space-y-8">
+			<div class="space-y-6">
 				{
 					recentPosts.map((post: any) => (
 						<PostCard
@@ -78,41 +89,66 @@ const recentPosts = posts
 				}
 			</div>
 
-			<div class="mt-8 text-center">
+			<div class="mt-12">
 				<a
 					href="/garden"
-					class="inline-block px-6 py-3 bg-garden-accent text-white rounded-lg hover:bg-opacity-90 transition-colors font-ui"
+					class="inline-flex items-center gap-2 text-garden-accent dark:text-garden-dark-accent font-ui font-medium hover:opacity-70 transition-opacity"
 				>
-					Explore the Garden
+					View all posts
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+					</svg>
 				</a>
 			</div>
 		</div>
 	</section>
 
+	<!-- Divider -->
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<hr class="border-gray-200 dark:border-gray-800" />
+	</div>
+
 	<Projects />
+
+	<!-- Divider -->
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<hr class="border-gray-200 dark:border-gray-800" />
+	</div>
 
 	<Technologies />
 
+	<!-- Divider -->
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<hr class="border-gray-200 dark:border-gray-800" />
+	</div>
+
 	<Writing />
 
-	<section id="contact" class="py-20 bg-white dark:bg-garden-dark-surface">
-		<div class="container mx-auto max-w-4xl px-6">
+	<!-- Divider -->
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<hr class="border-gray-200 dark:border-gray-800" />
+	</div>
+
+	<!-- Contact Section -->
+	<section id="contact" class="py-24 md:py-32">
+		<div class="container mx-auto max-w-5xl px-6 md:px-8">
+			<span class="section-number block">06</span>
 			<h2
-				class="text-3xl font-bold text-garden-primary dark:text-garden-dark-primary mb-8 font-ui"
+				class="text-garden-primary dark:text-garden-dark-primary mb-6 font-ui"
 			>
 				Get in Touch
 			</h2>
 			<p
-				class="text-xl text-garden-secondary dark:text-garden-dark-secondary mb-8 font-body"
+				class="text-lg text-garden-secondary dark:text-garden-dark-secondary mb-10 font-body max-w-xl"
 			>
-				Feel free to reach out for collaborations, questions, or just to say hi!
+				Feel free to reach out for collaborations, questions, or just to say hi.
 			</p>
-			<div class="flex flex-wrap gap-4">
+			<div class="flex flex-wrap gap-3">
 				<a
 					aria-label="x"
 					href="https://twitter.com/kiily95"
 					target="_blank"
-					class="inline-flex items-center gap-2 px-6 py-3 bg-[#000000] text-white rounded-lg hover:bg-opacity-90 transition-colors font-ui"
+					class="inline-flex items-center justify-center w-12 h-12 bg-garden-primary dark:bg-garden-dark-primary text-white dark:text-garden-dark-background rounded-full hover:opacity-80 transition-opacity"
 				>
 					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 						<path
@@ -124,7 +160,7 @@ const recentPosts = posts
 					aria-label="bluesky"
 					href="https://bsky.app/profile/kiily95.bsky.social"
 					target="_blank"
-					class="inline-flex items-center gap-2 px-6 py-3 bg-[#0085C3] text-white rounded-lg hover:bg-opacity-90 transition-colors font-ui"
+					class="inline-flex items-center justify-center w-12 h-12 bg-[#0085C3] text-white rounded-full hover:opacity-80 transition-opacity"
 				>
 					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 						<path
@@ -139,7 +175,7 @@ const recentPosts = posts
 					aria-label="github"
 					href="https://github.com/kiily"
 					target="_blank"
-					class="inline-flex items-center gap-2 px-6 py-3 bg-[#24292e] dark:bg-[#0d1117] text-white rounded-lg hover:bg-opacity-90 transition-colors font-ui"
+					class="inline-flex items-center justify-center w-12 h-12 bg-[#24292e] dark:bg-white text-white dark:text-[#24292e] rounded-full hover:opacity-80 transition-opacity"
 				>
 					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 						<path
@@ -151,7 +187,7 @@ const recentPosts = posts
 					aria-label="linkedin"
 					href="https://www.linkedin.com/in/%F0%9F%90%89-miguel-marin-vermelho-09805185/"
 					target="_blank"
-					class="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-garden-dark-background text-gray-800 dark:text-garden-dark-primary rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-garden-dark-surface transition-colors font-ui"
+					class="inline-flex items-center justify-center w-12 h-12 bg-[#0077B5] text-white rounded-full hover:opacity-80 transition-opacity"
 				>
 					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 						<path
