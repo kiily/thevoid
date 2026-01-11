@@ -2,22 +2,24 @@ import { defineCollection, z } from 'astro:content';
 
 const garden = defineCollection({
 	type: 'content',
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		publishDate: z.date(),
-		updateDate: z.date().optional(),
-		category: z.string(),
-		tags: z.array(z.string()).optional(),
-		connections: z
-			.array(
-				z.object({
-					title: z.string(),
-					url: z.string(),
-				})
-			)
-			.optional(),
-	}),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			publishDate: z.date(),
+			updateDate: z.date().optional(),
+			category: z.string(),
+			tags: z.array(z.string()).optional(),
+			image: image().optional(),
+			connections: z
+				.array(
+					z.object({
+						title: z.string(),
+						url: z.string(),
+					})
+				)
+				.optional(),
+		}),
 });
 
 const projects = defineCollection({

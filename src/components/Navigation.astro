@@ -1,6 +1,7 @@
 ---
 import { DataService } from '../lib/data-service';
 import Search from './Search.astro';
+import Badge from './Badge.astro';
 
 const categories = await DataService.getCategories();
 const tags = await DataService.getTags();
@@ -8,7 +9,7 @@ const tags = await DataService.getTags();
 
 <button
 	id="nav-toggle"
-	class="fixed top-20 left-6 z-50 p-2 bg-white dark:bg-garden-dark-surface rounded-lg shadow-md text-garden-secondary dark:text-garden-dark-secondary hover:text-garden-accent dark:hover:text-garden-dark-accent transition-all duration-300"
+	class="fixed top-20 left-6 z-50 p-2 bg-white dark:bg-garden-dark-surface rounded-lg shadow-md text-body hover:text-garden-accent dark:hover:text-garden-dark-accent transition-all duration-300"
 	aria-label="Toggle Navigation"
 >
 	<svg
@@ -50,7 +51,7 @@ const tags = await DataService.getTags();
 		<div class="space-y-6">
 			<div>
 				<h3
-					class="text-sm font-semibold text-garden-secondary dark:text-garden-dark-secondary uppercase tracking-wider mb-3 font-ui"
+					class="text-sm font-semibold text-body uppercase tracking-wider mb-3 font-ui"
 				>
 					Categories
 				</h3>
@@ -72,19 +73,16 @@ const tags = await DataService.getTags();
 
 			<div>
 				<h3
-					class="text-sm font-semibold text-garden-secondary dark:text-garden-dark-secondary uppercase tracking-wider mb-3 font-ui"
+					class="text-sm font-semibold text-body uppercase tracking-wider mb-3 font-ui"
 				>
 					Tags
 				</h3>
 				<div class="flex flex-wrap gap-2">
 					{
 						tags.map((tag) => (
-							<a
-								href={`/tag/${tag}`}
-								class="nav-link px-2 py-1 text-sm bg-garden-background dark:bg-garden-dark-background text-garden-secondary dark:text-garden-dark-secondary rounded-md hover:bg-garden-accent hover:text-white dark:hover:bg-garden-dark-accent transition-colors"
-							>
+							<Badge href={`/tag/${tag}`} size="sm">
 								{tag}
-							</a>
+							</Badge>
 						))
 					}
 				</div>

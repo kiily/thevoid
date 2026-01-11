@@ -28,13 +28,11 @@ function formatDate(date: Date) {
 				</div>
 			</div>
 
-			<h1
-				class="text-4xl font-bold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
-			>
+			<h1 class="text-garden-primary dark:text-garden-dark-primary mb-4">
 				{frontmatter.title}
 			</h1>
 			<p
-				class="text-xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body"
+				class="text-xl text-body mb-6 font-body"
 			>
 				{frontmatter.description}
 			</p>
@@ -107,7 +105,7 @@ function formatDate(date: Date) {
 			</div>
 
 			<div
-				class="text-garden-secondary dark:text-garden-dark-secondary font-ui"
+				class="text-body font-ui"
 			>
 				<time datetime={frontmatter.startDate.toISOString()}>
 					{formatDate(frontmatter.startDate)}
@@ -148,7 +146,7 @@ function formatDate(date: Date) {
 										d="M5 13l4 4L19 7"
 									/>
 								</svg>
-								<span class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+								<span class="text-body font-body">
 									{feature}
 								</span>
 							</li>
@@ -211,7 +209,7 @@ function formatDate(date: Date) {
 													d="M12 6v6m0 0v6m0-6h6m-6 0H6"
 												/>
 											</svg>
-											<span class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+											<span class="text-body font-body">
 												{challenge}
 											</span>
 										</li>
@@ -241,7 +239,7 @@ function formatDate(date: Date) {
 													d="M13 10V3L4 14h7v7l9-11h-7z"
 												/>
 											</svg>
-											<span class="text-garden-secondary dark:text-garden-dark-secondary font-body">
+											<span class="text-body font-body">
 												{learning}
 											</span>
 										</li>
@@ -271,7 +269,7 @@ function formatDate(date: Date) {
 										height={450}
 										class="rounded-lg shadow-md"
 									/>
-									<figcaption class="mt-2 text-center text-sm text-garden-secondary dark:text-garden-dark-secondary font-body">
+									<figcaption class="mt-2 text-center text-sm text-body font-body">
 										{item.caption}
 									</figcaption>
 								</figure>

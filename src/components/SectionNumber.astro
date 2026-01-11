@@ -1,0 +1,20 @@
+---
+export interface Props {
+	number: number;
+	class?: string;
+}
+
+const { number, class: className = '' } = Astro.props;
+
+// Format number with leading zero (01, 02, etc.)
+const formattedNumber = number.toString().padStart(2, '0');
+---
+
+<span
+	class:list={[
+		'section-number block text-garden-accent dark:text-garden-dark-accent uppercase font-ui',
+		className,
+	]}
+>
+	{formattedNumber}
+</span>

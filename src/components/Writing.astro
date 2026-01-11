@@ -1,14 +1,15 @@
+---
+import SectionNumber from './SectionNumber.astro';
+import SectionTitle from './SectionTitle.astro';
+---
+
 <section id="writing" class="py-24 md:py-32">
 	<div class="container mx-auto max-w-5xl px-6 md:px-8">
-		<span class="section-number block">05</span>
-		<header class="mb-12">
-			<h2 class="text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">
-				Writing
-			</h2>
-			<p class="text-lg text-garden-secondary dark:text-garden-dark-secondary font-body max-w-xl">
-				Thoughts on technology, productivity, and creative pursuits.
-			</p>
-		</header>
+		<SectionNumber number={5} />
+		<SectionTitle>Writing</SectionTitle>
+		<p class="text-lg text-body font-body max-w-xl mb-12">
+			Thoughts on technology, productivity, and creative pursuits.
+		</p>
 
 		<div class="grid md:grid-cols-2 gap-12 lg:gap-16">
 			<div>
@@ -33,7 +34,7 @@
 				<h3 class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-6 font-ui">
 					Technical Writing
 				</h3>
-				<p class="text-garden-secondary dark:text-garden-dark-secondary font-body mb-6">
+				<p class="text-body font-body mb-6">
 					Latest posts on Medium:
 				</p>
 				<ul class="space-y-4">

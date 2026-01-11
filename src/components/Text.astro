@@ -1,0 +1,49 @@
+---
+export interface Props {
+	as?: 'p' | 'span' | 'div';
+	variant?: 'body' | 'body-strong' | 'muted' | 'label';
+	size?: 'sm' | 'base' | 'lg' | 'xl' | '2xl';
+	class?: string;
+}
+
+type Variant = NonNullable<Props['variant']>;
+type Size = NonNullable<Props['size']>;
+
+const {
+	as: Tag = 'p',
+	variant = 'body',
+	size = 'base',
+	class: className = '',
+} = Astro.props as Props;
+
+const typedVariant: Variant = variant;
+const typedSize: Size = size;
+
+const variantClasses = {
+	body: 'text-garden-secondary dark:text-garden-dark-secondary font-body',
+	'body-strong': 'text-garden-primary dark:text-garden-dark-primary font-body',
+	muted: 'text-gray-400 dark:text-gray-500 font-body',
+	label:
+		'font-medium text-garden-secondary dark:text-garden-dark-secondary font-ui',
+};
+
+const sizeClasses = {
+	sm: 'text-sm',
+	base: 'text-base',
+	lg: 'text-lg',
+	xl: 'text-xl',
+	'2xl': 'text-2xl',
+};
+
+const classes = [
+	variantClasses[typedVariant],
+	sizeClasses[typedSize],
+	className,
+]
+	.filter(Boolean)
+	.join(' ');
+---
+
+<Tag class={classes}>
+	<slot />
+</Tag>

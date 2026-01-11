@@ -6,7 +6,8 @@ export default {
     extend: {
       fontFamily: {
         body: ['Source Serif 4', 'Georgia', 'serif'],
-        ui: ['Inter', 'system-ui', 'sans-serif']
+        ui: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Cormorant Garamond', 'Georgia', 'serif']
       },
       colors: {
         garden: {
@@ -16,7 +17,7 @@ export default {
           background: '#F7F7F2',
           surface: '#FFFFFF',
           'dark-primary': '#E1E1E1',
-          'dark-secondary': '#A1A1A1',
+          'dark-secondary': '#C9C9C9',
           'dark-accent': '#90EE90',
           'dark-background': '#1A1A1A',
           'dark-surface': '#2D2D2D'

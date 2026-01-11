@@ -6,6 +6,8 @@ import Technologies from '../components/Technologies.astro';
 import Projects from '../components/Projects.astro';
 import Writing from '../components/Writing.astro';
 import PostCard from '../components/PostCard.astro';
+import SectionNumber from '../components/SectionNumber.astro';
+import SectionTitle from '../components/SectionTitle.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('garden');
@@ -23,22 +25,14 @@ const recentPosts = posts
 	<!-- About Section -->
 	<section id="about" class="py-24 md:py-32">
 		<div class="container mx-auto max-w-5xl px-6 md:px-8">
-			<span class="section-number block">01</span>
-			<h2
-				class="text-garden-primary dark:text-garden-dark-primary mb-8 font-ui"
-			>
-				About
-			</h2>
+			<SectionNumber number={1} />
+			<SectionTitle>About</SectionTitle>
 			<div class="max-w-2xl">
-				<p
-					class="text-xl md:text-2xl text-garden-secondary dark:text-garden-dark-secondary mb-6 font-body leading-relaxed"
-				>
-					I'm Miguel. A polyglot biologist turned software engineer with a passion
-					for building products and making the world a better place.
+				<p class="text-xl md:text-2xl text-body mb-6 font-body leading-relaxed">
+					I'm Miguel. A polyglot biologist turned software engineer with a
+					passion for building products and making the world a better place.
 				</p>
-				<p
-					class="text-xl md:text-2xl text-garden-secondary dark:text-garden-dark-secondary font-body leading-relaxed"
-				>
+				<p class="text-xl md:text-2xl text-body font-body leading-relaxed">
 					Currently serving as CTO at <a
 						href="https://flown.com?referral=miguel-marinvermelho-9f20e"
 						class="text-garden-accent dark:text-garden-dark-accent hover:opacity-70 transition-opacity"
@@ -55,26 +49,15 @@ const recentPosts = posts
 	</div>
 
 	<!-- Garden Section -->
-	<section
-		id="garden"
-		class="py-24 md:py-32"
-	>
+	<section id="garden" class="py-24 md:py-32">
 		<div class="container mx-auto max-w-5xl px-6 md:px-8">
-			<span class="section-number block">02</span>
-			<header class="mb-12">
-				<h2
-					class="text-garden-primary dark:text-garden-dark-primary mb-4 font-ui"
-				>
-					Garden
-				</h2>
-				<p
-					class="text-lg text-garden-secondary dark:text-garden-dark-secondary font-body max-w-xl"
-				>
-					A space where ideas grow and thoughts interconnect.
-				</p>
-			</header>
+			<SectionNumber number={2} />
+			<SectionTitle>Garden</SectionTitle>
+			<p class="text-lg text-body font-body max-w-xl mb-12">
+				A space where ideas grow and thoughts interconnect.
+			</p>
 
-			<div class="space-y-6">
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 				{
 					recentPosts.map((post: any) => (
 						<PostCard
@@ -84,6 +67,8 @@ const recentPosts = posts
 							updateDate={post.data.updateDate}
 							url={`/garden/${post.slug}`}
 							tags={post.data.tags}
+							image={post.data.image}
+							variant="card"
 						/>
 					))
 				}
@@ -95,8 +80,17 @@ const recentPosts = posts
 					class="inline-flex items-center gap-2 text-garden-accent dark:text-garden-dark-accent font-ui font-medium hover:opacity-70 transition-opacity"
 				>
 					View all posts
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+					<svg
+						class="w-4 h-4"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
 					</svg>
 				</a>
 			</div>
@@ -132,15 +126,9 @@ const recentPosts = posts
 	<!-- Contact Section -->
 	<section id="contact" class="py-24 md:py-32">
 		<div class="container mx-auto max-w-5xl px-6 md:px-8">
-			<span class="section-number block">06</span>
-			<h2
-				class="text-garden-primary dark:text-garden-dark-primary mb-6 font-ui"
-			>
-				Get in Touch
-			</h2>
-			<p
-				class="text-lg text-garden-secondary dark:text-garden-dark-secondary mb-10 font-body max-w-xl"
-			>
+			<SectionNumber number={6} />
+			<SectionTitle>Get in Touch</SectionTitle>
+			<p class="text-lg text-body mb-10 font-body max-w-xl">
 				Feel free to reach out for collaborations, questions, or just to say hi.
 			</p>
 			<div class="flex flex-wrap gap-3">

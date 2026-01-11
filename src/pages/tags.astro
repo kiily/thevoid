@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Badge from '../components/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('garden');
+
+// Get all tags with counts
+const tagCounts = allPosts.reduce((acc, post) => {
+  (post.data.tags || []).forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {} as Record<string, number>);
+
+// Sort tags alphabetically
+const sortedTags = Object.entries(tagCounts).sort((a, b) =>
+  a[0].localeCompare(b[0])
+);
+
+// Group by first letter
+const groupedTags = sortedTags.reduce((acc, [tag, count]) => {
+  const letter = tag[0].toUpperCase();
+  if (!acc[letter]) acc[letter] = [];
+  acc[letter].push({ tag, count });
+  return acc;
+}, {} as Record<string, { tag: string; count: number }[]>);
+
+const letters = Object.keys(groupedTags).sort();
+---
+
+<Layout title="All Tags | The void">
+  <div class="container mx-auto max-w-5xl px-6 md:px-8 py-20">
+    <header class="mb-12">
+      <h1 class="text-garden-primary dark:text-garden-dark-primary mb-3">Tags</h1>
+      <p class="text-lg text-body">
+        Browse all {sortedTags.length} tags from the garden.
+      </p>
+    </header>
+
+    <!-- Quick Jump -->
+    <div class="mb-10 flex flex-wrap gap-2">
+      {letters.map(letter => (
+        <a
+          href={`#${letter}`}
+          class="w-8 h-8 flex items-center justify-center text-sm font-medium text-body hover:text-garden-accent dark:hover:text-garden-dark-accent hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors font-ui"
+        >
+          {letter}
+        </a>
+      ))}
+    </div>
+
+    <!-- Tags by Letter -->
+    <div class="space-y-10">
+      {letters.map(letter => (
+        <section id={letter}>
+          <h2 class="text-lg font-semibold text-garden-primary dark:text-garden-dark-primary mb-4 font-ui border-b border-gray-200 dark:border-gray-800 pb-2">
+            {letter}
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            {groupedTags[letter].map(({ tag, count }) => (
+              <Badge href={`/tag/${tag}`}>
+                {tag} <span class="opacity-60">({count})</span>
+              </Badge>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+      <a
+        href="/garden"
+        class="inline-flex items-center gap-2 text-garden-accent dark:text-garden-dark-accent font-ui font-medium hover:opacity-70 transition-opacity"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+        </svg>
+        Back to Garden
+      </a>
+    </div>
+  </div>
+</Layout>

@@ -1,6 +1,8 @@
 ---
 import { DataService, type Project } from '../lib/data-service';
 import { Image } from 'astro:assets';
+import SectionNumber from './SectionNumber.astro';
+import SectionTitle from './SectionTitle.astro';
 
 const projects = await DataService.getProjects();
 const sortedProjects = projects.sort((a: Project, b: Project) => {
@@ -21,15 +23,11 @@ const sortedProjects = projects.sort((a: Project, b: Project) => {
 
 <section id="projects" class="py-24 md:py-32">
 	<div class="container mx-auto max-w-5xl px-6 md:px-8">
-		<span class="section-number block">03</span>
-		<header class="mb-12">
-			<h2 class="text-garden-primary dark:text-garden-dark-primary mb-4 font-ui">
-				Projects
-			</h2>
-			<p class="text-lg text-garden-secondary dark:text-garden-dark-secondary font-body max-w-xl">
-				Things I've built and worked on.
-			</p>
-		</header>
+		<SectionNumber number={3} />
+		<SectionTitle>Projects</SectionTitle>
+		<p class="text-lg text-body font-body max-w-xl mb-12">
+			Things I've built and worked on.
+		</p>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 			{
@@ -61,13 +59,13 @@ const sortedProjects = projects.sort((a: Project, b: Project) => {
 									{project.data.title}
 								</a>
 							</h3>
-							<p class="text-garden-secondary dark:text-garden-dark-secondary font-body mb-4 leading-relaxed">
+							<p class="text-body font-body mb-4 leading-relaxed">
 								{project.data.description}
 							</p>
 
 							<div class="flex flex-wrap gap-2">
 								{project.data.tags.slice(0, 4).map((tag: string) => (
-									<span class="text-xs font-medium text-garden-secondary dark:text-garden-dark-secondary font-ui">
+									<span class="text-xs font-medium text-body font-ui">
 										#{tag}
 									</span>
 								))}
