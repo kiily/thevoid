@@ -30,6 +30,15 @@ export default defineConfig({
         styles: ['normal', 'italic'],
         display: 'swap',
         fallbacks: ['Georgia', 'serif']
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'Cormorant Garamond',
+        cssVariable: '--font-cormorant-garamond',
+        weights: [400, 500, 600],
+        styles: ['normal', 'italic'],
+        display: 'swap',
+        fallbacks: ['Georgia', 'serif']
       }
     ]
   },

@@ -30,6 +30,38 @@ const {
 		<!-- Astro Font API - handles optimization automatically -->
 		<Font cssVariable="--font-inter" preload />
 		<Font cssVariable="--font-source-serif-4" preload />
+		<Font cssVariable="--font-cormorant-garamond" preload />
+
+		<!-- Theme initialization - must run before body renders to prevent flash -->
+		<script is:inline>
+			// Apply theme immediately on initial load
+			(function () {
+				const theme =
+					localStorage.getItem('theme') ||
+					(window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light');
+				if (theme === 'dark') {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			})();
+
+			// Apply theme before view transition swap to prevent flicker
+			document.addEventListener('astro:before-swap', () => {
+				const theme =
+					localStorage.getItem('theme') ||
+					(window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light');
+				if (theme === 'dark') {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			});
+		</script>
 
 		<ClientRouter />
 	</head>
@@ -52,8 +84,10 @@ const {
 <style is:global>
 	:root {
 		--font-serif: var(--font-source-serif-4), 'Source Serif 4', Georgia, serif;
-		--font-sans: var(--font-inter), 'Inter', system-ui, -apple-system,
-			sans-serif;
+		--font-sans:
+			var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+		--font-display:
+			var(--font-cormorant-garamond), 'Cormorant Garamond', Georgia, serif;
 	}
 
 	html {
@@ -88,8 +122,11 @@ const {
 	}
 
 	h1 {
-		font-weight: 800;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-style: italic;
 		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		letter-spacing: -0.01em;
 	}
 
 	h2 {
@@ -114,17 +151,14 @@ const {
 		font-size: 0.875rem;
 		font-weight: 500;
 		letter-spacing: 0.1em;
-		color: #a1a1a1;
 		margin-bottom: 1rem;
-	}
-
-	.dark .section-number {
-		color: #6b6b6b;
 	}
 
 	/* Refined link styles */
 	a {
-		transition: color 0.2s ease, opacity 0.2s ease;
+		transition:
+			color 0.2s ease,
+			opacity 0.2s ease;
 	}
 
 	/* Selection styling */
@@ -134,7 +168,38 @@ const {
 	}
 
 	.dark ::selection {
-		background-color: #90EE90;
+		background-color: #90ee90;
 		color: #1a1a1a;
+	}
+
+	/* Semantic text utility classes - centralized text styling */
+	.text-body {
+		@apply text-garden-secondary dark:text-garden-dark-secondary;
+	}
+
+	.text-body-strong {
+		@apply text-garden-primary dark:text-garden-dark-primary;
+	}
+
+	.text-muted {
+		@apply text-gray-400 dark:text-gray-500;
+	}
+
+	.text-label {
+		@apply text-sm font-medium text-garden-secondary dark:text-garden-dark-secondary font-ui;
+	}
+
+	/* Badge/tag styling */
+	.badge {
+		@apply px-2 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-garden-primary dark:text-white rounded;
+	}
+
+	.badge-sm {
+		@apply px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 text-garden-primary dark:text-white rounded;
+	}
+
+	.badge:hover,
+	.badge-sm:hover {
+		@apply bg-garden-accent text-white dark:bg-garden-dark-accent;
 	}
 </style>
