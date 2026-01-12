@@ -1,0 +1,26 @@
+---
+import SectionNumber from './SectionNumber.astro';
+import SectionTitle from './SectionTitle.astro';
+---
+
+<section id="languages" class="py-24 md:py-32">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<SectionNumber number={6} />
+		<SectionTitle>Languages</SectionTitle>
+		<p class="text-lg text-body font-body max-w-xl mb-12">
+			Languages are one of my passions and I've been lucky to live in
+			environments that enabled this. In rough order of fluency:
+		</p>
+		<div class="flex flex-wrap gap-4">
+			<span class="text-5xl" title="Portuguese">🇵🇹</span>
+			<span class="text-5xl" title="Spanish">🇪🇸</span>
+			<span class="text-5xl" title="English">🇬🇧</span>
+			<span class="text-5xl" title="French">🇫🇷</span>
+			<span class="text-5xl" title="Italian">🇮🇹</span>
+			<span class="text-5xl" title="Japanese">🇯🇵</span>
+			<span class="text-5xl" title="Luxembourgish">🇱🇺</span>
+			<span class="text-5xl" title="German">🇩🇪</span>
+			<span class="text-5xl" title="Persian">🇮🇷</span>
+		</div>
+	</div>
+</section>

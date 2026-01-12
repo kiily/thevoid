@@ -1,0 +1,59 @@
+---
+import SectionNumber from './SectionNumber.astro';
+import SectionTitle from './SectionTitle.astro';
+import PostCard from './PostCard.astro';
+
+interface Props {
+	recentPosts: any[];
+}
+
+const { recentPosts } = Astro.props;
+---
+
+<section id="garden" class="py-24 md:py-32">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<SectionNumber number={2} />
+		<SectionTitle>Garden</SectionTitle>
+		<p class="text-lg text-body font-body max-w-xl mb-12">
+			A space where ideas grow and thoughts interconnect.
+		</p>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+			{
+				recentPosts.map((post: any) => (
+					<PostCard
+						title={post.data.title}
+						description={post.data.description}
+						publishDate={post.data.publishDate}
+						updateDate={post.data.updateDate}
+						url={`/garden/${post.slug}`}
+						tags={post.data.tags}
+						image={post.data.image}
+						variant="card"
+					/>
+				))
+			}
+		</div>
+
+		<div class="mt-12">
+			<a
+				href="/garden"
+				class="inline-flex items-center gap-2 text-garden-accent dark:text-garden-dark-accent font-ui font-medium hover:opacity-70 transition-opacity"
+			>
+				View all posts
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+				</svg>
+			</a>
+		</div>
+	</div>
+</section>
