@@ -2,6 +2,7 @@
 import SectionNumber from './SectionNumber.astro';
 import SectionTitle from './SectionTitle.astro';
 import PostCard from './PostCard.astro';
+import Search from './Search.astro';
 
 interface Props {
 	recentPosts: any[];
@@ -14,9 +15,18 @@ const { recentPosts } = Astro.props;
 	<div class="container mx-auto max-w-5xl px-6 md:px-8">
 		<SectionNumber number={2} />
 		<SectionTitle>Garden</SectionTitle>
-		<p class="text-lg text-body font-body max-w-xl mb-12">
+		<p class="text-lg text-body font-body max-w-xl mb-8">
 			A space where ideas grow and thoughts interconnect.
 		</p>
+
+		<div class="max-w-xl mb-12">
+			<Search
+				id="garden-search"
+				placeholder="Search posts, projects, and more..."
+				showTypes={true}
+				contentFilter="all"
+			/>
+		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 			{

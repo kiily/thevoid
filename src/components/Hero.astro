@@ -1,34 +1,38 @@
 ---
-import Search from './Search.astro';
+
 ---
 
-<section class="min-h-[70vh] flex items-center pt-24 pb-16">
-	<div class="container mx-auto max-w-5xl px-6 md:px-8">
-		<div class="max-w-3xl">
-			<span
-				class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-6 block font-ui"
+<section class="min-h-[80vh] flex items-center justify-center pt-16 pb-24">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8 text-center">
+		<span
+			class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-8 block font-ui"
+		>
+			THE VOID
+		</span>
+		<h1
+			class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-garden-primary dark:text-garden-dark-primary mb-8 leading-[1.05]"
+		>
+			こんにちは
+		</h1>
+		<p class="text-xl md:text-2xl text-body mb-12 leading-relaxed max-w-2xl mx-auto">
+			Welcome to my digital garden — a space where ideas grow and thoughts interconnect.
+		</p>
+		<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+			<a
+				href="#about"
+				class="inline-flex items-center gap-2 px-6 py-3 bg-garden-primary dark:bg-garden-dark-primary text-white dark:text-garden-dark-background rounded-lg font-ui font-medium hover:opacity-90 transition-opacity"
 			>
-				THE VOID
-			</span>
-			<h1
-				class="text-4xl sm:text-5xl md:text-6xl text-garden-primary dark:text-garden-dark-primary mb-6 leading-[1.1]"
+				Explore
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+				</svg>
+			</a>
+			<a
+				href="/garden"
+				class="inline-flex items-center gap-2 px-6 py-3 border border-garden-primary dark:border-garden-dark-primary text-garden-primary dark:text-garden-dark-primary rounded-lg font-ui font-medium hover:bg-garden-primary/5 dark:hover:bg-garden-dark-primary/5 transition-colors"
 			>
-				こんにちは
-			</h1>
-			<p class="text-xl md:text-2xl text-body mb-10 leading-relaxed max-w-2xl">
-				Welcome to my digital garden
-			</p>
-
-			<!-- Search Bar -->
-			<div class="max-w-xl mb-8">
-				<Search
-					id="hero-search"
-					placeholder="Search posts, projects, and more..."
-					className="w-full"
-					showTypes={true}
-					contentFilter="all"
-				/>
-			</div>
+				Browse Garden
+			</a>
 		</div>
 	</div>
 </section>
