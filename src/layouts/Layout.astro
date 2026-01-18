@@ -23,6 +23,9 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/void.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
+
+		<link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+
 		<!-- SEO -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -34,40 +37,37 @@ const {
 
 		<!-- Theme initialization - must run before body renders to prevent flash -->
 		<script is:inline>
-			// Apply theme immediately on initial load
-			(function () {
-				const theme =
+			// Helper to get and apply theme - reduces code duplication and ensures consistency
+			function getTheme() {
+				return (
 					localStorage.getItem('theme') ||
 					(window.matchMedia('(prefers-color-scheme: dark)').matches
 						? 'dark'
-						: 'light');
-				if (theme === 'dark') {
-					document.documentElement.classList.add('dark');
-				} else {
-					document.documentElement.classList.remove('dark');
-				}
-			})();
+						: 'light')
+				);
+			}
 
-			// Apply theme before view transition swap to prevent flicker
-			document.addEventListener('astro:before-swap', () => {
-				const theme =
-					localStorage.getItem('theme') ||
-					(window.matchMedia('(prefers-color-scheme: dark)').matches
-						? 'dark'
-						: 'light');
-				if (theme === 'dark') {
-					document.documentElement.classList.add('dark');
-				} else {
-					document.documentElement.classList.remove('dark');
-				}
+			function applyTheme(element, theme) {
+				// Single classList operation to minimize style recalculations
+				element.classList.toggle('dark', theme === 'dark');
+			}
+
+			// Apply theme immediately on initial load (synchronous to prevent flash)
+			applyTheme(document.documentElement, getTheme());
+
+			// Apply theme to incoming document before view transition swap
+			// This modifies the new document's classList, not the current one,
+			// which helps avoid forced reflow during the transition animation
+			document.addEventListener('astro:before-swap', (event) => {
+				const theme = getTheme();
+				// Apply to the incoming document's root element
+				applyTheme(event.newDocument.documentElement, theme);
 			});
 		</script>
 
 		<ClientRouter />
 	</head>
-	<body
-		class="font-body bg-garden-background text-garden-primary dark:bg-garden-dark-background dark:text-garden-dark-primary min-h-screen transition-colors duration-300"
-	>
+	<body class="font-body min-h-screen">
 		<Header />
 		<div class="flex pt-16">
 			<Navigation />
@@ -88,6 +88,15 @@ const {
 			var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
 		--font-display:
 			var(--font-cormorant-garamond), 'Cormorant Garamond', Georgia, serif;
+
+		/* Theme colors as CSS custom properties for smooth transitions */
+		--theme-bg: #f7f7f2;
+		--theme-text: #2d3a3a;
+	}
+
+	.dark {
+		--theme-bg: #1a1a1a;
+		--theme-text: #e1e1e1;
 	}
 
 	html {
@@ -97,15 +106,14 @@ const {
 	body {
 		font-family: var(--font-serif);
 		line-height: 1.7;
-		color: #2d3a3a;
-		background-color: #f7f7f2;
+		color: var(--theme-text);
+		background-color: var(--theme-bg);
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-	}
-
-	.dark body {
-		color: #e1e1e1;
-		background-color: #1a1a1a;
+		/* Transition on custom properties doesn't cause layout recalculation */
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease;
 	}
 
 	h1,
@@ -182,7 +190,7 @@ const {
 	}
 
 	.text-muted {
-		@apply text-gray-400 dark:text-gray-500;
+		@apply text-gray-500 dark:text-gray-400;
 	}
 
 	.text-label {

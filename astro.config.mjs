@@ -11,6 +11,12 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://thevoid-five.vercel.app/',
 
+  // Enable prefetch for View Transitions to preload linked pages
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'viewport'
+  },
+
   experimental: {
     fonts: [
       {

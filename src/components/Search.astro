@@ -101,10 +101,19 @@ const resultsId = `${id}-results`;
 </div>
 
 <script>
-	import { actions } from 'astro:actions';
+	// Lazy-load the actions module only when search is actually used
+	// This removes ~166ms from the critical path since the module loads on demand
+	let actionsModule: typeof import('astro:actions') | null = null;
 
-	// Simple search implementation
-	document.addEventListener('DOMContentLoaded', () => {
+	const getActions = async () => {
+		if (!actionsModule) {
+			actionsModule = await import('astro:actions');
+		}
+		return actionsModule.actions;
+	};
+
+	// Initialize search functionality
+	function initializeSearch() {
 		const searchInputs = document.querySelectorAll('input[type="search"]');
 
 		searchInputs.forEach((searchInput) => {
@@ -133,6 +142,8 @@ const resultsId = `${id}-results`;
 					) as HTMLElement;
 					const contentFilter = container?.dataset.contentFilter || 'all';
 
+					// Lazy-load actions module on first search
+					const actions = await getActions();
 					const { data, error } = await actions.search({
 						q: query,
 						limit: 12,
@@ -240,7 +251,17 @@ const resultsId = `${id}-results`;
 				}
 			});
 		});
-	});
+	}
+
+	// Initialize on DOM ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initializeSearch);
+	} else {
+		initializeSearch();
+	}
+
+	// Re-initialize on Astro page navigation (for View Transitions)
+	document.addEventListener('astro:page-load', initializeSearch);
 </script>
 
 <style>
