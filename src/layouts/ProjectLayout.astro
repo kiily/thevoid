@@ -16,7 +16,7 @@ function formatDate(date: Date) {
 			<div class="relative aspect-video mb-8 overflow-hidden rounded-lg">
 				<Image
 					src={frontmatter.image}
-					alt={frontmatter.title}
+					alt={frontmatter.description}
 					width={800}
 					height={450}
 					class="object-cover w-full h-full"
@@ -31,9 +31,7 @@ function formatDate(date: Date) {
 			<h1 class="text-garden-primary dark:text-garden-dark-primary mb-4">
 				{frontmatter.title}
 			</h1>
-			<p
-				class="text-xl text-body mb-6 font-body"
-			>
+			<p class="text-xl text-body mb-6 font-body">
 				{frontmatter.description}
 			</p>
 
@@ -104,9 +102,7 @@ function formatDate(date: Date) {
 				}
 			</div>
 
-			<div
-				class="text-body font-ui"
-			>
+			<div class="text-body font-ui">
 				<time datetime={frontmatter.startDate.toISOString()}>
 					{formatDate(frontmatter.startDate)}
 				</time>
@@ -146,9 +142,7 @@ function formatDate(date: Date) {
 										d="M5 13l4 4L19 7"
 									/>
 								</svg>
-								<span class="text-body font-body">
-									{feature}
-								</span>
+								<span class="text-body font-body">{feature}</span>
 							</li>
 						))}
 					</ul>
@@ -177,7 +171,7 @@ function formatDate(date: Date) {
 										))}
 									</div>
 								</div>
-							)
+							),
 						)}
 					</div>
 				</section>
@@ -209,9 +203,7 @@ function formatDate(date: Date) {
 													d="M12 6v6m0 0v6m0-6h6m-6 0H6"
 												/>
 											</svg>
-											<span class="text-body font-body">
-												{challenge}
-											</span>
+											<span class="text-body font-body">{challenge}</span>
 										</li>
 									))}
 								</ul>
@@ -239,9 +231,7 @@ function formatDate(date: Date) {
 													d="M13 10V3L4 14h7v7l9-11h-7z"
 												/>
 											</svg>
-											<span class="text-body font-body">
-												{learning}
-											</span>
+											<span class="text-body font-body">{learning}</span>
 										</li>
 									))}
 								</ul>
@@ -273,7 +263,7 @@ function formatDate(date: Date) {
 										{item.caption}
 									</figcaption>
 								</figure>
-							)
+							),
 						)}
 					</div>
 				</section>
