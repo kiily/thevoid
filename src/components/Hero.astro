@@ -1,5 +1,17 @@
 ---
+import TextCycler from './TextCycler.astro';
 
+const greetings = [
+	'Olá',           // Portuguese
+	'Hola',          // Spanish
+	'Hello',         // English
+	'Bonjour',       // French
+	'Ciao',          // Italian
+	'こんにちは',     // Japanese
+	'Moien',         // Luxembourgish
+	'Hallo',         // German
+	'سلام',          // Persian
+];
 ---
 
 <section class="min-h-[80vh] flex items-center justify-center pt-16 pb-24">
@@ -12,7 +24,7 @@
 		<h1
 			class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-garden-primary dark:text-garden-dark-primary mb-8 leading-[1.05]"
 		>
-			こんにちは
+			<TextCycler texts={greetings} interval={2500} />
 		</h1>
 		<p class="text-xl md:text-2xl text-body mb-12 leading-relaxed max-w-2xl mx-auto">
 			Welcome to my digital garden — a space where ideas grow and thoughts interconnect.
