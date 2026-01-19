@@ -2,49 +2,193 @@
 import TextCycler from './TextCycler.astro';
 
 const greetings = [
-	'Olá',           // Portuguese
-	'Hola',          // Spanish
-	'Hello',         // English
-	'Bonjour',       // French
-	'Ciao',          // Italian
-	'こんにちは',     // Japanese
-	'Moien',         // Luxembourgish
-	'Hallo',         // German
-	'سلام',          // Persian
+	'Olá', // Portuguese
+	'Hola', // Spanish
+	'Hello', // English
+	'Bonjour', // French
+	'Ciao', // Italian
+	'こんにちは', // Japanese
+	'Moien', // Luxembourgish
+	'Hallo', // German
+	'سلام', // Persian
 ];
 ---
 
-<section class="min-h-[80vh] flex items-center justify-center pt-16 pb-24">
-	<div class="container mx-auto max-w-5xl px-6 md:px-8 text-center">
+<section class="hero-section min-h-screen flex items-center justify-center relative overflow-hidden -mx-6 md:-mx-12 lg:-mx-16 -mt-8">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8 text-center relative z-10">
 		<span
-			class="text-sm font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-8 block font-ui"
+			class="text-lg font-medium tracking-widest text-garden-accent dark:text-garden-dark-accent uppercase mb-8 block font-ui"
 		>
 			THE VOID
 		</span>
 		<h1
-			class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-garden-primary dark:text-garden-dark-primary mb-8 leading-[1.05]"
+			class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-garden-primary dark:text-garden-dark-primary mb-8 leading-[1.05]"
 		>
 			<TextCycler texts={greetings} interval={2500} />
 		</h1>
-		<p class="text-xl md:text-2xl text-body mb-12 leading-relaxed max-w-2xl mx-auto">
-			Welcome to my digital garden — a space where ideas grow and thoughts interconnect.
-		</p>
-		<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-			<a
-				href="#about"
-				class="inline-flex items-center gap-2 px-6 py-3 bg-garden-primary dark:bg-garden-dark-primary text-white dark:text-garden-dark-background rounded-lg font-ui font-medium hover:opacity-90 transition-opacity"
-			>
-				Explore
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-				</svg>
-			</a>
-			<a
-				href="/garden"
-				class="inline-flex items-center gap-2 px-6 py-3 border border-garden-primary dark:border-garden-dark-primary text-garden-primary dark:text-garden-dark-primary rounded-lg font-ui font-medium hover:bg-garden-primary/5 dark:hover:bg-garden-dark-primary/5 transition-colors"
-			>
-				Browse Garden
-			</a>
-		</div>
+		<a
+			href="#about"
+			class="scroll-arrow mt-16 inline-flex flex-col items-center"
+			aria-label="Scroll to explore"
+		>
+			<div class="scroll-arrow-inner">
+				<span></span>
+				<span></span>
+			</div>
+		</a>
 	</div>
 </section>
+
+<style>
+	/* Futuristic scroll arrow */
+	.scroll-arrow {
+		opacity: 0.7;
+		transition: opacity 0.3s ease;
+	}
+
+	.scroll-arrow:hover {
+		opacity: 1;
+	}
+
+	.scroll-arrow-inner {
+		width: 24px;
+		height: 40px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.scroll-arrow-inner span {
+		display: block;
+		width: 12px;
+		height: 12px;
+		border-right: 2px solid currentColor;
+		border-bottom: 2px solid currentColor;
+		transform: rotate(45deg);
+		animation: scrollArrow 2s infinite;
+		opacity: 0;
+		color: var(--arrow-color, #006400);
+	}
+
+	:global(.dark) .scroll-arrow-inner span {
+		color: #90EE90;
+	}
+
+	.scroll-arrow-inner span:nth-child(1) {
+		animation-delay: 0s;
+	}
+
+	.scroll-arrow-inner span:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+
+	@keyframes scrollArrow {
+		0% {
+			opacity: 0;
+			transform: rotate(45deg) translate(-4px, -4px);
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+			transform: rotate(45deg) translate(4px, 4px);
+		}
+	}
+
+	/* Base void background - light mode */
+	.hero-section::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(
+				900px circle at 15% 25%,
+				rgba(0, 100, 0, 0.28),
+				transparent 50%
+			),
+			radial-gradient(
+				700px circle at 85% 55%,
+				rgba(0, 100, 0, 0.22),
+				transparent 50%
+			),
+			radial-gradient(
+				500px circle at 50% 85%,
+				rgba(0, 100, 0, 0.18),
+				transparent 50%
+			);
+		animation: voidShift 30s ease-in-out infinite alternate;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	/* Floating glow layer - light mode */
+	.hero-section::after {
+		content: "";
+		position: absolute;
+		inset: -20%;
+		background:
+			radial-gradient(
+				600px circle at 30% 40%,
+				rgba(0, 100, 0, 0.2),
+				transparent 60%
+			);
+		animation: glowDrift 45s linear infinite;
+		z-index: 0;
+		filter: blur(80px);
+		pointer-events: none;
+	}
+
+	/* Dark mode - more visible effect */
+	:global(.dark) .hero-section::before {
+		background:
+			radial-gradient(
+				800px circle at 20% 30%,
+				rgba(144, 238, 144, 0.18),
+				transparent 50%
+			),
+			radial-gradient(
+				600px circle at 80% 60%,
+				rgba(144, 238, 144, 0.15),
+				transparent 50%
+			),
+			radial-gradient(
+				400px circle at 60% 80%,
+				rgba(144, 238, 144, 0.12),
+				transparent 50%
+			);
+	}
+
+	:global(.dark) .hero-section::after {
+		background:
+			radial-gradient(
+				500px circle at 30% 40%,
+				rgba(144, 238, 144, 0.15),
+				transparent 60%
+			);
+	}
+
+	@keyframes voidShift {
+		0% {
+			background-position: 0% 0%, 100% 100%, 50% 50%;
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.8;
+		}
+		100% {
+			background-position: 100% 50%, 0% 50%, 80% 20%;
+			opacity: 1;
+		}
+	}
+
+	@keyframes glowDrift {
+		0% {
+			transform: translate3d(0, 0, 0) rotate(0deg);
+		}
+		100% {
+			transform: translate3d(15%, -15%, 0) rotate(360deg);
+		}
+	}
+</style>
