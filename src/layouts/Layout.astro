@@ -2,7 +2,6 @@
 import { Font } from 'astro:assets';
 import Navigation from '../components/Navigation.astro';
 import Header from '../components/Header.astro';
-import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
 
 export interface Props {
@@ -37,35 +36,13 @@ const {
 
 		<!-- Theme initialization - must run before body renders to prevent flash -->
 		<script is:inline>
-			// Helper to get and apply theme - reduces code duplication and ensures consistency
-			function getTheme() {
-				return (
-					localStorage.getItem('theme') ||
-					(window.matchMedia('(prefers-color-scheme: dark)').matches
-						? 'dark'
-						: 'light')
-				);
-			}
-
-			function applyTheme(element, theme) {
-				// Single classList operation to minimize style recalculations
-				element.classList.toggle('dark', theme === 'dark');
-			}
-
 			// Apply theme immediately on initial load (synchronous to prevent flash)
-			applyTheme(document.documentElement, getTheme());
-
-			// Apply theme to incoming document before view transition swap
-			// This modifies the new document's classList, not the current one,
-			// which helps avoid forced reflow during the transition animation
-			document.addEventListener('astro:before-swap', (event) => {
-				const theme = getTheme();
-				// Apply to the incoming document's root element
-				applyTheme(event.newDocument.documentElement, theme);
-			});
+			(function() {
+				var theme = localStorage.getItem('theme') ||
+					(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+				document.documentElement.classList.toggle('dark', theme === 'dark');
+			})();
 		</script>
-
-		<ClientRouter />
 	</head>
 	<body class="font-body min-h-screen">
 		<Header />
@@ -82,6 +59,11 @@ const {
 </html>
 
 <style is:global>
+	/* Native browser view transitions (Chrome 126+, Edge 126+, Safari 18.2+) */
+	@view-transition {
+		navigation: auto;
+	}
+
 	:root {
 		--font-serif: var(--font-source-serif-4), 'Source Serif 4', Georgia, serif;
 		--font-sans:
