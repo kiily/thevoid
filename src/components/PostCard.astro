@@ -41,9 +41,11 @@ const truncatedDescription =
 						<Image
 							src={image}
 							alt=""
-							width={400}
-							height={250}
+							widths={[320, 480, 640, 800]}
+							sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 							class="w-full h-full object-cover transform group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+							quality={80}
+							format="webp"
 						/>
 					</div>
 				) : (

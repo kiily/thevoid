@@ -24,10 +24,11 @@ const garden = defineCollection({
 
 const projects = defineCollection({
 	type: 'content',
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		image: z.string(),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			image: image().optional(),
 		link: z.string().optional(),
 		website: z.string().optional(),
 		github: z.string().optional(),
