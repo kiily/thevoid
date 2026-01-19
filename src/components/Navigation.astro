@@ -143,7 +143,4 @@ const tags = await DataService.getTags();
 	} else {
 		initializeNavigation();
 	}
-
-	// Re-initialize on Astro page navigation
-	document.addEventListener('astro:page-load', initializeNavigation);
 </script>

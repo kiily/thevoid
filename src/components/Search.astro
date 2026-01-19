@@ -102,7 +102,6 @@ const resultsId = `${id}-results`;
 
 <script>
 	// Lazy-load the actions module only when search is actually used
-	// This removes ~166ms from the critical path since the module loads on demand
 	let actionsModule: typeof import('astro:actions') | null = null;
 
 	const getActions = async () => {
@@ -112,156 +111,151 @@ const resultsId = `${id}-results`;
 		return actionsModule.actions;
 	};
 
-	// Initialize search functionality
-	function initializeSearch() {
-		const searchInputs = document.querySelectorAll('input[type="search"]');
+	// Track initialized inputs to avoid double initialization
+	const initializedInputs = new WeakSet<Element>();
 
-		searchInputs.forEach((searchInput) => {
-			const container = searchInput.closest('.search-container');
-			const resultsDiv = container?.querySelector('.search-results');
-			const loadingIndicator = container?.querySelector('.search-loading');
-			const searchButton = container?.querySelector('.search-button');
+	// Initialize search functionality for a single input
+	function initializeSearchInput(searchInput: Element) {
+		if (initializedInputs.has(searchInput)) return;
+		initializedInputs.add(searchInput);
 
-			if (!resultsDiv) return;
+		const container = searchInput.closest('.search-container');
+		const resultsDiv = container?.querySelector('.search-results');
+		const loadingIndicator = container?.querySelector('.search-loading');
+		const searchButton = container?.querySelector('.search-button');
 
-			let debounceTimeout: number;
-			let currentQuery = '';
+		if (!resultsDiv) return;
 
-			const performSearch = async (query: string) => {
-				if (query.length === 0) {
-					resultsDiv.classList.add('hidden');
+		let debounceTimeout: number;
+		let currentQuery = '';
+
+		const performSearch = async (query: string) => {
+			if (query.length === 0) {
+				resultsDiv.classList.add('hidden');
+				return;
+			}
+
+			if (loadingIndicator) loadingIndicator.classList.remove('hidden');
+
+			try {
+				const container = searchInput.closest('.search-container') as HTMLElement;
+				const contentFilter = container?.dataset.contentFilter || 'all';
+
+				const actions = await getActions();
+				const { data, error } = await actions.search({
+					q: query,
+					limit: 12,
+					contentFilter: contentFilter as 'all' | 'garden-only' | 'projects-only',
+				});
+
+				if (loadingIndicator) loadingIndicator.classList.add('hidden');
+
+				if (error) {
+					resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search error</div>`;
+					resultsDiv.classList.remove('hidden');
 					return;
 				}
 
-				// Show loading
-				if (loadingIndicator) loadingIndicator.classList.remove('hidden');
+				if (data?.results?.length > 0) {
+					const html = data.results
+						.map(
+							(result) => `
+						<a href="${result.item.url}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl">
+							<div class="font-semibold text-garden-primary dark:text-garden-dark-primary mb-1">${result.item.title}</div>
+							<div class="text-sm text-garden-secondary dark:text-garden-dark-secondary line-clamp-2 mb-2">${result.item.description}</div>
+							<div class="flex items-center justify-between">
+								<div class="text-xs text-garden-accent dark:text-garden-dark-accent capitalize font-medium px-2 py-1 bg-garden-accent/10 dark:bg-garden-dark-accent/20 rounded-full">${result.item.type}</div>
+							</div>
+						</a>
+					`
+						)
+						.join('');
 
-				try {
-					const container = searchInput.closest(
-						'.search-container'
-					) as HTMLElement;
-					const contentFilter = container?.dataset.contentFilter || 'all';
+					const footer =
+						data.results.length >= 10
+							? `<div class="p-4 text-sm text-center text-garden-secondary dark:text-garden-dark-secondary border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-b-2xl">
+							Showing ${data.results.length} of ${data.meta?.total || data.results.length} results
+						   </div>`
+							: '';
 
-					// Lazy-load actions module on first search
-					const actions = await getActions();
-					const { data, error } = await actions.search({
-						q: query,
-						limit: 12,
-						contentFilter: contentFilter as
-							| 'all'
-							| 'garden-only'
-							| 'projects-only',
-					});
-
-					if (loadingIndicator) loadingIndicator.classList.add('hidden');
-
-					if (error) {
-						resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search error</div>`;
-						resultsDiv.classList.remove('hidden');
-						return;
-					}
-
-					if (data?.results?.length > 0) {
-						const html = data.results
-							.map(
-								(result) => `
-							<a href="${result.item.url}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl">
-								<div class="font-semibold text-garden-primary dark:text-garden-dark-primary mb-1">${result.item.title}</div>
-								<div class="text-sm text-garden-secondary dark:text-garden-dark-secondary line-clamp-2 mb-2">${result.item.description}</div>
-								<div class="flex items-center justify-between">
-									<div class="text-xs text-garden-accent dark:text-garden-dark-accent capitalize font-medium px-2 py-1 bg-garden-accent/10 dark:bg-garden-dark-accent/20 rounded-full">${result.item.type}</div>
-								</div>
-							</a>
-						`
-							)
-							.join('');
-
-						// Add a footer if there are many results
-						const footer =
-							data.results.length >= 10
-								? `<div class="p-4 text-sm text-center text-garden-secondary dark:text-garden-dark-secondary border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-b-2xl">
-								Showing ${data.results.length} of ${data.meta?.total || data.results.length} results
-							   </div>`
-								: '';
-
-						resultsDiv.innerHTML = html + footer;
-						resultsDiv.classList.remove('hidden');
-					} else {
-						const filterText =
-							contentFilter === 'garden-only'
-								? 'garden posts'
-								: contentFilter === 'projects-only'
-									? 'projects'
-									: 'content';
-						resultsDiv.innerHTML = `<div class="p-6 text-garden-secondary dark:text-garden-dark-secondary text-center">No ${filterText} found for "${query}"</div>`;
-						resultsDiv.classList.remove('hidden');
-					}
-				} catch (error) {
-					if (loadingIndicator) loadingIndicator.classList.add('hidden');
-					resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search failed</div>`;
+					resultsDiv.innerHTML = html + footer;
+					resultsDiv.classList.remove('hidden');
+				} else {
+					const filterText =
+						contentFilter === 'garden-only'
+							? 'garden posts'
+							: contentFilter === 'projects-only'
+								? 'projects'
+								: 'content';
+					resultsDiv.innerHTML = `<div class="p-6 text-garden-secondary dark:text-garden-dark-secondary text-center">No ${filterText} found for "${query}"</div>`;
 					resultsDiv.classList.remove('hidden');
 				}
-			};
+			} catch (error) {
+				if (loadingIndicator) loadingIndicator.classList.add('hidden');
+				resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search failed</div>`;
+				resultsDiv.classList.remove('hidden');
+			}
+		};
 
-			searchInput.addEventListener('input', async (e) => {
-				const target = e.target as HTMLInputElement;
-				if (!target) return;
+		searchInput.addEventListener('input', async (e) => {
+			const target = e.target as HTMLInputElement;
+			if (!target) return;
 
-				const query = target.value.trim();
-				currentQuery = query;
+			const query = target.value.trim();
+			currentQuery = query;
 
-				clearTimeout(debounceTimeout);
+			clearTimeout(debounceTimeout);
 
-				debounceTimeout = window.setTimeout(async () => {
-					if (query !== currentQuery) return;
-					await performSearch(query);
-				}, 300);
-			});
+			debounceTimeout = window.setTimeout(async () => {
+				if (query !== currentQuery) return;
+				await performSearch(query);
+			}, 300);
+		});
 
-			// Handle search button click
-			searchButton?.addEventListener('click', async () => {
-				const input = searchInput as HTMLInputElement;
+		searchButton?.addEventListener('click', async () => {
+			const input = searchInput as HTMLInputElement;
+			const query = input.value.trim();
+			if (query) {
+				await performSearch(query);
+			}
+		});
+
+		searchInput.addEventListener('keydown', async (e) => {
+			const keyEvent = e as KeyboardEvent;
+			const input = e.target as HTMLInputElement;
+			if (keyEvent.key === 'Enter') {
+				e.preventDefault();
 				const query = input.value.trim();
 				if (query) {
 					await performSearch(query);
 				}
-			});
+			} else if (keyEvent.key === 'Escape') {
+				resultsDiv.classList.add('hidden');
+				input.blur();
+			}
+		});
 
-			// Handle Enter key
-			searchInput.addEventListener('keydown', async (e) => {
-				const keyEvent = e as KeyboardEvent;
-				const input = e.target as HTMLInputElement;
-				if (keyEvent.key === 'Enter') {
-					e.preventDefault();
-					const query = input.value.trim();
-					if (query) {
-						await performSearch(query);
-					}
-				} else if (keyEvent.key === 'Escape') {
-					resultsDiv.classList.add('hidden');
-					input.blur();
-				}
-			});
-
-			// Hide results when clicking outside
-			document.addEventListener('click', (e) => {
-				const target = e.target as Node;
-				if (!container?.contains(target)) {
-					resultsDiv.classList.add('hidden');
-				}
-			});
+		document.addEventListener('click', (e) => {
+			const target = e.target as Node;
+			if (!container?.contains(target)) {
+				resultsDiv.classList.add('hidden');
+			}
 		});
 	}
 
-	// Initialize on DOM ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initializeSearch);
-	} else {
-		initializeSearch();
+	// Defer initialization using requestIdleCallback for non-critical search inputs
+	// This removes the search script from the critical rendering path
+	function deferredInit() {
+		const searchInputs = document.querySelectorAll('input[type="search"]');
+		searchInputs.forEach(initializeSearchInput);
 	}
 
-	// Re-initialize on Astro page navigation (for View Transitions)
-	document.addEventListener('astro:page-load', initializeSearch);
+	// Use requestIdleCallback if available, otherwise use setTimeout
+	if ('requestIdleCallback' in window) {
+		requestIdleCallback(deferredInit, { timeout: 2000 });
+	} else {
+		setTimeout(deferredInit, 100);
+	}
 </script>
 
 <style>
