@@ -3,6 +3,7 @@ import { DataService, type Project } from '../lib/data-service';
 import { Image } from 'astro:assets';
 import SectionNumber from './SectionNumber.astro';
 import SectionTitle from './SectionTitle.astro';
+import SectionDescription from './SectionDescription.astro';
 
 const projects = await DataService.getProjects();
 const sortedProjects = projects.sort((a: Project, b: Project) => {
@@ -25,9 +26,14 @@ const sortedProjects = projects.sort((a: Project, b: Project) => {
 	<div class="container mx-auto max-w-5xl px-6 md:px-8">
 		<SectionNumber number={3} />
 		<SectionTitle>Projects</SectionTitle>
-		<p class="text-lg text-body font-body max-w-xl mb-12">
-			Things I've built and worked on.
-		</p>
+		<SectionDescription class="mb-12">
+			Ongoing and recent work. Currently serving as CTO at <a
+				href="https://flown.com?referral=miguel-marinvermelho-9f20e"
+				class="text-garden-accent dark:text-garden-dark-accent underline underline-offset-2 hover:opacity-70 transition-opacity"
+				target="_blank"
+				rel="noopener noreferrer">FLOWN</a
+			>, where we're reimagining the future of work and productivity.
+		</SectionDescription>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 			{

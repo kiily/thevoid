@@ -1,6 +1,7 @@
 ---
 import SectionNumber from './SectionNumber.astro';
 import SectionTitle from './SectionTitle.astro';
+import SectionDescription from './SectionDescription.astro';
 import PostCard from './PostCard.astro';
 import Search from './Search.astro';
 
@@ -15,9 +16,11 @@ const { recentPosts } = Astro.props;
 	<div class="container mx-auto max-w-5xl px-6 md:px-8">
 		<SectionNumber number={2} />
 		<SectionTitle>Garden</SectionTitle>
-		<p class="text-lg text-body font-body max-w-xl mb-8">
-			A space where ideas grow and thoughts interconnect.
-		</p>
+		<SectionDescription>The space for my writings.</SectionDescription>
+		<SectionDescription>
+			I think of them as a crystallisation of thought. There is a mix of
+			creative and philosophical pieces.
+		</SectionDescription>
 
 		<div class="max-w-xl mb-12">
 			<Search
