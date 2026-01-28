@@ -47,7 +47,7 @@ export const technologies: Technology[] = [
 		docs: 'https://docs.python.org/3/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
 		categories: ['language', 'backend', 'data'],
-		level: 4,
+		level: 2,
 	},
 	{
 		name: 'Bash',
@@ -97,7 +97,7 @@ export const technologies: Technology[] = [
 		docs: 'https://docs.flutter.dev/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
 		categories: ['framework', 'mobile'],
-		level: 3,
+		level: 2,
 	},
 
 	// Runtime & Build Tools
@@ -123,7 +123,7 @@ export const technologies: Technology[] = [
 		docs: 'https://vitejs.dev/guide/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg',
 		categories: ['build', 'frontend'],
-		level: 4,
+		level: 3,
 	},
 	{
 		name: 'Webpack',
@@ -131,7 +131,7 @@ export const technologies: Technology[] = [
 		docs: 'https://webpack.js.org/concepts/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg',
 		categories: ['build', 'frontend'],
-		level: 3,
+		level: 4,
 	},
 
 	// Databases
@@ -141,7 +141,7 @@ export const technologies: Technology[] = [
 		docs: 'https://www.mongodb.com/docs/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
 		categories: ['database', 'backend'],
-		level: 4,
+		level: 5,
 	},
 	{
 		name: 'PostgreSQL',
@@ -157,7 +157,7 @@ export const technologies: Technology[] = [
 		docs: 'https://dev.mysql.com/doc/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
 		categories: ['database', 'backend'],
-		level: 3,
+		level: 4,
 	},
 
 	// DevOps & Infrastructure
@@ -175,7 +175,7 @@ export const technologies: Technology[] = [
 		docs: 'https://kubernetes.io/docs/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
 		categories: ['devops', 'infrastructure'],
-		level: 3,
+		level: 2,
 	},
 
 	// Cloud & Hosting
@@ -209,7 +209,7 @@ export const technologies: Technology[] = [
 		docs: 'https://developers.cloudflare.com/',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg',
 		categories: ['cloud', 'infrastructure'],
-		level: 4,
+		level: 3,
 	},
 	{
 		name: 'Bitrise',
@@ -217,7 +217,7 @@ export const technologies: Technology[] = [
 		docs: 'https://devcenter.bitrise.io/',
 		logo: 'https://www.bitrise.io/favicon.ico',
 		categories: ['devops', 'mobile'],
-		level: 3,
+		level: 4,
 	},
 
 	// Observability & Analytics
@@ -235,7 +235,7 @@ export const technologies: Technology[] = [
 		docs: 'https://segment.com/docs/',
 		logo: 'https://segment.com/favicon.ico',
 		categories: ['analytics', 'data'],
-		level: 4,
+		level: 5,
 	},
 	{
 		name: 'Statsig',
@@ -253,7 +253,7 @@ export const technologies: Technology[] = [
 		docs: 'https://stripe.com/docs',
 		logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/stripe/stripe-original.svg',
 		categories: ['payments', 'backend'],
-		level: 4,
+		level: 5,
 	},
 	{
 		name: 'Customer.io',
@@ -261,7 +261,7 @@ export const technologies: Technology[] = [
 		docs: 'https://customer.io/docs/',
 		logo: 'https://customer.io/favicon.ico',
 		categories: ['marketing', 'automation'],
-		level: 4,
+		level: 5,
 	},
 
 	// AI & Dev Tools
@@ -279,6 +279,6 @@ export const technologies: Technology[] = [
 		docs: 'https://docs.cursor.com/',
 		logo: 'https://cursor.sh/favicon.ico',
 		categories: ['ai', 'devtools'],
-		level: 4,
+		level: 5,
 	},
 ];

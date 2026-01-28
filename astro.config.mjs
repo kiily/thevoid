@@ -62,5 +62,13 @@ export default defineConfig({
     sitemap()
   ],
 
-  adapter: vercel()
+  adapter: vercel(),
+
+  vite: {
+    server: {
+      watch: {
+        ignored: ['**/.vercel/**']
+      }
+    }
+  }
 });

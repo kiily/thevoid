@@ -56,28 +56,66 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 </section>
 
 <!-- Modal for tech details -->
-<div
+<dialog
 	id="tech-modal"
-	class="fixed inset-0 z-50 hidden items-center justify-center p-4"
-	role="dialog"
-	aria-modal="true"
-	aria-labelledby="modal-title"
+	class="tech-dialog bg-garden-surface dark:bg-garden-dark-surface rounded-2xl shadow-2xl max-w-md w-full p-6 backdrop:bg-black/50 backdrop:backdrop-blur-sm"
 >
-	<div
-		class="tech-modal-backdrop absolute inset-0 bg-black/50 backdrop-blur-sm"
+	<button
+		type="button"
+		id="modal-close"
+		class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+		aria-label="Close modal"
 	>
+		<svg
+			class="w-6 h-6"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M6 18L18 6M6 6l12 12"></path>
+		</svg>
+	</button>
+
+	<div class="flex items-center gap-4 mb-4">
+		<img
+			id="modal-logo"
+			src=""
+			alt=""
+			class="w-12 h-12 object-contain"
+			loading="lazy"
+		/>
+		<h3
+			id="modal-title"
+			class="text-2xl font-semibold text-garden-primary dark:text-garden-dark-primary font-ui"
+		>
+		</h3>
 	</div>
-	<div
-		class="tech-modal-content relative bg-garden-surface dark:bg-garden-dark-surface rounded-2xl shadow-2xl max-w-md w-full p-6 transform transition-all"
-	>
-		<button
-			type="button"
-			id="modal-close"
-			class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
-			aria-label="Close modal"
+
+	<div class="mb-4">
+		<div class="flex items-center gap-2 mb-2">
+			<span class="text-sm text-body font-ui uppercase tracking-wide"
+				>Proficiency</span
+			>
+			<div id="modal-level" class="flex gap-1"></div>
+		</div>
+	</div>
+
+	<div id="modal-categories" class="flex flex-wrap gap-2 mb-6"></div>
+
+	<div class="flex gap-3">
+		<a
+			id="modal-website"
+			href="#"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white dark:text-garden-dark-background rounded-lg font-ui font-medium hover:opacity-90 transition-opacity"
 		>
 			<svg
-				class="w-6 h-6"
+				class="w-4 h-4"
 				fill="none"
 				stroke="currentColor"
 				viewBox="0 0 24 24"
@@ -86,84 +124,47 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					stroke-width="2"
-					d="M6 18L18 6M6 6l12 12"></path>
+					d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+				></path>
 			</svg>
-		</button>
-
-		<div class="flex items-center gap-4 mb-4">
-			<img
-				id="modal-logo"
-				src=""
-				alt=""
-				class="w-12 h-12 object-contain"
-				loading="lazy"
-			/>
-			<h3
-				id="modal-title"
-				class="text-2xl font-semibold text-garden-primary dark:text-garden-dark-primary font-ui"
+			Website
+		</a>
+		<a
+			id="modal-docs"
+			href="#"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 border border-garden-accent dark:border-garden-dark-accent text-garden-accent dark:text-garden-dark-accent rounded-lg font-ui font-medium hover:bg-garden-accent/10 dark:hover:bg-garden-dark-accent/10 transition-colors"
+		>
+			<svg
+				class="w-4 h-4"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
 			>
-			</h3>
-		</div>
-
-		<div class="mb-4">
-			<div class="flex items-center gap-2 mb-2">
-				<span class="text-sm text-body font-ui uppercase tracking-wide"
-					>Proficiency</span
-				>
-				<div id="modal-level" class="flex gap-1"></div>
-			</div>
-		</div>
-
-		<div id="modal-categories" class="flex flex-wrap gap-2 mb-6"></div>
-
-		<div class="flex gap-3">
-			<a
-				id="modal-website"
-				href="#"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 bg-garden-accent dark:bg-garden-dark-accent text-white dark:text-garden-dark-background rounded-lg font-ui font-medium hover:opacity-90 transition-opacity"
-			>
-				<svg
-					class="w-4 h-4"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-					></path>
-				</svg>
-				Website
-			</a>
-			<a
-				id="modal-docs"
-				href="#"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 border border-garden-accent dark:border-garden-dark-accent text-garden-accent dark:text-garden-dark-accent rounded-lg font-ui font-medium hover:bg-garden-accent/10 dark:hover:bg-garden-dark-accent/10 transition-colors"
-			>
-				<svg
-					class="w-4 h-4"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-					></path>
-				</svg>
-				Docs
-			</a>
-		</div>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+				></path>
+			</svg>
+			Docs
+		</a>
 	</div>
-</div>
+</dialog>
+
+<style>
+	.tech-dialog {
+		position: fixed;
+		margin: auto;
+	}
+
+	.tech-dialog::backdrop {
+		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(4px);
+	}
+</style>
 
 <script>
 	interface Technology {
@@ -175,7 +176,7 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 		level: number;
 	}
 
-	const modal = document.getElementById('tech-modal');
+	const modal = document.getElementById('tech-modal') as HTMLDialogElement;
 	const modalTitle = document.getElementById('modal-title');
 	const modalLogo = document.getElementById('modal-logo') as HTMLImageElement;
 	const modalLevel = document.getElementById('modal-level');
@@ -185,7 +186,6 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 	) as HTMLAnchorElement;
 	const modalDocs = document.getElementById('modal-docs') as HTMLAnchorElement;
 	const modalClose = document.getElementById('modal-close');
-	const modalBackdrop = document.querySelector('.tech-modal-backdrop');
 
 	function openModal(tech: Technology) {
 		if (
@@ -223,19 +223,7 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 		modalWebsite.href = tech.website;
 		modalDocs.href = tech.docs;
 
-		modal.classList.remove('hidden');
-		modal.classList.add('flex');
-		document.body.style.overflow = 'hidden';
-
-		// Focus the close button for accessibility
-		modalClose?.focus();
-	}
-
-	function closeModal() {
-		if (!modal) return;
-		modal.classList.add('hidden');
-		modal.classList.remove('flex');
-		document.body.style.overflow = '';
+		modal.showModal();
 	}
 
 	// Add click handlers to tech items
@@ -249,14 +237,13 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 		});
 	});
 
-	// Close modal handlers
-	modalClose?.addEventListener('click', closeModal);
-	modalBackdrop?.addEventListener('click', closeModal);
+	// Close modal on button click
+	modalClose?.addEventListener('click', () => modal?.close());
 
-	// Close on Escape key
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
-			closeModal();
+	// Close modal when clicking on backdrop
+	modal?.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			modal.close();
 		}
 	});
 </script>
