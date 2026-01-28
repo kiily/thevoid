@@ -15,14 +15,14 @@ const posts = await getCollection('garden');
 const recentPosts = posts
 	.sort(
 		(a: any, b: any) =>
-			b.data.publishDate.getTime() - a.data.publishDate.getTime()
+			b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 	)
 	.slice(0, 3);
 ---
 
 <Layout
 	title="The Void | Miguel Marin Vermelho"
-	description="A digital garden by Miguel Marin Vermelho. Polyglot biologist turned software engineer with a passion for building products and making the world a better place."
+	description="A digital garden by Miguel Marin Vermelho. Polyglot biologist turned software engineer with a passion for building products and making the world a better place. Currently CTO at FLOWN"
 >
 	<Hero />
 
