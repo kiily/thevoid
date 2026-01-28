@@ -5,7 +5,13 @@ import { format } from 'date-fns';
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout
+	title={frontmatter.title}
+	description={frontmatter.description}
+	image={frontmatter.image?.src || '/og-image.jpg'}
+	type="article"
+	publishedTime={frontmatter.publishDate ? new Date(frontmatter.publishDate).toISOString() : undefined}
+>
 	<article class="max-w-4xl mx-auto">
 		<a
 			href="/garden"

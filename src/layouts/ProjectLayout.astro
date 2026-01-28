@@ -10,7 +10,13 @@ function formatDate(date: Date) {
 }
 ---
 
-<Layout title={`${frontmatter.title} | Projects`}>
+<Layout
+	title={`${frontmatter.title} | Projects`}
+	description={frontmatter.description}
+	image={frontmatter.image?.src || '/og-image.jpg'}
+	type="article"
+	publishedTime={frontmatter.startDate ? new Date(frontmatter.startDate).toISOString() : undefined}
+>
 	<article class="max-w-4xl mx-auto py-20 px-6">
 		<header class="mb-12">
 			<div class="relative aspect-video mb-8 overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
