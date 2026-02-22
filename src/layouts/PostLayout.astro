@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import { format } from 'date-fns';
+import BackButton from '../components/BackButton.astro';
 
 const { frontmatter } = Astro.props;
 ---
@@ -10,17 +11,14 @@ const { frontmatter } = Astro.props;
 	description={frontmatter.description}
 	image={frontmatter.image?.src || '/og-image.jpg'}
 	type="article"
-	publishedTime={frontmatter.publishDate ? new Date(frontmatter.publishDate).toISOString() : undefined}
+	publishedTime={frontmatter.publishDate
+		? new Date(frontmatter.publishDate).toISOString()
+		: undefined}
 >
 	<article class="max-w-4xl mx-auto">
-		<a
-			href="/garden"
-			class="inline-block mb-6 text-garden-accent dark:text-garden-dark-accent underline hover:no-underline font-body"
-		>
-			← Back to Garden
-		</a>
+		<BackButton href="/garden" label="Back to Garden" />
 
-		<header class="mb-8">
+		<header class="my-8">
 			<h1 class="text-garden-primary dark:text-garden-dark-primary mb-4">
 				{frontmatter.title}
 			</h1>
@@ -78,13 +76,6 @@ const { frontmatter } = Astro.props;
 				</footer>
 			)
 		}
-
-		<a
-			href="/garden"
-			class="text-garden-accent dark:text-garden-dark-accent underline hover:no-underline font-body"
-		>
-			← Back to Garden
-		</a>
 	</article>
 </Layout>
 
