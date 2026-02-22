@@ -1,0 +1,902 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BackButton from '../components/BackButton.astro';
+---
+
+<Layout
+	title="般若心経 — The Heart Sutra | The Void"
+	description="A bunkobon pocket guide to the Heart Sutra (般若心経). Complete text in Japanese and English with explanations of its key teachings on emptiness, non-duality, and liberation."
+>
+	<div class="heart-sutra-page">
+
+		<!-- ============================================================
+		     BOOK COVER
+		     ============================================================ -->
+		<section class="book-cover">
+			<a href="/" class="back-link" aria-label="Back to home">← back</a>
+
+			<!-- Enso Circle (animated brushstroke) -->
+			<div class="enso-wrapper" aria-hidden="true">
+				<svg class="enso" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+					<path
+						class="enso-circle"
+						d="M 100 22
+						   C 144 22, 178 57, 178 100
+						   C 178 143, 144 178, 100 178
+						   C 56 178, 22 143, 22 100
+						   C 22 60, 50 27, 94 22"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="9"
+						stroke-linecap="round"
+					/>
+				</svg>
+			</div>
+
+			<div class="cover-title">
+				<div class="kanji-title" lang="ja">般若心経</div>
+				<div class="cover-divider"></div>
+				<div class="cover-subtitle">Hannya Shingyō</div>
+				<div class="cover-tagline">知恵の心 &mdash; The Heart of Wisdom</div>
+			</div>
+		</section>
+
+		<!-- ============================================================
+		     BOOK BODY
+		     ============================================================ -->
+		<div class="book-body">
+
+			<!-- ── Title Page ─────────────────────────────────────────── -->
+			<div class="book-page title-page">
+				<span class="page-number" aria-hidden="true">i</span>
+				<div class="title-page-content">
+					<div class="title-kanji" lang="ja">般若心経</div>
+					<h1 class="title-english">The Heart Sutra</h1>
+					<p class="title-tagline">A Pocket Guide to the Essence of Wisdom</p>
+				</div>
+			</div>
+
+			<!-- ── Introduction ───────────────────────────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">3</span>
+				<div class="chapter-header">
+					<span class="chapter-label" lang="ja">序文</span>
+					<h2 class="chapter-title">Introduction</h2>
+				</div>
+				<div class="book-text">
+					<p>
+						The <em>Prajnaparamita Hridaya Sutra</em>, commonly known as the Heart
+						Sutra, is one of the most famous and beloved texts in Mahayana Buddhism.
+						Though it is only 260 characters long in its Chinese translation, it
+						encapsulates the profound heart of Buddhist wisdom.
+					</p>
+					<p>
+						The sutra is a teaching given by the Bodhisattva Avalokiteshvara to
+						Shariputra, a senior disciple of the Buddha. Its core message is the
+						teaching of <em>Shunyata</em>, or &ldquo;emptiness.&rdquo; This is not a
+						nihilistic &ldquo;nothingness,&rdquo; but a revelation that all things,
+						concepts, and phenomena lack a fixed, independent, and permanent self.
+						They are interconnected and ever-changing.
+					</p>
+					<p>
+						This short book presents the sutra in Japanese and English, followed by
+						brief explanations of its key concepts to help you on your journey of
+						understanding.
+					</p>
+				</div>
+			</div>
+
+			<!-- ── Japanese Sutra ─────────────────────────────────────── -->
+			<div class="book-page sutra-page">
+				<span class="page-number" aria-hidden="true">5</span>
+				<div class="chapter-header">
+					<span class="chapter-label" lang="ja">経文</span>
+					<h2 class="chapter-title" lang="ja">摩訶般若波羅蜜多心経</h2>
+				</div>
+
+				<div class="japanese-sutra">
+					<p class="sutra-text" lang="ja">
+						観自在菩薩行深般若波羅蜜多時照見五蘊皆空度一切苦厄舎利子色不異空空不異色色即是空空即是色受想行識亦復如是舎利子是諸法空相不生不滅不垢不浄不増不減是故空中無色無受想行識無眼耳鼻舌身意無色声香味触法無眼界乃至無意識界無無明亦無無明尽乃至無老死亦無老死尽無苦集滅道無智亦無得以無所得故菩提薩埵依般若波羅蜜多故心無罣礙無罣礙故無有恐怖遠離一切顛倒夢想究竟涅槃三世諸仏依般若波羅蜜多故得阿耨多羅三藐三菩提故知般若波羅蜜多是大神呪是大明呪是無上呪是無等等呪能除一切苦真実不虚故説般若波羅蜜多呪即説呪曰
+					</p>
+					<p class="mantra-jp" lang="ja">羯諦　羯諦　波羅羯諦　波羅僧羯諦　菩提　薩婆訶</p>
+					<p class="sutra-end" lang="ja">般若心経</p>
+				</div>
+			</div>
+
+			<!-- ── English Translation ────────────────────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">6</span>
+				<div class="chapter-header">
+					<span class="chapter-label" lang="ja">英訳</span>
+					<h2 class="chapter-title">The Heart Sutra</h2>
+					<p class="chapter-subtitle">English Translation</p>
+				</div>
+				<div class="book-text">
+					<p>
+						When the Bodhisattva Avalokiteshvara was practicing the profound
+						Perfection of Wisdom, he perceived that all five aggregates are empty and
+						was saved from all suffering and distress.
+					</p>
+					<p>
+						&ldquo;Shariputra, form does not differ from emptiness, emptiness does
+						not differ from form. That which is form is emptiness, that which is
+						emptiness is form. The same is true of feelings, perceptions, impulses,
+						and consciousness.
+					</p>
+					<p>
+						Shariputra, all dharmas are marked with emptiness; they do not appear or
+						disappear, are not tainted or pure, do not increase or decrease.
+					</p>
+					<p>
+						Therefore, in emptiness there is no form, no feeling, no perception, no
+						impulse, no consciousness. No eye, no ear, no nose, no tongue, no body,
+						no mind; no color, no sound, no smell, no taste, no touch, no object of
+						mind; no realm of eyes and so forth until no realm of mind consciousness.
+						No ignorance and also no extinction of it, and so forth until no old age
+						and death and also no extinction of them. No suffering, no origination,
+						no stopping, no path, no cognition, also no attainment with nothing to
+						attain.
+					</p>
+					<p>
+						The Bodhisattva depends on Prajnaparamita and the mind is no hindrance;
+						without any hindrance no fears exist. Far apart from every perverted view
+						one dwells in Nirvana.
+					</p>
+					<p>
+						All Buddhas in the past, present, and future depend on Prajnaparamita and
+						attain Anuttara Samyak Sambodhi.
+					</p>
+					<p>
+						Therefore, know that Prajnaparamita is the great transcendent mantra, is
+						the great bright mantra, is the utmost mantra, is the supreme mantra,
+						which is able to relieve all suffering and is true, not false. So proclaim
+						the Prajnaparamita mantra, proclaim the mantra which says:
+					</p>
+					<p class="mantra-english">
+						<em>Gate gate p&#257;ragate p&#257;rasamgate bodhi sv&#257;h&#257;.&rdquo;</em>
+					</p>
+				</div>
+			</div>
+
+			<!-- ── Explanations ───────────────────────────────────────── -->
+			<div class="book-page explanations-page">
+				<span class="page-number" aria-hidden="true">9</span>
+				<div class="chapter-header">
+					<span class="chapter-label" lang="ja">解説</span>
+					<h2 class="chapter-title">Explanations</h2>
+				</div>
+
+				<!-- Lotus Illustration -->
+				<figure class="book-illustration" aria-label="Sumi-e lotus flower illustration">
+					<svg
+						class="sumi-e"
+						viewBox="0 0 240 200"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<!-- Roots fading into emptiness below water -->
+						<path d="M 120 132 L 114 155 Q 111 168 109 180" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3,5" opacity="0.2"/>
+						<path d="M 120 132 L 126 155 Q 129 168 131 180" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3,5" opacity="0.2"/>
+						<path d="M 118 142 L 106 162 Q 102 174 100 184" fill="none" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2,6" opacity="0.12"/>
+						<!-- Water surface -->
+						<path d="M 8 132 Q 60 125, 120 132 Q 180 139, 232 132" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+						<!-- Stem -->
+						<path d="M 120 132 Q 119 112, 120 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+						<!-- Leaves -->
+						<path d="M 118 116 Q 88 108, 70 122" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+						<path d="M 122 116 Q 152 108, 170 122" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+						<!-- Center petal -->
+						<path d="M 120 30 Q 113 54, 114 74 Q 116 88, 120 96 Q 124 88, 126 74 Q 127 54, 120 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+						<!-- Left inner petal -->
+						<path d="M 104 40 Q 98 60, 100 78 Q 104 91, 112 96 Q 112 80, 108 62 Q 104 46, 104 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+						<!-- Right inner petal -->
+						<path d="M 136 40 Q 142 60, 140 78 Q 136 91, 128 96 Q 128 80, 132 62 Q 136 46, 136 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+						<!-- Left outer petal -->
+						<path d="M 82 58 Q 84 78, 90 92 Q 98 102, 110 103 Q 102 86, 94 72 Q 87 60, 82 58" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+						<!-- Right outer petal -->
+						<path d="M 158 58 Q 156 78, 150 92 Q 142 102, 130 103 Q 138 86, 146 72 Q 153 60, 158 58" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+					</svg>
+					<figcaption class="illustration-caption" lang="ja">形は空に溶ける</figcaption>
+				</figure>
+
+				<!-- Explanation 1 -->
+				<article class="explanation">
+					<div class="explanation-header">
+						<span class="explanation-number" aria-hidden="true" lang="ja">一</span>
+						<div>
+							<h3 class="explanation-title">Form is Emptiness, Emptiness is Form</h3>
+							<p class="explanation-kanji" lang="ja">色即是空、空即是色</p>
+							<p class="explanation-romaji">Shiki soku ze kū, kū soku ze shiki</p>
+						</div>
+					</div>
+					<div class="book-text">
+						<p>
+							This is the sutra&rsquo;s most famous and paradoxical statement.
+							&ldquo;Form&rdquo; refers to the physical world, our bodies, and material
+							objects. The sutra asserts that these forms have no permanent, inherent
+							existence. They are &ldquo;empty&rdquo; because they are constantly
+							changing and dependent on other conditions to exist.
+						</p>
+						<p>
+							A wave is distinct, yet it is just water. The wave is &ldquo;empty&rdquo;
+							of a separate self; it is the water. Conversely, this
+							&ldquo;emptiness&rdquo; is not apart from the physical world; it
+							manifests as form.
+						</p>
+					</div>
+				</article>
+
+				<!-- Explanation 2 -->
+				<article class="explanation">
+					<div class="explanation-header">
+						<span class="explanation-number" aria-hidden="true" lang="ja">二</span>
+						<div>
+							<h3 class="explanation-title">The Five Aggregates are Empty</h3>
+							<p class="explanation-kanji" lang="ja">五蘊皆空</p>
+							<p class="explanation-romaji">Goun kai kū</p>
+						</div>
+					</div>
+					<div class="book-text">
+						<p>
+							The Buddha taught that what we call a &ldquo;self&rdquo; is just a
+							temporary combination of five parts, or aggregates:
+						</p>
+						<ol class="aggregate-list">
+							<li><strong>Form</strong> &mdash; The physical body.</li>
+							<li><strong>Feeling</strong> &mdash; Sensations of pleasant, unpleasant, or neutral.</li>
+							<li><strong>Perception</strong> &mdash; Recognizing and labeling things.</li>
+							<li><strong>Mental Formations</strong> &mdash; Thoughts, volitions, and emotions.</li>
+							<li><strong>Consciousness</strong> &mdash; Awareness itself.</li>
+						</ol>
+						<p>
+							Avalokiteshvara sees that none of these parts constitute a permanent
+							&ldquo;I&rdquo;. When we realize our &ldquo;self&rdquo; is empty, we are
+							freed from the suffering that comes from clinging to it.
+						</p>
+					</div>
+				</article>
+
+				<!-- Torii Gate Illustration -->
+				<figure class="book-illustration" aria-label="Sumi-e torii gate illustration">
+					<svg
+						class="sumi-e"
+						viewBox="0 0 240 200"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+					>
+						<!-- Mist / cliff base -->
+						<path d="M 0 182 Q 120 174, 240 182 L 240 200 L 0 200 Z" fill="currentColor" opacity="0.06"/>
+						<path d="M 0 190 Q 120 183, 240 190 L 240 200 L 0 200 Z" fill="currentColor" opacity="0.05"/>
+						<!-- Left pillar -->
+						<line x1="74" y1="66" x2="74" y2="182" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+						<!-- Right pillar -->
+						<line x1="166" y1="66" x2="166" y2="182" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+						<!-- Nuki (second horizontal beam) -->
+						<line x1="58" y1="90" x2="182" y2="90" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+						<!-- Shimagi (beam directly under kasagi) -->
+						<line x1="44" y1="69" x2="196" y2="69" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+						<!-- Kasagi (top curved beam) -->
+						<path d="M 18 57 Q 120 30, 222 57" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+						<!-- Mist wisps around pillars -->
+						<path d="M 0 158 Q 38 152, 65 158" fill="none" stroke="currentColor" stroke-width="1" opacity="0.18"/>
+						<path d="M 178 160 Q 205 154, 240 160" fill="none" stroke="currentColor" stroke-width="1" opacity="0.18"/>
+						<path d="M 0 170 Q 50 164, 70 170" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12"/>
+						<path d="M 175 172 Q 205 166, 240 172" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12"/>
+					</svg>
+					<figcaption class="illustration-caption" lang="ja">彼岸への門</figcaption>
+				</figure>
+
+				<!-- Explanation 3 -->
+				<article class="explanation">
+					<div class="explanation-header">
+						<span class="explanation-number" aria-hidden="true" lang="ja">三</span>
+						<div>
+							<h3 class="explanation-title">The Great Mantra</h3>
+							<p class="explanation-kanji" lang="ja">羯諦羯諦…</p>
+							<p class="explanation-romaji">Gyatei gyatei…</p>
+						</div>
+					</div>
+					<div class="book-text">
+						<p>
+							The sutra concludes with a powerful mantra, a chant that encapsulates
+							the energy of the teaching. It is often left untranslated to preserve
+							its power, but its meaning is approximately:
+						</p>
+						<blockquote>
+							&ldquo;Gone, gone, gone beyond, gone altogether beyond, O awakening,
+							hail!&rdquo;
+						</blockquote>
+						<ul class="mantra-breakdown">
+							<li><strong>Gate</strong> &mdash; Gone from the shore of suffering and ignorance.</li>
+							<li><strong>Paragate</strong> &mdash; Gone to the other shore of enlightenment.</li>
+							<li><strong>Parasamgate</strong> &mdash; Gone completely, together with all beings.</li>
+							<li><strong>Bodhi</strong> &mdash; Awakening.</li>
+							<li><strong>Sv&#257;h&#257;</strong> &mdash; An expression of delight, like &ldquo;So be it!&rdquo; or &ldquo;Hallelujah!&rdquo;</li>
+						</ul>
+						<p>
+							Reciting the mantra is a practice to help us let go of our conceptual
+							thinking and cross over from the world of suffering to the shore of
+							liberation.
+						</p>
+					</div>
+				</article>
+
+			</div><!-- /explanations-page -->
+
+		</div><!-- /book-body -->
+
+		<!-- ============================================================
+		     BACK COVER
+		     ============================================================ -->
+		<section class="back-cover" aria-label="Back cover">
+			<div class="back-cover-enso" aria-hidden="true">
+				<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M 40 8 C 58 8, 72 22, 72 40 C 72 58, 58 72, 40 72 C 22 72, 8 58, 8 40 C 8 24, 20 10, 37 8"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="5"
+						stroke-linecap="round"
+						opacity="0.35"
+					/>
+				</svg>
+			</div>
+			<div class="back-cover-content">
+				<p class="back-cover-blurb">
+					A timeless guide to the essence of Buddhist wisdom.
+				</p>
+				<p class="back-cover-description">
+					This pocket-sized edition contains the complete text of the Heart Sutra in
+					Japanese and English, along with concise explanations of its most profound
+					teachings on emptiness, non-duality, and liberation.
+				</p>
+				<p class="back-cover-tagline">
+					A perfect companion for meditation and daily reflection.
+				</p>
+				<div class="back-cover-rule" aria-hidden="true"></div>
+				<p class="back-cover-kanji" lang="ja">般若心経</p>
+			</div>
+		</section>
+
+	</div><!-- /heart-sutra-page -->
+</Layout>
+
+<style>
+	/* =====================================================================
+	   CSS VARIABLES — washi-paper palette
+	   ===================================================================== */
+	:root {
+		--washi:        #f4efe5;
+		--washi-deep:   #ece6d9;
+		--ink:          #1c1917;
+		--ink-mid:      rgba(28, 25, 23, 0.55);
+		--ink-faint:    rgba(28, 25, 23, 0.18);
+		--enso-size:    min(300px, 75vw);
+	}
+
+	:global(.dark) {
+		--washi:        #1a1815;
+		--washi-deep:   #141210;
+		--ink:          #e8e2d6;
+		--ink-mid:      rgba(232, 226, 214, 0.55);
+		--ink-faint:    rgba(232, 226, 214, 0.15);
+	}
+
+	/* =====================================================================
+	   FULL-BLEED WRAPPER — cancels Layout padding
+	   ===================================================================== */
+	.heart-sutra-page {
+		margin-top:    -2rem;
+		margin-bottom: -2rem;
+		margin-left:   -1.5rem;
+		margin-right:  -1.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.heart-sutra-page {
+			margin-left:  -3rem;
+			margin-right: -3rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.heart-sutra-page {
+			margin-left:  -4rem;
+			margin-right: -4rem;
+		}
+	}
+
+	/* =====================================================================
+	   COVER
+	   ===================================================================== */
+	.book-cover {
+		background-color: var(--washi);
+		color: var(--ink);
+		min-height: 100svh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 5rem 2rem 4rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	/* subtle ruled-paper lines */
+	.book-cover::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: repeating-linear-gradient(
+			0deg,
+			transparent,
+			transparent 31px,
+			rgba(0, 0, 0, 0.025) 31px,
+			rgba(0, 0, 0, 0.025) 32px
+		);
+		pointer-events: none;
+	}
+
+	:global(.dark) .book-cover::before {
+		background-image: repeating-linear-gradient(
+			0deg,
+			transparent,
+			transparent 31px,
+			rgba(255, 255, 255, 0.025) 31px,
+			rgba(255, 255, 255, 0.025) 32px
+		);
+	}
+
+	/* back link */
+	.back-link {
+		position: absolute;
+		top: 1.5rem;
+		left: 1.75rem;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.8rem;
+		letter-spacing: 0.08em;
+		color: var(--ink-mid);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.back-link:hover {
+		color: var(--ink);
+	}
+
+	/* enso SVG */
+	.enso-wrapper {
+		margin-bottom: 3rem;
+	}
+
+	.enso {
+		width: var(--enso-size);
+		height: var(--enso-size);
+		color: var(--ink);
+		display: block;
+	}
+
+	.enso-circle {
+		stroke-dasharray: 680;
+		stroke-dashoffset: 680;
+		animation: draw-enso 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
+	}
+
+	@keyframes draw-enso {
+		to { stroke-dashoffset: 0; }
+	}
+
+	/* cover typography */
+	.cover-title {
+		text-align: center;
+	}
+
+	.kanji-title {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(2.5rem, 9vw, 5.5rem);
+		font-weight: 400;
+		letter-spacing: 0.25em;
+		color: var(--ink);
+		margin-bottom: 1.25rem;
+		line-height: 1;
+	}
+
+	.cover-divider {
+		width: 3.5rem;
+		height: 1px;
+		background-color: var(--ink-mid);
+		margin: 0 auto 1.25rem;
+	}
+
+	.cover-subtitle {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.75rem;
+		letter-spacing: 0.45em;
+		text-transform: uppercase;
+		color: var(--ink-mid);
+		margin-bottom: 0.75rem;
+	}
+
+	.cover-tagline {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1rem, 3vw, 1.6rem);
+		font-style: italic;
+		color: var(--ink-mid);
+		letter-spacing: 0.04em;
+	}
+
+	/* =====================================================================
+	   BOOK BODY
+	   ===================================================================== */
+	.book-body {
+		background-color: var(--washi);
+		color: var(--ink);
+	}
+
+	.book-page {
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 5rem 2.5rem 4.5rem;
+		border-bottom: 1px solid var(--ink-faint);
+		position: relative;
+	}
+
+	.page-number {
+		position: absolute;
+		top: 1.75rem;
+		right: 2.5rem;
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.7rem;
+		letter-spacing: 0.2em;
+		color: var(--ink-mid);
+		user-select: none;
+	}
+
+	/* =====================================================================
+	   CHAPTER HEADERS
+	   ===================================================================== */
+	.chapter-header {
+		margin-bottom: 2.75rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--ink-faint);
+	}
+
+	.chapter-label {
+		display: block;
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.65rem;
+		letter-spacing: 0.5em;
+		text-transform: uppercase;
+		color: var(--ink-mid);
+		margin-bottom: 0.6rem;
+	}
+
+	.chapter-title {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.8rem, 4vw, 2.6rem);
+		font-weight: 400;
+		font-style: italic;
+		color: var(--ink);
+		margin: 0 0 0.2rem;
+		line-height: 1.2;
+	}
+
+	.chapter-subtitle {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.8rem;
+		letter-spacing: 0.2em;
+		color: var(--ink-mid);
+		margin: 0.3rem 0 0;
+	}
+
+	/* =====================================================================
+	   TITLE PAGE
+	   ===================================================================== */
+	.title-page {
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.title-page-content {
+		text-align: center;
+	}
+
+	.title-kanji {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(2rem, 6vw, 3.75rem);
+		letter-spacing: 0.35em;
+		color: var(--ink);
+		margin-bottom: 1.75rem;
+		line-height: 1;
+	}
+
+	.title-english {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.4rem, 3.5vw, 2.25rem);
+		font-weight: 400;
+		font-style: italic;
+		color: var(--ink);
+		margin: 0 0 1rem;
+		letter-spacing: 0.02em;
+	}
+
+	.title-tagline {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.85rem;
+		letter-spacing: 0.1em;
+		color: var(--ink-mid);
+		margin: 0;
+	}
+
+	/* =====================================================================
+	   BOOK TEXT
+	   ===================================================================== */
+	.book-text {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 1rem;
+		line-height: 1.9;
+		color: var(--ink);
+	}
+
+	.book-text p {
+		margin-bottom: 1.3rem;
+	}
+
+	.book-text p:last-child {
+		margin-bottom: 0;
+	}
+
+	.book-text em {
+		font-style: italic;
+	}
+
+	.book-text blockquote {
+		margin: 1.75rem 0;
+		padding: 0.75rem 1.5rem;
+		border-left: 2px solid var(--ink-mid);
+		font-style: italic;
+		color: var(--ink-mid);
+	}
+
+	.mantra-english {
+		text-align: center;
+		margin-top: 1.75rem !important;
+		font-size: 1.05rem;
+	}
+
+	/* =====================================================================
+	   JAPANESE SUTRA
+	   ===================================================================== */
+	.sutra-text {
+		font-family:
+			'Noto Serif JP',
+			'Hiragino Mincho Pro',
+			'Yu Mincho',
+			'游明朝',
+			'MS Mincho',
+			'Source Serif 4',
+			Georgia,
+			serif;
+		font-size: 1.05rem;
+		line-height: 2.3;
+		letter-spacing: 0.06em;
+		color: var(--ink);
+		text-align: justify;
+		word-break: break-all;
+		margin-bottom: 2.5rem;
+	}
+
+	.mantra-jp {
+		font-family:
+			'Noto Serif JP',
+			'Hiragino Mincho Pro',
+			'Yu Mincho',
+			'Source Serif 4',
+			Georgia,
+			serif;
+		font-size: 1.25rem;
+		letter-spacing: 0.18em;
+		text-align: center;
+		color: var(--ink);
+		margin: 0 0 2rem;
+		padding: 1.25rem 0;
+		border-top: 1px solid var(--ink-faint);
+		border-bottom: 1px solid var(--ink-faint);
+	}
+
+	.sutra-end {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: 1.05rem;
+		letter-spacing: 0.35em;
+		text-align: center;
+		color: var(--ink-mid);
+		margin: 0;
+	}
+
+	/* =====================================================================
+	   ILLUSTRATIONS
+	   ===================================================================== */
+	.book-illustration {
+		text-align: center;
+		margin: 3.5rem 0;
+		padding: 2rem 0;
+	}
+
+	.sumi-e {
+		width: min(280px, 92%);
+		height: auto;
+		color: var(--ink);
+		display: block;
+		margin: 0 auto 1rem;
+	}
+
+	.illustration-caption {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.72rem;
+		letter-spacing: 0.2em;
+		color: var(--ink-mid);
+		margin: 0;
+	}
+
+	/* =====================================================================
+	   EXPLANATIONS
+	   ===================================================================== */
+	.explanation {
+		margin-bottom: 3.25rem;
+		padding-bottom: 3.25rem;
+		border-bottom: 1px solid var(--ink-faint);
+	}
+
+	.explanation:last-of-type {
+		border-bottom: none;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.explanation-header {
+		display: flex;
+		gap: 1.25rem;
+		align-items: flex-start;
+		margin-bottom: 1.5rem;
+	}
+
+	.explanation-number {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: 2.75rem;
+		font-weight: 400;
+		color: var(--ink-mid);
+		line-height: 1;
+		flex-shrink: 0;
+		margin-top: 0.05rem;
+		user-select: none;
+	}
+
+	.explanation-title {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 1.05rem;
+		font-weight: 600;
+		color: var(--ink);
+		margin: 0 0 0.3rem;
+		line-height: 1.3;
+	}
+
+	.explanation-kanji {
+		font-family:
+			'Noto Serif JP',
+			'Hiragino Mincho Pro',
+			'Source Serif 4',
+			Georgia,
+			serif;
+		font-size: 0.95rem;
+		letter-spacing: 0.1em;
+		color: var(--ink);
+		margin: 0 0 0.15rem;
+	}
+
+	.explanation-romaji {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.78rem;
+		font-style: italic;
+		letter-spacing: 0.04em;
+		color: var(--ink-mid);
+		margin: 0;
+	}
+
+	/* list styles */
+	.aggregate-list,
+	.mantra-breakdown {
+		margin: 1rem 0 1.25rem 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.aggregate-list li,
+	.mantra-breakdown li {
+		padding: 0.35rem 0 0.35rem 1.1rem;
+		border-left: 2px solid var(--ink-faint);
+		margin-bottom: 0.5rem;
+		font-size: 0.95rem;
+		line-height: 1.65;
+		color: var(--ink);
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+	}
+
+	.aggregate-list li strong,
+	.mantra-breakdown li strong {
+		font-weight: 600;
+	}
+
+	/* =====================================================================
+	   BACK COVER
+	   ===================================================================== */
+	.back-cover {
+		background-color: var(--washi-deep);
+		color: var(--ink);
+		min-height: 60vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 5rem 2rem;
+		text-align: center;
+		border-top: 1px solid var(--ink-faint);
+	}
+
+	.back-cover-enso {
+		margin-bottom: 2rem;
+		color: var(--ink);
+	}
+
+	.back-cover-enso svg {
+		width: 72px;
+		height: 72px;
+	}
+
+	.back-cover-content {
+		max-width: 400px;
+	}
+
+	.back-cover-blurb {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.25rem, 3vw, 1.75rem);
+		font-style: italic;
+		font-weight: 400;
+		color: var(--ink);
+		margin: 0 0 1.5rem;
+		line-height: 1.45;
+	}
+
+	.back-cover-description {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.88rem;
+		line-height: 1.85;
+		color: var(--ink-mid);
+		margin: 0 0 1.25rem;
+	}
+
+	.back-cover-tagline {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.82rem;
+		font-style: italic;
+		letter-spacing: 0.04em;
+		color: var(--ink-mid);
+		margin: 0 0 2rem;
+	}
+
+	.back-cover-rule {
+		width: 2.5rem;
+		height: 1px;
+		background-color: var(--ink-mid);
+		margin: 0 auto 1.75rem;
+	}
+
+	.back-cover-kanji {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: 1.15rem;
+		letter-spacing: 0.45em;
+		color: var(--ink-mid);
+		margin: 0;
+	}
+</style>
