@@ -101,16 +101,6 @@ const resultsId = `${id}-results`;
 </div>
 
 <script>
-	// Lazy-load the actions module only when search is actually used
-	let actionsModule: typeof import('astro:actions') | null = null;
-
-	const getActions = async () => {
-		if (!actionsModule) {
-			actionsModule = await import('astro:actions');
-		}
-		return actionsModule.actions;
-	};
-
 	// Track initialized inputs to avoid double initialization
 	const initializedInputs = new WeakSet<Element>();
 
@@ -141,16 +131,17 @@ const resultsId = `${id}-results`;
 				const container = searchInput.closest('.search-container') as HTMLElement;
 				const contentFilter = container?.dataset.contentFilter || 'all';
 
-				const actions = await getActions();
-				const { data, error } = await actions.search({
+				const params = new URLSearchParams({
 					q: query,
-					limit: 12,
-					contentFilter: contentFilter as 'all' | 'garden-only' | 'projects-only',
+					limit: '12',
+					filter: contentFilter,
 				});
+				const response = await fetch(`/api/search?${params}`);
+				const data = await response.json();
 
 				if (loadingIndicator) loadingIndicator.classList.add('hidden');
 
-				if (error) {
+				if (!response.ok) {
 					resultsDiv.innerHTML = `<div class="p-6 text-red-500 text-center">Search error</div>`;
 					resultsDiv.classList.remove('hidden');
 					return;
