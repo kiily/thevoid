@@ -3,6 +3,7 @@ import { Font } from 'astro:assets';
 // import Navigation from '../components/Navigation.astro';
 import Header from '../components/Header.astro';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 export interface Props {
 	title: string;
@@ -100,6 +101,7 @@ const ogImageUrl = image.startsWith('http')
 			>
 				<slot />
 				<Analytics />
+				<SpeedInsights />
 			</main>
 		</div>
 	</body>
