@@ -29,15 +29,18 @@ import BackButton from '../components/BackButton.astro';
 					  Path is a near-circle with slight asymmetry (control points
 					  vary a few px) to mimic a hand-drawn brushstroke.
 					  The gap sits at the top (~11 o'clock) between the
-					  endpoint (84,18) and the startpoint (109,17).
+					  startpoint (84,18) and the endpoint (109,17).
+					  The stroke draws left-to-right: starting at the left edge
+					  of the gap, sweeping counter-clockwise through the bottom,
+					  and arriving at the right edge of the gap.
 					-->
 					<path
 						class="enso-circle"
-						d="M 109 17
-						   C 156 15, 186 55, 184 102
-						   C 182 149, 145 185, 97 184
-						   C 49 183, 14 145, 15 97
-						   C 16 51, 53 18, 84 18"
+						d="M 84 18
+						   C 53 18, 16 51, 15 97
+						   C 14 145, 49 183, 97 184
+						   C 145 185, 182 149, 184 102
+						   C 186 55, 156 15, 109 17"
 						fill="none"
 						stroke="currentColor"
 						stroke-width="26"
