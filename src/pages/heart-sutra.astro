@@ -91,15 +91,32 @@ import BackButton from '../components/BackButton.astro';
 				<span class="page-number" aria-hidden="true">5</span>
 				<div class="chapter-header">
 					<span class="chapter-label" lang="ja">経文</span>
-					<h2 class="chapter-title" lang="ja">摩訶般若波羅蜜多心経</h2>
+					<h2 class="chapter-title" lang="ja"><ruby>摩訶<rt>まか</rt></ruby><ruby>般若<rt>はんにゃ</rt></ruby><ruby>波羅蜜多<rt>はらみった</rt></ruby><ruby>心経<rt>しんぎょう</rt></ruby></h2>
+				</div>
+
+				<!-- Reading aid toggles -->
+				<div class="reading-controls" role="group" aria-label="Reading aids">
+					<span class="reading-label">Reading aids</span>
+					<button class="reading-btn" id="btn-furigana" aria-pressed="false">
+						<span lang="ja">読み仮名</span><span class="reading-btn-sub">Furigana</span>
+					</button>
+					<button class="reading-btn" id="btn-romaji" aria-pressed="false">
+						<span lang="ja">ローマ字</span><span class="reading-btn-sub">Romaji</span>
+					</button>
 				</div>
 
 				<div class="japanese-sutra">
-					<p class="sutra-text" lang="ja">
-						観自在菩薩行深般若波羅蜜多時照見五蘊皆空度一切苦厄舎利子色不異空空不異色色即是空空即是色受想行識亦復如是舎利子是諸法空相不生不滅不垢不浄不増不減是故空中無色無受想行識無眼耳鼻舌身意無色声香味触法無眼界乃至無意識界無無明亦無無明尽乃至無老死亦無老死尽無苦集滅道無智亦無得以無所得故菩提薩埵依般若波羅蜜多故心無罣礙無罣礙故無有恐怖遠離一切顛倒夢想究竟涅槃三世諸仏依般若波羅蜜多故得阿耨多羅三藐三菩提故知般若波羅蜜多是大神呪是大明呪是無上呪是無等等呪能除一切苦真実不虚故説般若波羅蜜多呪即説呪曰
-					</p>
-					<p class="mantra-jp" lang="ja">羯諦　羯諦　波羅羯諦　波羅僧羯諦　菩提　薩婆訶</p>
+					<p class="sutra-text" lang="ja"><ruby>観自在<rt>かんじざい</rt></ruby><ruby>菩薩<rt>ぼさつ</rt></ruby><ruby>行<rt>ぎょう</rt></ruby><ruby>深<rt>じん</rt></ruby><ruby>般若<rt>はんにゃ</rt></ruby><ruby>波羅蜜多<rt>はらみった</rt></ruby><ruby>時<rt>じ</rt></ruby><ruby>照見<rt>しょうけん</rt></ruby><ruby>五蘊<rt>ごうん</rt></ruby><ruby>皆空<rt>かいくう</rt></ruby><ruby>度<rt>ど</rt></ruby><ruby>一切<rt>いっさい</rt></ruby><ruby>苦厄<rt>くやく</rt></ruby><ruby>舎利子<rt>しゃりし</rt></ruby><ruby>色<rt>しき</rt></ruby><ruby>不異<rt>ふい</rt></ruby><ruby>空<rt>くう</rt></ruby><ruby>空<rt>くう</rt></ruby><ruby>不異<rt>ふい</rt></ruby><ruby>色<rt>しき</rt></ruby><ruby>色<rt>しき</rt></ruby><ruby>即是<rt>そくぜ</rt></ruby><ruby>空<rt>くう</rt></ruby><ruby>空<rt>くう</rt></ruby><ruby>即是<rt>そくぜ</rt></ruby><ruby>色<rt>しき</rt></ruby><ruby>受<rt>じゅ</rt></ruby><ruby>想<rt>そう</rt></ruby><ruby>行<rt>ぎょう</rt></ruby><ruby>識<rt>しき</rt></ruby><ruby>亦復如是<rt>やくぶにょぜ</rt></ruby><ruby>舎利子<rt>しゃりし</rt></ruby><ruby>是<rt>ぜ</rt></ruby><ruby>諸法<rt>しょほう</rt></ruby><ruby>空相<rt>くうそう</rt></ruby><ruby>不生<rt>ふしょう</rt></ruby><ruby>不滅<rt>ふめつ</rt></ruby><ruby>不垢<rt>ふく</rt></ruby><ruby>不浄<rt>ふじょう</rt></ruby><ruby>不増<rt>ふぞう</rt></ruby><ruby>不減<rt>ふげん</rt></ruby><ruby>是故<rt>ぜこ</rt></ruby><ruby>空中<rt>くうちゅう</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>色<rt>しき</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>受<rt>じゅ</rt></ruby><ruby>想<rt>そう</rt></ruby><ruby>行<rt>ぎょう</rt></ruby><ruby>識<rt>しき</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>眼耳鼻舌身意<rt>げんにびぜっしんい</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>色声香味触法<rt>しきしょうこうみそくほう</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>眼界<rt>げんかい</rt></ruby><ruby>乃至<rt>ないし</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>意識界<rt>いしきかい</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>無明<rt>むみょう</rt></ruby><ruby>亦<rt>やく</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>無明<rt>むみょう</rt></ruby><ruby>尽<rt>じん</rt></ruby><ruby>乃至<rt>ないし</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>老死<rt>ろうし</rt></ruby><ruby>亦<rt>やく</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>老死<rt>ろうし</rt></ruby><ruby>尽<rt>じん</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>苦<rt>く</rt></ruby><ruby>集<rt>しゅう</rt></ruby><ruby>滅<rt>めつ</rt></ruby><ruby>道<rt>どう</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>智<rt>ち</rt></ruby><ruby>亦<rt>やく</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>得<rt>とく</rt></ruby><ruby>以<rt>い</rt></ruby><ruby>無所得<rt>むしょとく</rt></ruby><ruby>故<rt>こ</rt></ruby><ruby>菩提薩埵<rt>ぼだいさった</rt></ruby><ruby>依<rt>え</rt></ruby><ruby>般若波羅蜜多<rt>はんにゃはらみった</rt></ruby><ruby>故<rt>こ</rt></ruby><ruby>心<rt>しん</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>罣礙<rt>けいげ</rt></ruby><ruby>無<rt>む</rt></ruby><ruby>罣礙<rt>けいげ</rt></ruby><ruby>故<rt>こ</rt></ruby><ruby>無有<rt>むう</rt></ruby><ruby>恐怖<rt>くふ</rt></ruby><ruby>遠離<rt>おんり</rt></ruby><ruby>一切<rt>いっさい</rt></ruby><ruby>顛倒<rt>てんどう</rt></ruby><ruby>夢想<rt>むそう</rt></ruby><ruby>究竟<rt>くぎょう</rt></ruby><ruby>涅槃<rt>ねはん</rt></ruby><ruby>三世<rt>さんぜ</rt></ruby><ruby>諸仏<rt>しょぶつ</rt></ruby><ruby>依<rt>え</rt></ruby><ruby>般若波羅蜜多<rt>はんにゃはらみった</rt></ruby><ruby>故<rt>こ</rt></ruby><ruby>得<rt>とく</rt></ruby><ruby>阿耨多羅<rt>あのくたら</rt></ruby><ruby>三藐<rt>さんみゃく</rt></ruby><ruby>三菩提<rt>さんぼだい</rt></ruby><ruby>故<rt>こ</rt></ruby><ruby>知<rt>ち</rt></ruby><ruby>般若波羅蜜多<rt>はんにゃはらみった</rt></ruby><ruby>是<rt>ぜ</rt></ruby><ruby>大神呪<rt>だいじんしゅ</rt></ruby><ruby>是<rt>ぜ</rt></ruby><ruby>大明呪<rt>だいみょうしゅ</rt></ruby><ruby>是<rt>ぜ</rt></ruby><ruby>無上呪<rt>むじょうしゅ</rt></ruby><ruby>是<rt>ぜ</rt></ruby><ruby>無等等呪<rt>むとうどうしゅ</rt></ruby><ruby>能除<rt>のうじょ</rt></ruby><ruby>一切<rt>いっさい</rt></ruby><ruby>苦<rt>く</rt></ruby><ruby>真実<rt>しんじつ</rt></ruby><ruby>不虚<rt>ふこ</rt></ruby><ruby>故<rt>こ</rt></ruby><ruby>説<rt>せつ</rt></ruby><ruby>般若波羅蜜多呪<rt>はんにゃはらみったしゅ</rt></ruby><ruby>即説<rt>そくせつ</rt></ruby><ruby>呪曰<rt>しゅわつ</rt></ruby></p>
+					<p class="mantra-jp" lang="ja"><ruby>羯諦<rt>ぎゃてい</rt></ruby>　<ruby>羯諦<rt>ぎゃてい</rt></ruby>　<ruby>波羅<rt>はら</rt></ruby><ruby>羯諦<rt>ぎゃてい</rt></ruby>　<ruby>波羅僧<rt>はらそう</rt></ruby><ruby>羯諦<rt>ぎゃてい</rt></ruby>　<ruby>菩提<rt>ぼじ</rt></ruby>　<ruby>薩婆訶<rt>そわか</rt></ruby></p>
 					<p class="sutra-end" lang="ja">般若心経</p>
+
+					<!-- Romaji block (shown when romaji toggle is active) -->
+					<div class="romaji-block" aria-label="Romanized pronunciation">
+						<span class="romaji-label">ローマ字 — Romanization</span>
+						<p class="romaji-text">Kan jizai bosatsu gyō jin Hannya Haramitta ji, shōken go'un kai kū, do issai ku yaku. Sha-ri-shi, shiki fu i kū, kū fu i shiki, shiki soku ze kū, kū soku ze shiki. Ju sō gyō shiki, yaku bu nyoze. Sha-ri-shi, ze shohō kū sō, fu shō fu metsu, fu ku fu jō, fu zō fu gen. Ze ko kū chū, mu shiki, mu ju sō gyō shiki, mu gen ni bi zetsu shin i, mu shiki shō kō mi soku hō, mu gen kai nai shi mu i shiki kai. Mu mumyō, yaku mu mumyō jin, nai shi mu rōshi, yaku mu rōshi jin. Mu ku shū metsu dō, mu chi, yaku mu toku. I mu shotoku ko, bodaisatta, e Hannya Haramitta ko, shin mu keige, mu keige ko, mu u kufu, on-ri issai tendō musō, kugyō Nehan. Sanze shobutsu, e Hannya Haramitta ko, toku Anokutara Sanmyaku Sanbodai. Ko chi Hannya Haramitta, ze dai jin shū, ze dai myō shū, ze mu jō shū, ze mu tō dō shū, nō jo issai ku, shinjitsu fuko. Ko setsu Hannya Haramitta shū, soku setsu shū watsu:</p>
+						<p class="romaji-mantra">Gyatei gyatei, hara gyatei, harasō gyatei, boji sowaka.</p>
+						<p class="romaji-text romaji-end">Hannya Shingyō.</p>
+					</div>
 				</div>
 			</div>
 
@@ -205,7 +222,7 @@ import BackButton from '../components/BackButton.astro';
 						<span class="explanation-number" aria-hidden="true" lang="ja">一</span>
 						<div>
 							<h3 class="explanation-title">Form is Emptiness, Emptiness is Form</h3>
-							<p class="explanation-kanji" lang="ja">色即是空、空即是色</p>
+							<p class="explanation-kanji" lang="ja"><ruby>色<rt>しき</rt></ruby><ruby>即是<rt>そくぜ</rt></ruby><ruby>空<rt>くう</rt></ruby>、<ruby>空<rt>くう</rt></ruby><ruby>即是<rt>そくぜ</rt></ruby><ruby>色<rt>しき</rt></ruby></p>
 							<p class="explanation-romaji">Shiki soku ze kū, kū soku ze shiki</p>
 						</div>
 					</div>
@@ -232,7 +249,7 @@ import BackButton from '../components/BackButton.astro';
 						<span class="explanation-number" aria-hidden="true" lang="ja">二</span>
 						<div>
 							<h3 class="explanation-title">The Five Aggregates are Empty</h3>
-							<p class="explanation-kanji" lang="ja">五蘊皆空</p>
+							<p class="explanation-kanji" lang="ja"><ruby>五蘊<rt>ごうん</rt></ruby><ruby>皆空<rt>かいくう</rt></ruby></p>
 							<p class="explanation-romaji">Goun kai kū</p>
 						</div>
 					</div>
@@ -292,7 +309,7 @@ import BackButton from '../components/BackButton.astro';
 						<span class="explanation-number" aria-hidden="true" lang="ja">三</span>
 						<div>
 							<h3 class="explanation-title">The Great Mantra</h3>
-							<p class="explanation-kanji" lang="ja">羯諦羯諦…</p>
+							<p class="explanation-kanji" lang="ja"><ruby>羯諦<rt>ぎゃてい</rt></ruby><ruby>羯諦<rt>ぎゃてい</rt></ruby>…</p>
 							<p class="explanation-romaji">Gyatei gyatei…</p>
 						</div>
 					</div>
@@ -899,4 +916,179 @@ import BackButton from '../components/BackButton.astro';
 		color: var(--ink-mid);
 		margin: 0;
 	}
+
+	/* =====================================================================
+	   READING CONTROLS
+	   ===================================================================== */
+	.reading-controls {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+		margin-bottom: 2rem;
+		padding: 0.65rem 0.9rem;
+		border: 1px solid var(--ink-faint);
+		border-radius: 3px;
+	}
+
+	.reading-label {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.62rem;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--ink-mid);
+		flex-shrink: 0;
+		margin-right: 0.1rem;
+	}
+
+	.reading-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.28rem 0.75rem;
+		border: 1px solid var(--ink-faint);
+		border-radius: 2rem;
+		background: transparent;
+		color: var(--ink-mid);
+		cursor: pointer;
+		font-size: 0.82rem;
+		font-family:
+			'Noto Serif JP',
+			'Hiragino Mincho Pro',
+			'Source Serif 4',
+			Georgia,
+			serif;
+		transition:
+			background-color 0.18s ease,
+			color 0.18s ease,
+			border-color 0.18s ease;
+		line-height: 1.5;
+	}
+
+	.reading-btn:hover {
+		border-color: var(--ink);
+		color: var(--ink);
+	}
+
+	.reading-btn.active {
+		background-color: var(--ink);
+		color: var(--washi);
+		border-color: var(--ink);
+	}
+
+	.reading-btn-sub {
+		font-size: 0.66rem;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		opacity: 0.72;
+		letter-spacing: 0.04em;
+	}
+
+	/* =====================================================================
+	   RUBY / FURIGANA
+	   ===================================================================== */
+	/* Hidden by default — rt takes no space, kanji flows normally */
+	ruby rt {
+		display: none;
+		font-size: 0.5em;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		font-family:
+			'Noto Sans JP',
+			'Hiragino Kaku Gothic Pro',
+			'Yu Gothic',
+			system-ui,
+			sans-serif;
+		color: var(--ink-mid);
+	}
+
+	/* Restore browser-native ruby-text positioning when toggled on */
+	.furigana-active ruby rt {
+		display: revert;
+	}
+
+	/* Extra line-height to accommodate furigana above kanji */
+	.furigana-active .sutra-text {
+		line-height: 3.5;
+	}
+
+	.furigana-active .mantra-jp {
+		line-height: 3.2;
+	}
+
+	.furigana-active .explanation-kanji {
+		line-height: 2.8;
+	}
+
+	/* Chapter title furigana (smaller, as it's in display context) */
+	.furigana-active .chapter-title[lang='ja'] {
+		line-height: 2.2;
+	}
+
+	/* =====================================================================
+	   ROMAJI BLOCK
+	   ===================================================================== */
+	.romaji-block {
+		display: none;
+		margin-top: 2.25rem;
+		padding-top: 1.75rem;
+		border-top: 1px solid var(--ink-faint);
+	}
+
+	.romaji-active .romaji-block {
+		display: block;
+	}
+
+	.romaji-label {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.6rem;
+		letter-spacing: 0.38em;
+		text-transform: uppercase;
+		color: var(--ink-mid);
+		margin-bottom: 1rem;
+	}
+
+	.romaji-text {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.875rem;
+		line-height: 2.1;
+		color: var(--ink-mid);
+		font-style: italic;
+		margin-bottom: 0;
+	}
+
+	.romaji-mantra {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.98rem;
+		text-align: center;
+		font-style: italic;
+		color: var(--ink-mid);
+		margin: 1.5rem 0 0.25rem;
+		letter-spacing: 0.04em;
+	}
+
+	.romaji-end {
+		text-align: center;
+		margin-top: 0.25rem;
+		font-size: 0.82rem;
+		letter-spacing: 0.1em;
+	}
 </style>
+
+<script>
+	const page = document.querySelector<HTMLElement>('.heart-sutra-page');
+	const btnFurigana = document.getElementById('btn-furigana');
+	const btnRomaji   = document.getElementById('btn-romaji');
+
+	btnFurigana?.addEventListener('click', () => {
+		const on = page?.classList.toggle('furigana-active') ?? false;
+		btnFurigana.classList.toggle('active', on);
+		btnFurigana.setAttribute('aria-pressed', String(on));
+	});
+
+	btnRomaji?.addEventListener('click', () => {
+		const on = page?.classList.toggle('romaji-active') ?? false;
+		btnRomaji.classList.toggle('active', on);
+		btnRomaji.setAttribute('aria-pressed', String(on));
+	});
+</script>
