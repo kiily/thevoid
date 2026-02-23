@@ -17,10 +17,10 @@ import BackButton from '../components/BackButton.astro';
 
 			<!-- Enso Circle (animated brushstroke) -->
 			<div class="enso-wrapper" aria-hidden="true">
-				<svg class="enso" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+				<svg class="enso" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
 					<defs>
 						<!-- Low baseFrequency = coarse bristle marks; high scale = bold ink distortion -->
-						<filter id="enso-ink" x="-18%" y="-18%" width="136%" height="136%" color-interpolation-filters="sRGB">
+						<filter id="enso-ink" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
 							<feTurbulence type="fractalNoise" baseFrequency="0.04 0.13" numOctaves="5" seed="7" result="noise"/>
 							<feDisplacementMap in="SourceGraphic" in2="noise" scale="13" xChannelSelector="R" yChannelSelector="G"/>
 						</filter>
@@ -29,21 +29,21 @@ import BackButton from '../components/BackButton.astro';
 					  Path is a near-circle with slight asymmetry (control points
 					  vary a few px) to mimic a hand-drawn brushstroke.
 					  The gap sits at the top (~11 o'clock) between the
-					  startpoint (84,18) and the endpoint (109,17).
-					  The stroke draws left-to-right: starting at the left edge
-					  of the gap, sweeping counter-clockwise through the bottom,
-					  and arriving at the right edge of the gap.
+					  startpoint (62,22) at ~10-o'clock and endpoint (138,22) at ~2-o'clock.
+					  Gap is 76 px wide (> stroke-width 40) so it stays open.
+					  Stroke draws left-to-right: sweeping counter-clockwise
+					  through the bottom and arriving at the right gap edge.
 					-->
 					<path
 						class="enso-circle"
-						d="M 84 18
-						   C 53 18, 16 51, 15 97
+						d="M 62 22
+						   C 38 38, 16 51, 15 97
 						   C 14 145, 49 183, 97 184
 						   C 145 185, 182 149, 184 102
-						   C 186 55, 156 15, 109 17"
+						   C 186 55, 162 38, 138 22"
 						fill="none"
 						stroke="currentColor"
-						stroke-width="44"
+						stroke-width="40"
 						stroke-linecap="round"
 						filter="url(#enso-ink)"
 					/>
