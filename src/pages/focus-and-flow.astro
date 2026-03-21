@@ -1,0 +1,1571 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Focus & Flow — The Science of Deep Work | The Void"
+	description="A bunkobon pocket guide to the science of focused work, flow states, and why we do our best thinking together. Based on research by FLOWN, Cal Newport, Csikszentmihalyi, and others."
+>
+	<div class="focus-flow-page">
+		<!-- ============================================================
+		     BOOK COVER
+		     ============================================================ -->
+		<section class="book-cover">
+			<a href="/" class="back-link" aria-label="Back to home">&larr; back</a>
+
+			<!-- Concentric Ripple Circles — focus radiating outward -->
+			<div class="ripple-wrapper" aria-hidden="true">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 300 300"
+					class="ripple-hero"
+					aria-hidden="true"
+				>
+					<circle class="ripple-ring ripple-1" cx="150" cy="150" r="20" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"></circle>
+					<circle class="ripple-ring ripple-2" cx="150" cy="150" r="45" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.45"></circle>
+					<circle class="ripple-ring ripple-3" cx="150" cy="150" r="70" fill="none" stroke="currentColor" stroke-width="1" opacity="0.32"></circle>
+					<circle class="ripple-ring ripple-4" cx="150" cy="150" r="95" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.2"></circle>
+					<circle class="ripple-ring ripple-5" cx="150" cy="150" r="120" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.1"></circle>
+					<!-- Center dot — the stone -->
+					<circle cx="150" cy="150" r="3" fill="currentColor" opacity="0.7"></circle>
+				</svg>
+			</div>
+
+			<div class="cover-title">
+				<span class="cover-label">A Bunkobon</span>
+				<h1 class="cover-main-title">Focus &amp; Flow</h1>
+				<div class="cover-divider"></div>
+				<p class="cover-subtitle">The Science of Deep Work</p>
+				<p class="cover-attribution">Based on research by FLOWN &amp; others</p>
+			</div>
+		</section>
+
+		<!-- ============================================================
+		     BOOK BODY
+		     ============================================================ -->
+		<div class="book-body">
+			<!-- ── Title Page ─────────────────────────────────────────── -->
+			<div class="book-page title-page">
+				<span class="page-number" aria-hidden="true">i</span>
+				<div class="title-page-content">
+					<span class="title-label">A Bunkobon</span>
+					<h2 class="title-main">Focus &amp; Flow</h2>
+					<p class="title-sub">The Science of Deep Work</p>
+					<div class="title-rule"></div>
+					<p class="title-tagline">
+						A concise guide to the science of focused work, flow states,
+						and why we do our best thinking together.
+					</p>
+				</div>
+			</div>
+
+			<!-- ── Chapter 1: The Attention Crisis ────────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">1</span>
+				<div class="chapter-header">
+					<span class="chapter-label">Chapter One</span>
+					<h2 class="chapter-title">The Attention Crisis</h2>
+				</div>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">47 seconds</span>
+					<p class="stat-description">
+						The average time we spend on a single screen before switching.
+					</p>
+					<cite class="stat-cite">Gloria Mark, <em>Attention Span</em> (2023)</cite>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Our attention spans have collapsed. In 2004, researchers measured
+						that the average time a knowledge worker spent on a single screen
+						was two and a half minutes. By 2012, it had dropped to 75 seconds.
+						By 2021, it was just 47 seconds.
+					</p>
+					<p>
+						Knowledge workers now check communication tools every six minutes
+						on average. Forty percent of workers never get 30 unbroken minutes
+						of focus in a single workday. We have built an economy that runs
+						on attention, inside an environment that systematically destroys it.
+					</p>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">2</span>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">23 min 15 sec</span>
+					<p class="stat-description">
+						The time it takes to fully refocus after a single interruption.
+					</p>
+					<cite class="stat-cite">Mark, Gudith &amp; Klocke (2008)</cite>
+				</div>
+
+				<div class="book-text">
+					<p>
+						The cost is not the interruption itself &mdash; it is the cognitive
+						residue it leaves behind. When we switch tasks, a portion of our
+						attention remains stuck on the previous activity. We carry forward
+						unfinished thoughts, unresolved decisions, phantom notifications.
+					</p>
+					<p>
+						Perhaps most troubling: we interrupt ourselves more than others
+						interrupt us. We have internalized the rhythm of distraction. The
+						ping no longer needs to come from outside &mdash; we reach for the
+						phone, open a new tab, check the inbox before we even realize
+						we&rsquo;ve broken our own concentration.
+					</p>
+				</div>
+
+				<!-- Illustration: attention scattering and refocusing -->
+				<figure class="book-illustration" aria-label="Scattered dots reforming into a line">
+					<svg class="focus-illustration" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<!-- Scattered dots (left) -->
+						<circle cx="18" cy="32" r="2.5" fill="currentColor" opacity="0.2"></circle>
+						<circle cx="42" cy="68" r="2" fill="currentColor" opacity="0.18"></circle>
+						<circle cx="30" cy="50" r="3" fill="currentColor" opacity="0.25"></circle>
+						<circle cx="55" cy="25" r="1.8" fill="currentColor" opacity="0.15"></circle>
+						<circle cx="48" cy="78" r="2.2" fill="currentColor" opacity="0.2"></circle>
+						<circle cx="65" cy="42" r="2.8" fill="currentColor" opacity="0.22"></circle>
+						<circle cx="22" cy="72" r="1.5" fill="currentColor" opacity="0.12"></circle>
+						<circle cx="58" cy="55" r="2" fill="currentColor" opacity="0.18"></circle>
+						<!-- Converging dots (middle) -->
+						<circle cx="100" cy="48" r="2.5" fill="currentColor" opacity="0.3"></circle>
+						<circle cx="112" cy="52" r="2.8" fill="currentColor" opacity="0.35"></circle>
+						<circle cx="125" cy="50" r="3" fill="currentColor" opacity="0.4"></circle>
+						<!-- Focused line (right) -->
+						<line x1="145" y1="50" x2="265" y2="50" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.55"></line>
+						<circle cx="265" cy="50" r="3.5" fill="currentColor" opacity="0.6"></circle>
+					</svg>
+					<figcaption class="illustration-caption">
+						From scatter to focus
+					</figcaption>
+				</figure>
+			</div>
+
+			<!-- ── Chapter 2: Deep Work ──────────────────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">3</span>
+				<div class="chapter-header">
+					<span class="chapter-label">Chapter Two</span>
+					<h2 class="chapter-title">Deep Work</h2>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Cal Newport defines deep work as &ldquo;professional activities
+						performed in a state of distraction-free concentration that push
+						your cognitive capabilities to their limit.&rdquo; These efforts
+						create new value, improve your skill, and are hard to replicate.
+					</p>
+					<p>
+						Newport identifies four rules for cultivating deep work:
+					</p>
+				</div>
+
+				<ol class="focus-list">
+					<li><strong>Work Deeply</strong> &mdash; Build rituals and routines that minimize the need for willpower.</li>
+					<li><strong>Embrace Boredom</strong> &mdash; Train your brain to resist switching to stimulation at the first sign of discomfort.</li>
+					<li><strong>Quit Social Media</strong> &mdash; Apply the craftsman approach: adopt a tool only if its benefits substantially outweigh its costs.</li>
+					<li><strong>Drain the Shallows</strong> &mdash; Ruthlessly minimize shallow work to protect deep work hours.</li>
+				</ol>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">60%</span>
+					<p class="stat-description">
+						Of the average knowledge worker&rsquo;s week is spent on shallow
+						electronic communication and coordination.
+					</p>
+					<cite class="stat-cite">McKinsey Global Institute (2012)</cite>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">4</span>
+
+				<div class="book-text">
+					<p>
+						Anders Ericsson&rsquo;s research on deliberate practice reveals a
+						hard ceiling: beginners can sustain only 15&ndash;20 minutes of
+						true, full concentration. Even experts &mdash; professional musicians,
+						elite athletes &mdash; max out at four to five hours per day. Most
+						knowledge workers achieve roughly one hour of genuine deep work.
+					</p>
+				</div>
+
+				<blockquote class="pull-quote observe-fade">
+					<p>
+						&ldquo;The ability to perform deep work is becoming increasingly
+						rare at exactly the same time it is becoming increasingly valuable
+						in our economy.&rdquo;
+					</p>
+					<footer>&mdash; Cal Newport, <cite>Deep Work</cite> (2016)</footer>
+				</blockquote>
+
+				<!-- Illustration: Hourglass -->
+				<figure class="book-illustration" aria-label="Hourglass illustration">
+					<svg class="focus-illustration" viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<!-- Top frame -->
+						<line x1="35" y1="20" x2="125" y2="20" stroke="currentColor" stroke-width="3" stroke-linecap="round"></line>
+						<!-- Bottom frame -->
+						<line x1="35" y1="200" x2="125" y2="200" stroke="currentColor" stroke-width="3" stroke-linecap="round"></line>
+						<!-- Left glass -->
+						<path d="M 45 24 Q 45 80, 80 110 Q 45 140, 45 196" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+						<!-- Right glass -->
+						<path d="M 115 24 Q 115 80, 80 110 Q 115 140, 115 196" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+						<!-- Sand top -->
+						<path d="M 55 60 Q 80 75, 105 60" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"></path>
+						<!-- Sand stream -->
+						<line x1="80" y1="100" x2="80" y2="130" stroke="currentColor" stroke-width="1" opacity="0.35" stroke-dasharray="2,3"></line>
+						<!-- Sand pile bottom -->
+						<path d="M 60 185 Q 80 170, 100 185" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"></path>
+					</svg>
+					<figcaption class="illustration-caption">
+						Time &amp; depth
+					</figcaption>
+				</figure>
+			</div>
+
+			<!-- ── Chapter 3: The Flow State ─────────────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">5</span>
+				<div class="chapter-header">
+					<span class="chapter-label">Chapter Three</span>
+					<h2 class="chapter-title">The Flow State</h2>
+				</div>
+
+				<div class="book-text">
+					<p>
+						In the 1970s, psychologist Mihaly Csikszentmihalyi began interviewing
+						artists, athletes, surgeons, and chess players who described losing
+						themselves in their work. They performed not for external reward but
+						for the intrinsic pleasure of the activity itself. The word they kept
+						using was &ldquo;flow&rdquo; &mdash; the feeling of being carried
+						along by a current.
+					</p>
+					<p>
+						Csikszentmihalyi identified eight conditions that characterize
+						the flow state:
+					</p>
+				</div>
+
+				<ol class="flow-conditions">
+					<li><strong>Complete concentration</strong> on the task at hand</li>
+					<li><strong>Clarity of goals</strong> and immediate feedback</li>
+					<li><strong>Transformation of time</strong> &mdash; hours feel like minutes</li>
+					<li><strong>Intrinsically rewarding</strong> &mdash; the activity is its own reward</li>
+					<li><strong>Effortlessness</strong> &mdash; action flows without strain</li>
+					<li><strong>Challenge-skill balance</strong> &mdash; roughly 4% above current skill level</li>
+					<li><strong>Action-awareness merging</strong> &mdash; self-consciousness dissolves</li>
+					<li><strong>Feeling of control</strong> over the task and outcome</li>
+				</ol>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">6</span>
+
+				<div class="book-text">
+					<p>
+						The neurochemistry of flow involves five key chemicals, as
+						identified by Steven Kotler and the Flow Research Collective:
+					</p>
+				</div>
+
+				<div class="neurochemistry-grid">
+					<div class="chem-item">
+						<span class="chem-name">Dopamine</span>
+						<span class="chem-role">Attention &amp; pattern recognition</span>
+					</div>
+					<div class="chem-item">
+						<span class="chem-name">Norepinephrine</span>
+						<span class="chem-role">Arousal &amp; neural efficiency</span>
+					</div>
+					<div class="chem-item">
+						<span class="chem-name">Endorphins</span>
+						<span class="chem-role">Pain relief &amp; pleasure</span>
+					</div>
+					<div class="chem-item">
+						<span class="chem-name">Anandamide</span>
+						<span class="chem-role">Lateral thinking &mdash; from Sanskrit: &ldquo;bliss&rdquo;</span>
+					</div>
+					<div class="chem-item">
+						<span class="chem-name">Serotonin</span>
+						<span class="chem-role">The afterglow at flow&rsquo;s end</span>
+					</div>
+				</div>
+
+				<div class="book-text">
+					<p>
+						A crucial discovery came from Arne Dietrich in 2004: during flow,
+						the prefrontal cortex temporarily deactivates &mdash; a phenomenon
+						called <em>transient hypofrontality</em>. The brain&rsquo;s inner
+						critic goes quiet. This was confirmed by Limb &amp; Braun&rsquo;s
+						2008 fMRI study of jazz pianists improvising: the self-monitoring
+						centers of the brain literally shut down, freeing creative output.
+					</p>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">7</span>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">500%</span>
+					<p class="stat-description">
+						More productive when in flow, according to a McKinsey study.
+					</p>
+					<cite class="stat-cite">
+						Cited via Kotler, <em>The Rise of Superman</em>.
+						<span class="cite-note">Widely cited; original methodology not public.</span>
+					</cite>
+				</div>
+
+				<!-- Illustration: Brain with wave/ripple -->
+				<figure class="book-illustration" aria-label="Brain with radiating waves">
+					<svg class="focus-illustration" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<!-- Simplified brain outline -->
+						<path d="M 90 95 Q 85 60, 100 45 Q 115 30, 130 40 Q 140 30, 155 40 Q 170 50, 165 70 Q 175 75, 170 90 Q 168 100, 155 105 Q 145 112, 130 110 Q 115 112, 105 105 Q 92 100, 90 95 Z" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"></path>
+						<!-- Brain center fold -->
+						<path d="M 128 42 Q 130 65, 128 90" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"></path>
+						<!-- Left hemisphere folds -->
+						<path d="M 98 55 Q 108 60, 110 70" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"></path>
+						<path d="M 95 75 Q 105 78, 115 80" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"></path>
+						<!-- Right hemisphere folds -->
+						<path d="M 158 55 Q 148 60, 145 70" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"></path>
+						<path d="M 162 78 Q 150 80, 142 82" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"></path>
+						<!-- Ripple waves emanating -->
+						<circle cx="128" cy="75" r="45" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.12"></circle>
+						<circle cx="128" cy="75" r="60" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.08"></circle>
+						<circle cx="128" cy="75" r="75" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.05"></circle>
+					</svg>
+					<figcaption class="illustration-caption">
+						The quiet mind in flow
+					</figcaption>
+				</figure>
+			</div>
+
+			<!-- ── Chapter 4: The Science of Presence ────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">8</span>
+				<div class="chapter-header">
+					<span class="chapter-label">Chapter Four</span>
+					<h2 class="chapter-title">The Science of Presence</h2>
+				</div>
+
+				<div class="book-text">
+					<p>
+						In 1965, Robert Zajonc published a landmark paper on <em>social
+						facilitation</em>: the mere presence of others increases
+						physiological arousal and strengthens dominant responses. Dogs
+						ran faster alongside other dogs. Cockroaches navigated simple
+						mazes more quickly with an audience. Ants built bigger nests when
+						other ants were nearby. Even chickens ate more in the company
+						of a feeding companion.
+					</p>
+				</div>
+
+				<div class="subsection-header observe-fade">
+					<h3 class="subsection-title">The Hawthorne Effect</h3>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Between 1924 and 1933, researchers at the Western Electric factory
+						in Hawthorne, Illinois made a puzzling discovery. Workers&rsquo;
+						productivity improved whenever changes were made to their
+						environment &mdash; even contradictory changes, like both increasing
+						and decreasing the lighting. The improvement was driven not by the
+						changes themselves but by the workers&rsquo; awareness that they
+						were being observed.
+					</p>
+					<p>
+						Henry Landsberger coined the term in 1958: the <em>Hawthorne
+						Effect</em>. We modify and generally improve our behavior simply
+						because we know someone is paying attention. A 2006 German study
+						found this effect improved performance by 16&ndash;32%. When you
+						work in the presence of others, you don&rsquo;t just feel
+						accountable &mdash; you think more deeply, engage more fully,
+						and perceive your work as more meaningful.
+					</p>
+				</div>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">16&ndash;32%</span>
+					<p class="stat-description">
+						Performance improvement from the Hawthorne Effect &mdash; the
+						simple awareness of being observed.
+					</p>
+					<cite class="stat-cite">Landsberger (1958); replicated in German workplace study (2006)</cite>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">9</span>
+
+				<div class="subsection-header observe-fade">
+					<h3 class="subsection-title">Mirror Neurons</h3>
+				</div>
+
+				<div class="book-text">
+					<p>
+						In the 1990s, neurophysiologist Giacomo Rizzolatti and his colleagues
+						at the University of Parma placed electrodes in the ventral premotor
+						cortex of macaque monkeys and discovered something remarkable:
+						specific neurons fired both when a monkey performed an action
+						&mdash; reaching for a peanut &mdash; and when it merely
+						<em>observed</em> another monkey or human performing that same
+						action.
+					</p>
+					<p>
+						These <em>mirror neurons</em> are a class of brain cells that make
+						us reflexively emulate those around us. When you see someone working
+						in focused concentration &mdash; even on a video call &mdash; your
+						mirror neurons fire as if you yourself were performing that focused
+						work. This creates an involuntary pull toward matching their
+						behavior: a subconscious feedback loop that draws you into the
+						same state of attention.
+					</p>
+					<p>
+						The mechanism also stimulates dopamine release through mild social
+						pressure and positive mirroring, engaging the brain&rsquo;s
+						motivation circuits. A 2019 fMRI study found that ADHD brains
+						showed increased prefrontal cortex activation &mdash; the region
+						responsible for focus and executive function &mdash; when observing
+						others working, compared to working alone.
+					</p>
+				</div>
+
+				<!-- Illustration: Mirror neurons / two figures with wave connection -->
+				<figure class="book-illustration" aria-label="Two figures connected by mirroring waves">
+					<svg class="focus-illustration" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<!-- Left figure (simplified head + torso) -->
+						<circle cx="65" cy="35" r="12" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.45"></circle>
+						<line x1="65" y1="47" x2="65" y2="90" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.45"></line>
+						<!-- Right figure (mirror) -->
+						<circle cx="175" cy="35" r="12" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.45"></circle>
+						<line x1="175" y1="47" x2="175" y2="90" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.45"></line>
+						<!-- Mirror waves between them -->
+						<path d="M 82 38 Q 120 28, 158 38" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.18"></path>
+						<path d="M 80 55 Q 120 45, 160 55" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.22"></path>
+						<path d="M 78 70 Q 120 58, 162 70" fill="none" stroke="currentColor" stroke-width="0.9" opacity="0.28"></path>
+						<path d="M 80 85 Q 120 75, 160 85" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.22"></path>
+						<!-- Subtle outer resonance -->
+						<path d="M 45 62 Q 120 40, 195 62" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.08"></path>
+						<!-- Label: small dots at neural points -->
+						<circle cx="65" cy="30" r="1.5" fill="currentColor" opacity="0.3"></circle>
+						<circle cx="175" cy="30" r="1.5" fill="currentColor" opacity="0.3"></circle>
+					</svg>
+					<figcaption class="illustration-caption">
+						Mirror neurons at work
+					</figcaption>
+				</figure>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">10</span>
+
+				<div class="subsection-header observe-fade">
+					<h3 class="subsection-title">Body Doubling</h3>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Body doubling brings these forces together. Working alongside
+						others &mdash; even in silence, even virtually &mdash; combines
+						the Hawthorne Effect (the awareness of being observed) with
+						mirror neuron activation (the involuntary pull to match focused
+						behavior). The result is a compounding effect on attention that
+						neither mechanism produces alone.
+					</p>
+					<p>
+						For people with ADHD, body doubling has emerged as one of the
+						most effective focus strategies available. The external presence
+						acts as scaffolding for executive function &mdash; providing the
+						activation energy that the ADHD brain struggles to generate
+						independently.
+					</p>
+				</div>
+
+				<div class="study-callout observe-fade">
+					<span class="study-label">FLOWN Body Doubling Study</span>
+					<p class="study-detail">117 participants &middot; 12-week controlled study</p>
+					<ul class="study-results">
+						<li>Focus intensity <strong>doubled</strong></li>
+						<li>Anxiety decreased <strong>30%</strong></li>
+						<li>Life satisfaction increased <strong>2.5 points</strong></li>
+						<li>Equivalent to regaining <strong>7 weeks per year</strong></li>
+						<li>Estimated value: <strong>&pound;9,000/year</strong> per person</li>
+					</ul>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Additional research supports these findings. A VR study found that
+						participants finished tasks faster with a human or AI body double
+						present. Cleveland Clinic researchers (2023) reported 37% more tasks
+						completed in parallel-work settings compared to working alone.
+					</p>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">11</span>
+
+				<div class="subsection-header observe-fade">
+					<h3 class="subsection-title">The FLOWN Method</h3>
+				</div>
+
+				<div class="book-text">
+					<p>
+						FLOWN synthesizes these research findings into a structured virtual
+						coworking practice called <em>Flocks</em> &mdash; facilitated
+						sessions built on six behavioral science principles:
+					</p>
+				</div>
+
+				<div class="flown-principles">
+					<div class="principle-item">
+						<span class="principle-number">1</span>
+						<div>
+							<span class="principle-name">Body Doubling</span>
+							<span class="principle-desc">Working in the presence of others activates mirror neurons and the Hawthorne Effect</span>
+						</div>
+					</div>
+					<div class="principle-item">
+						<span class="principle-number">2</span>
+						<div>
+							<span class="principle-name">Implementation Intentions</span>
+							<span class="principle-desc">Declaring what you will work on creates an if-then plan that bypasses willpower</span>
+						</div>
+					</div>
+					<div class="principle-item">
+						<span class="principle-number">3</span>
+						<div>
+							<span class="principle-name">Accountability</span>
+							<span class="principle-desc">Social commitment to follow through &mdash; stating your intention to others increases success by up to 95%</span>
+						</div>
+					</div>
+					<div class="principle-item">
+						<span class="principle-number">4</span>
+						<div>
+							<span class="principle-name">Focused Work Stints</span>
+							<span class="principle-desc">Structured deep work blocks calibrated to attention capacity</span>
+						</div>
+					</div>
+					<div class="principle-item">
+						<span class="principle-number">5</span>
+						<div>
+							<span class="principle-name">Time Blocking</span>
+							<span class="principle-desc">Dedicated scheduled periods that protect deep work from shallow intrusions</span>
+						</div>
+					</div>
+					<div class="principle-item">
+						<span class="principle-number">6</span>
+						<div>
+							<span class="principle-name">Power of Play</span>
+							<span class="principle-desc">Interactive breaks that activate ancient reward circuits and restore creative capacity</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">95%</span>
+					<p class="stat-description">
+						Of FLOWN users reported above-average improvement in focus.
+						94% reported improved productivity; 85% rated their quality
+						of work as higher.
+					</p>
+					<cite class="stat-cite">FLOWN user outcomes data</cite>
+				</div>
+
+				<!-- Illustration: Two parallel lines with wave connection -->
+				<figure class="book-illustration" aria-label="Two figures working side by side">
+					<svg class="focus-illustration" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<!-- Left figure line -->
+						<line x1="70" y1="25" x2="70" y2="135" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"></line>
+						<!-- Right figure line -->
+						<line x1="130" y1="25" x2="130" y2="135" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"></line>
+						<!-- Wave connection between them -->
+						<path d="M 75 50 Q 100 42, 125 50" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.2"></path>
+						<path d="M 75 70 Q 100 62, 125 70" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"></path>
+						<path d="M 75 90 Q 100 82, 125 90" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"></path>
+						<path d="M 75 110 Q 100 102, 125 110" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.25"></path>
+						<!-- Gentle outer waves -->
+						<path d="M 55 80 Q 100 65, 145 80" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.1"></path>
+					</svg>
+					<figcaption class="illustration-caption">
+						Side by side
+					</figcaption>
+				</figure>
+			</div>
+
+			<!-- ── Chapter 5: The Architecture of Intention ──────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">12</span>
+				<div class="chapter-header">
+					<span class="chapter-label">Chapter Five</span>
+					<h2 class="chapter-title">The Architecture of Intention</h2>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Peter Gollwitzer and Paschal Sheeran&rsquo;s 2006 meta-analysis
+						of 94 studies with over 8,000 participants found that
+						<em>implementation intentions</em> &mdash; specific if-then plans
+						&mdash; have an effect size of d&thinsp;=&thinsp;0.65. Difficult
+						goals are completed three times more often when paired with
+						if-then plans.
+					</p>
+					<p>
+						The format is simple: &ldquo;If [situation], then I will
+						[action].&rdquo; This automates behavior at the point of decision,
+						bypassing willpower entirely. The plan pre-loads the response,
+						so the environment triggers the action.
+					</p>
+				</div>
+
+				<div class="stat-callout observe-fade">
+					<span class="stat-number">78%</span>
+					<p class="stat-description">
+						Goal achievement rate when using financial stakes plus a referee,
+						compared to 35% without commitment devices.
+					</p>
+					<cite class="stat-cite">stickK / Yale University research</cite>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Katherine Milkman&rsquo;s 2014 research on <em>temptation
+						bundling</em> showed 51% more gym visits when participants
+						could only access enjoyable audiobooks while exercising &mdash;
+						linking &ldquo;want&rdquo; to &ldquo;should.&rdquo;
+					</p>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">13</span>
+
+				<div class="book-text">
+					<p>
+						DeskTime&rsquo;s analysis of their top 10% most productive users
+						revealed a consistent pattern: 52 minutes of focused work followed
+						by 17 minutes of rest. The key was not the exact ratio but the
+						principle &mdash; sprints of intense purpose paired with breaks
+						of complete disengagement.
+					</p>
+					<p>
+						You are three times more likely to achieve a goal with commitment
+						devices &mdash; mechanisms that make the cost of inaction concrete
+						and immediate. The architecture of intention is not about
+						willpower. It is about designing systems that make the right
+						action the easiest one.
+					</p>
+				</div>
+
+				<!-- Illustration: Clock / geometric hourglass -->
+				<figure class="book-illustration" aria-label="Geometric clock illustration">
+					<svg class="focus-illustration" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<!-- Clock circle -->
+						<circle cx="90" cy="90" r="65" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"></circle>
+						<!-- Hour marks -->
+						<line x1="90" y1="30" x2="90" y2="38" stroke="currentColor" stroke-width="1.5" opacity="0.4"></line>
+						<line x1="150" y1="90" x2="142" y2="90" stroke="currentColor" stroke-width="1.5" opacity="0.4"></line>
+						<line x1="90" y1="150" x2="90" y2="142" stroke="currentColor" stroke-width="1.5" opacity="0.4"></line>
+						<line x1="30" y1="90" x2="38" y2="90" stroke="currentColor" stroke-width="1.5" opacity="0.4"></line>
+						<!-- Hour hand -->
+						<line x1="90" y1="90" x2="90" y2="52" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.55"></line>
+						<!-- Minute hand -->
+						<line x1="90" y1="90" x2="126" y2="72" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.45"></line>
+						<!-- Center dot -->
+						<circle cx="90" cy="90" r="3" fill="currentColor" opacity="0.5"></circle>
+					</svg>
+					<figcaption class="illustration-caption">
+						Structured time
+					</figcaption>
+				</figure>
+			</div>
+
+			<!-- ── Chapter 6: Environment & Play ─────────────────────── -->
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">14</span>
+				<div class="chapter-header">
+					<span class="chapter-label">Chapter Six</span>
+					<h2 class="chapter-title">Environment &amp; Play</h2>
+				</div>
+
+				<div class="book-text">
+					<p>
+						Mehta, Zhu, and Cheema (2012) found that ambient noise at 70
+						decibels &mdash; roughly the level of a coffee shop &mdash;
+						enhances creative performance by promoting abstract thinking.
+						At 85 decibels, performance drops sharply. There is a sweet
+						spot of productive distraction.
+					</p>
+					<p>
+						A Cornell study by Hedge (2017) found that workers with adequate
+						natural light reported an 84% drop in eyestrain symptoms and a
+						10% decrease in drowsiness. Our cognitive performance is
+						profoundly shaped by the physical environment we inhabit.
+					</p>
+				</div>
+			</div>
+
+			<div class="book-page">
+				<span class="page-number" aria-hidden="true">15</span>
+
+				<div class="book-text">
+					<p>
+						Stuart Brown&rsquo;s research on play began in an unlikely place:
+						the 1966 University of Texas tower shooting. Investigating the
+						perpetrator&rsquo;s background, Brown found severe play deprivation.
+						He went on to study over 6,000 life histories and found that play
+						deprivation is consistently linked to antisocial behavior,
+						depression, and rigidity.
+					</p>
+					<p>
+						Jaak Panksepp&rsquo;s neuroscience research identified PLAY as
+						one of seven hardwired emotional systems in the mammalian brain.
+						His work showed that rats literally laugh during play &mdash;
+						ultrasonic chirps at 50 kHz. Play impulses originate in the brain
+						stem, making them among the most ancient and fundamental drives
+						we possess.
+					</p>
+					<p>
+						Children who play are faster learners, more creative, and more
+						socially competent. Adults who play are more resilient, more
+						innovative, and more collaborative. Play is not the opposite
+						of work &mdash; it is work&rsquo;s essential companion.
+					</p>
+				</div>
+
+				<!-- Illustration: Ripple wave returning to cover motif -->
+				<figure class="book-illustration" aria-label="Concentric ripple returning to stillness">
+					<svg class="focus-illustration" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<circle cx="100" cy="60" r="8" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.4"></circle>
+						<circle cx="100" cy="60" r="22" fill="none" stroke="currentColor" stroke-width="0.9" opacity="0.28"></circle>
+						<circle cx="100" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.18"></circle>
+						<circle cx="100" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.1"></circle>
+						<circle cx="100" cy="60" r="2.5" fill="currentColor" opacity="0.5"></circle>
+					</svg>
+					<figcaption class="illustration-caption">
+						Still water
+					</figcaption>
+				</figure>
+			</div>
+		</div><!-- /book-body -->
+
+		<!-- ============================================================
+		     BACK COVER
+		     ============================================================ -->
+		<section class="back-cover" aria-label="Back cover">
+			<div class="back-ripple" aria-hidden="true">
+				<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<circle class="back-ripple-ring" cx="50" cy="50" r="12" fill="none" stroke="currentColor" stroke-width="1" opacity="0.25"></circle>
+					<circle class="back-ripple-ring" cx="50" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.15"></circle>
+					<circle cx="50" cy="50" r="2" fill="currentColor" opacity="0.35"></circle>
+				</svg>
+			</div>
+
+			<div class="back-cover-content">
+				<p class="back-cover-blurb">
+					Focus is not a trait. It is a practice.<br>
+					And it works better together.
+				</p>
+
+				<div class="back-cover-rule" aria-hidden="true"></div>
+
+				<div class="sources-section">
+					<span class="sources-label">Sources</span>
+					<ul class="sources-list">
+						<li>Mark, G. (2023). <em>Attention Span</em>. Hanover Square Press.</li>
+						<li>Mark, G., Gudith, D. &amp; Klocke, U. (2008). The Cost of Interrupted Work. <em>CHI &rsquo;08</em>.</li>
+						<li>Newport, C. (2016). <em>Deep Work</em>. Grand Central Publishing.</li>
+						<li>Csikszentmihalyi, M. (1990). <em>Flow</em>. Harper &amp; Row.</li>
+						<li>Kotler, S. (2014). <em>The Rise of Superman</em>. New Harvest.</li>
+						<li>Dietrich, A. (2004). Neurocognitive mechanisms underlying the experience of flow. <em>Consciousness and Cognition</em>, 13(4).</li>
+						<li>Limb, C. &amp; Braun, A. (2008). Neural substrates of spontaneous musical performance. <em>PLoS ONE</em>, 3(2).</li>
+						<li>Zajonc, R. (1965). Social facilitation. <em>Science</em>, 149(3681).</li>
+						<li>Landsberger, H.A. (1958). <em>Hawthorne Revisited</em>. Cornell University.</li>
+						<li>Rizzolatti, G. &amp; Craighero, L. (2004). The mirror-neuron system. <em>Annual Review of Neuroscience</em>, 27.</li>
+						<li>FLOWN (2023). Body Doubling &amp; ADHD Study. 117 participants, 12 weeks.</li>
+						<li>Gollwitzer, P. &amp; Sheeran, P. (2006). Implementation Intentions. <em>Advances in Experimental Social Psychology</em>, 38.</li>
+						<li>Milkman, K. et al. (2014). Holding the Hunger Games Hostage at the Gym. <em>Management Science</em>, 60(2).</li>
+						<li>Ericsson, K.A. et al. (1993). The Role of Deliberate Practice. <em>Psychological Review</em>, 100(3).</li>
+						<li>Mehta, R., Zhu, R. &amp; Cheema, A. (2012). Is Noise Always Bad? <em>Journal of Consumer Research</em>, 39(4).</li>
+						<li>Brown, S. (2009). <em>Play</em>. Avery.</li>
+						<li>Panksepp, J. (2004). <em>Affective Neuroscience</em>. Oxford University Press.</li>
+					</ul>
+				</div>
+
+				<p class="back-cover-maker">Built with care by The Void</p>
+			</div>
+		</section>
+	</div><!-- /focus-flow-page -->
+</Layout>
+
+<style>
+	/* =====================================================================
+	   CSS VARIABLES — deep indigo + warm amber palette
+	   ===================================================================== */
+	:root {
+		--focus-cream: #f5f1ea;
+		--focus-cream-deep: #ece7dd;
+		--focus-indigo: #1e1b4b;
+		--focus-indigo-mid: rgba(30, 27, 75, 0.55);
+		--focus-indigo-faint: rgba(30, 27, 75, 0.15);
+		--focus-amber: #d4a44c;
+		--focus-amber-light: rgba(212, 164, 76, 0.15);
+	}
+
+	:global(.dark) {
+		--focus-cream: #141220;
+		--focus-cream-deep: #0f0e1a;
+		--focus-indigo: #e2dfd6;
+		--focus-indigo-mid: rgba(226, 223, 214, 0.55);
+		--focus-indigo-faint: rgba(226, 223, 214, 0.12);
+		--focus-amber: #e8b84d;
+		--focus-amber-light: rgba(232, 184, 77, 0.12);
+	}
+
+	/* =====================================================================
+	   FULL-BLEED WRAPPER — cancels Layout padding
+	   ===================================================================== */
+	.focus-flow-page {
+		margin-top: -2rem;
+		margin-bottom: -2rem;
+		margin-left: -1.5rem;
+		margin-right: -1.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.focus-flow-page {
+			margin-left: -3rem;
+			margin-right: -3rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.focus-flow-page {
+			margin-left: -4rem;
+			margin-right: -4rem;
+		}
+	}
+
+	/* =====================================================================
+	   COVER
+	   ===================================================================== */
+	.book-cover {
+		background-color: var(--focus-cream);
+		color: var(--focus-indigo);
+		min-height: 100svh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 5rem 2rem 4rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	/* Back link */
+	.back-link {
+		position: absolute;
+		top: 1.5rem;
+		left: 1.75rem;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.8rem;
+		letter-spacing: 0.08em;
+		color: var(--focus-indigo-mid);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.back-link:hover {
+		color: var(--focus-indigo);
+	}
+
+	/* Ripple hero SVG */
+	.ripple-wrapper {
+		margin-bottom: 3rem;
+	}
+
+	.ripple-hero {
+		width: min(280px, 70vw);
+		height: min(280px, 70vw);
+		display: block;
+		color: var(--focus-amber);
+	}
+
+	/* Ripple ring staggered expansion animation */
+	.ripple-ring {
+		transform-origin: center;
+		animation: ripple-expand 4s ease-out forwards;
+		opacity: 0;
+	}
+	.ripple-1 { animation-delay: 0s; }
+	.ripple-2 { animation-delay: 0.4s; }
+	.ripple-3 { animation-delay: 0.8s; }
+	.ripple-4 { animation-delay: 1.2s; }
+	.ripple-5 { animation-delay: 1.6s; }
+
+	@keyframes ripple-expand {
+		0% {
+			transform: scale(0.6);
+			opacity: 0;
+		}
+		30% {
+			opacity: 0.6;
+		}
+		100% {
+			transform: scale(1);
+			opacity: var(--ring-opacity, 0.3);
+		}
+	}
+
+	.ripple-1 { --ring-opacity: 0.6; }
+	.ripple-2 { --ring-opacity: 0.45; }
+	.ripple-3 { --ring-opacity: 0.32; }
+	.ripple-4 { --ring-opacity: 0.2; }
+	.ripple-5 { --ring-opacity: 0.1; }
+
+	@media (prefers-reduced-motion: reduce) {
+		.ripple-ring {
+			animation: none;
+			opacity: var(--ring-opacity, 0.3);
+			transform: scale(1);
+		}
+	}
+
+	/* Cover typography */
+	.cover-title {
+		text-align: center;
+	}
+
+	.cover-label {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.65rem;
+		letter-spacing: 0.45em;
+		text-transform: uppercase;
+		color: var(--focus-amber);
+		margin-bottom: 1rem;
+	}
+
+	.cover-main-title {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(2.5rem, 9vw, 5.5rem);
+		font-weight: 400;
+		color: var(--focus-indigo);
+		margin: 0 0 1.25rem;
+		line-height: 1;
+	}
+
+	.cover-divider {
+		width: 3.5rem;
+		height: 1px;
+		background-color: var(--focus-amber);
+		margin: 0 auto 1.25rem;
+	}
+
+	.cover-subtitle {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: clamp(1rem, 3vw, 1.5rem);
+		font-style: italic;
+		color: var(--focus-indigo-mid);
+		margin: 0 0 1.5rem;
+	}
+
+	.cover-attribution {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.68rem;
+		letter-spacing: 0.15em;
+		color: var(--focus-indigo-mid);
+		margin: 0;
+	}
+
+	/* =====================================================================
+	   BOOK BODY
+	   ===================================================================== */
+	.book-body {
+		background-color: var(--focus-cream);
+		color: var(--focus-indigo);
+	}
+
+	.book-page {
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 5rem 2.5rem 4.5rem;
+		border-bottom: 1px solid var(--focus-indigo-faint);
+		position: relative;
+	}
+
+	.page-number {
+		position: absolute;
+		top: 1.75rem;
+		right: 2.5rem;
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.7rem;
+		letter-spacing: 0.2em;
+		color: var(--focus-indigo-mid);
+		user-select: none;
+	}
+
+	/* =====================================================================
+	   TITLE PAGE
+	   ===================================================================== */
+	.title-page {
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.title-page-content {
+		text-align: center;
+	}
+
+	.title-label {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.6rem;
+		letter-spacing: 0.45em;
+		text-transform: uppercase;
+		color: var(--focus-amber);
+		margin-bottom: 1.5rem;
+	}
+
+	.title-main {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(2rem, 6vw, 3.75rem);
+		font-weight: 400;
+		color: var(--focus-indigo);
+		margin: 0 0 0.5rem;
+		line-height: 1;
+	}
+
+	.title-sub {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: clamp(1rem, 2.5vw, 1.35rem);
+		font-style: italic;
+		color: var(--focus-indigo-mid);
+		margin: 0 0 2rem;
+	}
+
+	.title-rule {
+		width: 2.5rem;
+		height: 1px;
+		background-color: var(--focus-amber);
+		margin: 0 auto 2rem;
+	}
+
+	.title-tagline {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.88rem;
+		line-height: 1.85;
+		color: var(--focus-indigo-mid);
+		max-width: 420px;
+		margin: 0 auto;
+	}
+
+	/* =====================================================================
+	   CHAPTER HEADERS
+	   ===================================================================== */
+	.chapter-header {
+		margin-bottom: 2.75rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--focus-indigo-faint);
+	}
+
+	.chapter-label {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.62rem;
+		letter-spacing: 0.45em;
+		text-transform: uppercase;
+		color: var(--focus-amber);
+		margin-bottom: 0.6rem;
+	}
+
+	.chapter-title {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.8rem, 4vw, 2.6rem);
+		font-weight: 400;
+		font-style: italic;
+		color: var(--focus-indigo);
+		margin: 0;
+		line-height: 1.2;
+	}
+
+	/* =====================================================================
+	   BOOK TEXT
+	   ===================================================================== */
+	.book-text {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 1rem;
+		line-height: 1.9;
+		color: var(--focus-indigo);
+	}
+
+	.book-text p {
+		margin-bottom: 1.3rem;
+	}
+
+	.book-text p:last-child {
+		margin-bottom: 0;
+	}
+
+	.book-text em {
+		font-style: italic;
+	}
+
+	/* =====================================================================
+	   STAT CALLOUTS
+	   ===================================================================== */
+	.stat-callout {
+		margin: 2rem 0;
+		padding: 1.5rem 1.5rem 1.25rem;
+		border-left: 3px solid var(--focus-amber);
+		background-color: var(--focus-amber-light);
+	}
+
+	.stat-number {
+		display: block;
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
+		font-weight: 400;
+		color: var(--focus-amber);
+		margin-bottom: 0.5rem;
+		line-height: 1;
+	}
+
+	.stat-description {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.92rem;
+		line-height: 1.65;
+		color: var(--focus-indigo);
+		margin: 0 0 0.6rem;
+	}
+
+	.stat-cite {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.68rem;
+		letter-spacing: 0.04em;
+		color: var(--focus-indigo-mid);
+		font-style: normal;
+	}
+
+	.cite-note {
+		display: block;
+		margin-top: 0.2rem;
+		font-style: italic;
+		opacity: 0.7;
+	}
+
+	/* =====================================================================
+	   PULL QUOTES
+	   ===================================================================== */
+	.pull-quote {
+		margin: 2.5rem 0;
+		padding: 1.5rem 1.75rem;
+		border-left: 2px solid var(--focus-amber);
+	}
+
+	.pull-quote p {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+		font-style: italic;
+		line-height: 1.65;
+		color: var(--focus-indigo);
+		margin: 0 0 0.75rem;
+	}
+
+	.pull-quote footer {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.72rem;
+		letter-spacing: 0.04em;
+		color: var(--focus-indigo-mid);
+	}
+
+	/* =====================================================================
+	   LISTS
+	   ===================================================================== */
+	.focus-list,
+	.flow-conditions {
+		margin: 1.25rem 0 2rem;
+		padding: 0;
+		list-style: none;
+		counter-reset: item;
+	}
+
+	.focus-list li,
+	.flow-conditions li {
+		counter-increment: item;
+		padding: 0.5rem 0 0.5rem 1.25rem;
+		border-left: 2px solid var(--focus-indigo-faint);
+		margin-bottom: 0.5rem;
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.95rem;
+		line-height: 1.65;
+		color: var(--focus-indigo);
+		position: relative;
+	}
+
+	.flow-conditions li::before {
+		content: counter(item);
+		position: absolute;
+		left: -1.75rem;
+		top: 0.5rem;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.58rem;
+		font-weight: 600;
+		color: var(--focus-amber);
+		width: 1.25rem;
+		text-align: right;
+	}
+
+	.focus-list li strong,
+	.flow-conditions li strong {
+		font-weight: 600;
+	}
+
+	/* =====================================================================
+	   NEUROCHEMISTRY GRID
+	   ===================================================================== */
+	.neurochemistry-grid {
+		margin: 1.5rem 0 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+	}
+
+	.chem-item {
+		padding: 0.75rem 1rem;
+		border-left: 2px solid var(--focus-amber);
+		background-color: var(--focus-amber-light);
+	}
+
+	.chem-name {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--focus-indigo);
+		margin-bottom: 0.15rem;
+	}
+
+	.chem-role {
+		display: block;
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.85rem;
+		font-style: italic;
+		color: var(--focus-indigo-mid);
+	}
+
+	/* =====================================================================
+	   STUDY CALLOUT (FLOWN study)
+	   ===================================================================== */
+	.study-callout {
+		margin: 2rem 0;
+		padding: 1.5rem;
+		border: 1px solid var(--focus-amber);
+		background-color: var(--focus-amber-light);
+	}
+
+	.study-label {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
+		color: var(--focus-amber);
+		margin-bottom: 0.35rem;
+	}
+
+	.study-detail {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.82rem;
+		color: var(--focus-indigo-mid);
+		margin: 0 0 1rem;
+	}
+
+	.study-results {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.study-results li {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.92rem;
+		line-height: 1.55;
+		color: var(--focus-indigo);
+		padding: 0.3rem 0;
+		border-bottom: 1px solid var(--focus-indigo-faint);
+	}
+
+	.study-results li:last-child {
+		border-bottom: none;
+	}
+
+	.study-results li strong {
+		color: var(--focus-amber);
+		font-weight: 600;
+	}
+
+	/* =====================================================================
+	   SUBSECTION HEADERS
+	   ===================================================================== */
+	.subsection-header {
+		margin: 2.5rem 0 1.5rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid var(--focus-indigo-faint);
+	}
+
+	.subsection-title {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.25rem, 3vw, 1.65rem);
+		font-weight: 400;
+		font-style: italic;
+		color: var(--focus-indigo);
+		margin: 0;
+		line-height: 1.3;
+	}
+
+	/* =====================================================================
+	   FLOWN PRINCIPLES
+	   ===================================================================== */
+	.flown-principles {
+		margin: 1.25rem 0 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.principle-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 0.75rem 1rem;
+		border-left: 2px solid var(--focus-amber);
+		background-color: var(--focus-amber-light);
+	}
+
+	.principle-number {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.62rem;
+		font-weight: 700;
+		color: var(--focus-amber);
+		flex-shrink: 0;
+		margin-top: 0.15rem;
+	}
+
+	.principle-name {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--focus-indigo);
+		margin-bottom: 0.1rem;
+	}
+
+	.principle-desc {
+		display: block;
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.82rem;
+		line-height: 1.55;
+		color: var(--focus-indigo-mid);
+	}
+
+	/* =====================================================================
+	   ILLUSTRATIONS
+	   ===================================================================== */
+	.book-illustration {
+		text-align: center;
+		margin: 3.5rem 0;
+		padding: 2rem 0;
+	}
+
+	.focus-illustration {
+		width: min(280px, 92%);
+		height: auto;
+		color: var(--focus-indigo);
+		display: block;
+		margin: 0 auto 1rem;
+	}
+
+	.illustration-caption {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.68rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--focus-indigo-mid);
+		margin: 0;
+	}
+
+	/* =====================================================================
+	   BACK COVER
+	   ===================================================================== */
+	.back-cover {
+		background-color: var(--focus-cream-deep);
+		color: var(--focus-indigo);
+		min-height: 60vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 5rem 2rem;
+		text-align: center;
+		border-top: 1px solid var(--focus-indigo-faint);
+	}
+
+	.back-ripple {
+		margin-bottom: 2rem;
+		color: var(--focus-amber);
+	}
+
+	.back-ripple svg {
+		width: 72px;
+		height: 72px;
+	}
+
+	.back-ripple-ring {
+		animation: back-ripple-breathe 9s 1s ease-in-out infinite;
+	}
+
+	@keyframes back-ripple-breathe {
+		0%, 100% {
+			opacity: 0.25;
+			transform: scale(1);
+		}
+		40% {
+			opacity: 0.1;
+			transform: scale(0.95);
+		}
+		57% {
+			opacity: 0.1;
+			transform: scale(0.95);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.back-ripple-ring {
+			animation: none;
+		}
+	}
+
+	.back-cover-content {
+		max-width: 520px;
+	}
+
+	.back-cover-blurb {
+		font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+		font-size: clamp(1.25rem, 3vw, 1.75rem);
+		font-style: italic;
+		font-weight: 400;
+		color: var(--focus-indigo);
+		margin: 0 0 2rem;
+		line-height: 1.55;
+	}
+
+	.back-cover-rule {
+		width: 2.5rem;
+		height: 1px;
+		background-color: var(--focus-amber);
+		margin: 0 auto 2rem;
+	}
+
+	/* Sources */
+	.sources-section {
+		text-align: left;
+		margin-bottom: 2.5rem;
+	}
+
+	.sources-label {
+		display: block;
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.58rem;
+		letter-spacing: 0.4em;
+		text-transform: uppercase;
+		color: var(--focus-amber);
+		margin-bottom: 1rem;
+	}
+
+	.sources-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.sources-list li {
+		font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
+		font-size: 0.72rem;
+		line-height: 1.6;
+		color: var(--focus-indigo-mid);
+		margin-bottom: 0.4rem;
+		padding-left: 0.75rem;
+		border-left: 1px solid var(--focus-indigo-faint);
+	}
+
+	.sources-list li em {
+		font-style: italic;
+	}
+
+	.back-cover-maker {
+		font-family: var(--font-sans), 'Inter', system-ui, sans-serif;
+		font-size: 0.62rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--focus-indigo-mid);
+		margin: 0;
+	}
+
+	/* =====================================================================
+	   SCROLL FADE-IN ANIMATION
+	   ===================================================================== */
+	.observe-fade {
+		opacity: 0;
+		transform: translateY(1.25rem);
+		transition: opacity 0.6s ease, transform 0.6s ease;
+	}
+
+	.observe-fade.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.observe-fade {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	// ── Scroll fade-in for stat callouts and pull quotes ──────────────
+	if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const targets = document.querySelectorAll<HTMLElement>('.observe-fade');
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				}
+			},
+			{ threshold: 0.15 },
+		);
+
+		for (const el of targets) {
+			observer.observe(el);
+		}
+	}
+</script>
