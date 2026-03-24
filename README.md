@@ -1,48 +1,77 @@
-# Astro Starter Kit: Basics
+# The Void
 
-```sh
-npm create astro@latest -- --template basics
+I'm [Miguel](https://github.com/kiily), a polyglot biologist turned software engineer and CTO at [FLOWN](https://flown.com).
+
+This is The Void, my personal digital garden and portfolio.
+
+Built with Astro 5, Tailwind CSS, and MDX. Deployed on Vercel.
+
+## What's here
+
+- **Garden** — Essays, meditations, and reflections in English, Portuguese, Spanish, French, and Japanese. Topics range from Buddhist philosophy and neuroscience to short fiction and family.
+- **Projects** — A portfolio of software projects including FLOWN, a Heart Sutra digital bunkobon, and others.
+- **Special pages** — Handcrafted standalone experiences: the Heart Sutra (`/heart-sutra`), a Focus & Flow bunkobon (`/focus-and-flow`), and a family tree visualisation.
+
+## Stack
+
+| Concern | Technology |
+|---|---|
+| Framework | [Astro 5](https://astro.build) |
+| Styling | [Tailwind CSS 3](https://tailwindcss.com) |
+| Content | MDX via `@astrojs/mdx` |
+| Search | [Fuse.js](https://fusejs.io) |
+| Data viz | [D3](https://d3js.org) + [family-chart](https://github.com/nicktrandasir/family-chart) |
+| Fonts | Inter · Source Serif 4 · Cormorant Garamond |
+| Deployment | [Vercel](https://vercel.com) |
+
+## Commands
+
+```bash
+npm run dev       # Start dev server at localhost:4321
+npm run build     # Production build
+npm run preview   # Preview production build
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+> Uses [Bun](https://bun.sh) as the package manager. Run `bun install` if you prefer it over `npm install`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Project structure
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── pages/          # File-based routing
+├── content/
+│   ├── garden/     # MDX blog posts (~50 posts)
+│   └── projects/   # MDX project entries (6 projects)
+├── components/     # 22 Astro components
+├── layouts/        # Layout.astro, PostLayout.astro, ProjectLayout.astro
+├── lib/
+│   ├── data-service.ts   # Centralised cached data fetching (use this, not getCollection)
+│   └── technologies.ts   # Tech proficiency metadata
+└── features/
+    └── family-tree/      # Family tree data + types
+public/
+├── void.svg        # Site icon
+└── enso.svg        # Zen enso circle
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Content collections
 
-## 🧞 Commands
+Two collections defined with Zod schemas in `src/content/config.ts`:
 
-All commands are run from the root of the project, from a terminal:
+- **garden** — `title`, `description`, `publishDate`, `category`, `tags[]`, `image`, `connections[]`
+- **projects** — `title`, `description`, `status`, `techStack`, `features`, `challenges`, `learnings`, `gallery`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Always use `DataService` methods rather than calling `getCollection()` directly — it handles in-memory caching.
 
-## 👀 Want to learn more?
+## Theme
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Dark/light mode via CSS custom properties and Tailwind's `dark:` variant. Theme persisted in `localStorage`. Custom colour palette under the `garden` namespace in `tailwind.config.mjs` — always prefer these semantic tokens over raw Tailwind colours.
+
+Three font variables: `--font-inter`, `--font-source-serif-4`, `--font-cormorant-garamond`.
+
+## Notable conventions
+
+- No `@apply` — use Tailwind utilities directly or scoped `<style>` blocks
+- Images always use Astro's `<Image>` component
+- Client hydration is minimal: only `Search`, `TextCycler`, and `ThemeToggle` use `client:*` directives
+- Large self-contained pages (`heart-sutra.astro`, `focus-and-flow.astro`, `b-30.astro`) use inline styles — treat carefully

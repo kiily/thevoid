@@ -12,6 +12,7 @@ export interface Props {
 	type?: 'website' | 'article';
 	publishedTime?: string;
 	author?: string;
+	noindex?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
 	type = 'website',
 	publishedTime,
 	author = 'Miguel Marin Vermelho',
+	noindex = false,
 } = Astro.props;
 
 const siteUrl = 'https://thevoid-five.vercel.app';
@@ -44,6 +46,7 @@ const ogImageUrl = image.startsWith('http')
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalUrl} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
 
 		<!-- Open Graph -->
 		<meta property="og:title" content={title} />
