@@ -1,6 +1,8 @@
 # The Void
 
-A personal digital garden and portfolio by **Miguel Marin Vermelho** — a polyglot biologist turned software engineer and CTO at [FLOWN](https://flown.com).
+I'm [Miguel](https://github.com/kiily), a polyglot biologist turned software engineer and CTO at [FLOWN](https://flown.com).
+
+This is The Void, my personal digital garden and portfolio.
 
 Built with Astro 5, Tailwind CSS, and MDX. Deployed on Vercel.
 

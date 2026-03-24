@@ -2,7 +2,7 @@
 
 > A personal digital garden and portfolio by Miguel Marin Vermelho — polyglot biologist turned software engineer, CTO at FLOWN.
 
-Live site: https://thevoid-five.vercel.app/
+Live site: https://thevoid.garden/
 
 ## About
 
