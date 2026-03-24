@@ -1,0 +1,50 @@
+# The Void
+
+> A personal digital garden and portfolio by Miguel Marin Vermelho — polyglot biologist turned software engineer, CTO at FLOWN.
+
+Live site: https://thevoid-five.vercel.app/
+
+## About
+
+The Void is a contemplative corner of the internet combining philosophical essays, meditation reflections, technical projects, and personal stories. Content spans multiple languages (English, Portuguese, Spanish, French, Japanese) and themes including Buddhist philosophy, neuroscience, deep work, and human connection.
+
+## Garden (Essays & Reflections)
+
+The `/garden` section contains ~50 MDX posts organised by category and tag. Topics include:
+
+- Buddhist philosophy: emptiness, dependent origination, Nāgārjuna, the Heart Sutra
+- Meditation: practice without closing your eyes, corporate mindfulness, presence
+- Neuroscience: hemispatial neglect, perception
+- Personal: multilingual poems and stories for family (Portuguese, Spanish, French)
+- Nature: reflections on trees, seashells, islands, mountains
+- Work: deep focus, flow states, Yamabushi monks
+
+Posts have `title`, `description`, `publishDate`, `category`, `tags[]`, and optional `connections[]` (related links).
+
+## Projects
+
+- **FLOWN** — Science-backed deep work platform. Author is CTO. Virtual coworking and expert-led focus sessions.
+- **Heart Sutra Bunkobon** — Interactive digital pocket guide to the Buddhist Heart Sutra. Japanese + English with furigana/romaji toggles. Custom sumi-e SVG illustrations and animated Enso circle.
+- **Pokemon Recall** — Memory training game for Pokemon names, types, and attributes.
+- **Personal website v1** — First iteration built with Astro (archived).
+- **Omniago** — Crowdsourced debate platform for combating climate misinformation (archived).
+- **Readium** — Reading tracking app (archived).
+
+## Special Pages
+
+- `/heart-sutra` — Standalone bunkobon experience with animated Enso circle, washi-paper aesthetic, bilingual Heart Sutra text, ink-splash particle effects
+- `/focus-and-flow` — Bunkobon on the science of deep work and flow states, with concentric ripple visualisation
+
+## Tech Stack
+
+- Astro 5 (SSG + SSR for search API)
+- Tailwind CSS 3 with custom `garden` colour palette
+- MDX content collections with Zod schemas
+- Fuse.js full-text search
+- D3 + family-chart for data visualisation
+- Vercel deployment with Analytics + Speed Insights
+- Fonts: Inter (UI), Source Serif 4 (body), Cormorant Garamond (display)
+
+## Author
+
+Miguel Marin Vermelho — polyglot (English, Portuguese, Spanish, French, Luxembourgish, Japanese), biologist by training, software engineer by profession. Expert in TypeScript, React, Next.js, Node.js. Currently CTO at FLOWN.
