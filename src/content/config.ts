@@ -10,6 +10,7 @@ const garden = defineCollection({
 			updateDate: z.date().optional(),
 			category: z.string(),
 			tags: z.array(z.string()).optional(),
+			lang: z.enum(['en', 'pt', 'es', 'fr', 'ja']).optional(),
 			image: image().optional(),
 			connections: z
 				.array(

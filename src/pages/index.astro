@@ -9,21 +9,39 @@ import Writing from '../components/Writing.astro';
 import Languages from '../components/Languages.astro';
 import Contact from '../components/Contact.astro';
 import Divider from '../components/Divider.astro';
-import { getCollection } from 'astro:content';
+import { DataService } from '../lib/data-service';
 
-const posts = await getCollection('garden');
+const posts = await DataService.getGardenPosts();
 const recentPosts = posts
 	.sort(
 		(a: any, b: any) =>
 			b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 	)
 	.slice(0, 3);
+
+const siteUrl = 'https://thevoid.garden';
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	'@id': `${siteUrl}/#person`,
+	name: 'Miguel Marin Vermelho',
+	url: siteUrl,
+	jobTitle: 'CTO',
+	worksFor: { '@type': 'Organization', name: 'FLOWN', url: 'https://flown.com' },
+	description: 'Polyglot biologist turned software engineer. Personal digital garden exploring Buddhism, meditation, neuroscience, and software.',
+	knowsAbout: ['TypeScript', 'React', 'Next.js', 'Buddhist philosophy', 'Meditation', 'Deep work', 'Neuroscience'],
+	knowsLanguage: ['English', 'Portuguese', 'Spanish', 'French', 'Luxembourgish', 'Japanese'],
+	sameAs: [
+		'https://github.com/kiily',
+	],
+};
 ---
 
 <Layout
 	title="The Void | Miguel Marin Vermelho"
 	description="A digital garden by Miguel Marin Vermelho. Polyglot biologist turned software engineer with a passion for building products and making the world a better place. Currently CTO at FLOWN"
 >
+	<script type="application/ld+json" set:html={JSON.stringify(personSchema)} slot="head" />
 	<Hero />
 
 	<Divider />

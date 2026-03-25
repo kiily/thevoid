@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Colophon | The Void"
+  description="How The Void is built, why it exists, and the design philosophy behind it."
+>
+  <article class="max-w-2xl mx-auto py-20 px-6">
+    <header class="mb-12">
+      <p class="text-garden-accent dark:text-garden-dark-accent font-ui text-sm font-medium tracking-widest uppercase mb-4">Colophon</p>
+      <h1 class="text-garden-primary dark:text-garden-dark-primary mb-4">About this site</h1>
+      <p class="text-muted font-body text-lg">How it's built, why it exists, and what it's trying to be.</p>
+    </header>
+
+    <div class="prose prose-lg dark:prose-dark max-w-none space-y-12">
+
+      <section>
+        <h2>Why</h2>
+        <p>
+          The name comes from Buddhist philosophy — śūnyatā, emptiness, the void. Not nihilistic absence but the open, unobstructed quality of mind that makes everything possible. A garden felt like the right metaphor: something tended over time, connected rather than hierarchical, growing in ways that aren't always planned.
+        </p>
+        <p>
+          I write here to think. Not to perform expertise or build an audience, but because writing makes ideas legible to me in ways that thinking alone doesn't. If something here is useful to you, that's a bonus.
+        </p>
+      </section>
+
+      <section>
+        <h2>How it's built</h2>
+        <ul>
+          <li><strong>Framework:</strong> <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro 5</a> — static site generation with one dynamic route for search.</li>
+          <li><strong>Content:</strong> MDX files with Zod-validated frontmatter, organised into <code>garden</code> and <code>projects</code> collections.</li>
+          <li><strong>Styling:</strong> Tailwind CSS 3 with a custom <code>garden</code> colour palette. Dark/light mode via CSS custom properties.</li>
+          <li><strong>Search:</strong> <a href="https://fusejs.io" target="_blank" rel="noopener noreferrer">Fuse.js</a> fuzzy search running server-side via a Vercel function.</li>
+          <li><strong>Fonts:</strong> Inter (UI), Source Serif 4 (body), Cormorant Garamond (display) — loaded via Astro's experimental font API.</li>
+          <li><strong>Deployment:</strong> <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a>, with Analytics and Speed Insights.</li>
+          <li><strong>Package manager:</strong> Bun.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Design</h2>
+        <p>
+          The palette is muted and deliberate: warm off-white (<code>#f7f7f2</code>) in light mode, deep charcoal (<code>#1a1a1a</code>) in dark mode, with forest green (<code>#006400</code> / <code>#90EE90</code>) as the single accent. The goal was something that recedes — that lets the writing be what you notice, not the interface.
+        </p>
+        <p>
+          The Enso circle (the hand-drawn SVG that appears as the favicon and in the Heart Sutra page) is drawn from a single SVG path with an ink-displacement filter. It's intentionally imperfect.
+        </p>
+        <p>
+          Typography leans on the serif stack for body text and the display typeface (Cormorant Garamond) for headings, which gives it a slightly literary feel that suits a writing-first garden.
+        </p>
+      </section>
+
+      <section>
+        <h2>Special pages</h2>
+        <p>
+          Some pages are self-contained experiments that live outside the normal garden/project structure:
+        </p>
+        <ul>
+          <li><a href="/heart-sutra"><strong>Heart Sutra</strong></a> — An interactive bilingual bunkobon (pocket book) of the Buddhist Heart Sutra. Japanese with furigana and romaji toggles, animated Enso circle, hand-drawn sumi-e illustrations.</li>
+          <li><a href="/focus-and-flow"><strong>Focus &amp; Flow</strong></a> — A bunkobon on the science of deep work and flow states, with a concentric ripple visualisation drawing on FLOWN's research.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Source</h2>
+        <p>
+          The code is on <a href="https://github.com/kiily" target="_blank" rel="noopener noreferrer">GitHub</a>. Feel free to look around. The content is mine; the structure is yours to learn from.
+        </p>
+      </section>
+
+    </div>
+  </article>
+</Layout>

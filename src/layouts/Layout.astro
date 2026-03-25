@@ -11,8 +11,11 @@ export interface Props {
 	image?: string;
 	type?: 'website' | 'article';
 	publishedTime?: string;
+	modifiedTime?: string;
 	author?: string;
 	noindex?: boolean;
+	lang?: string;
+	tags?: string[];
 }
 
 const {
@@ -21,19 +24,73 @@ const {
 	image = '/og-image.jpg',
 	type = 'website',
 	publishedTime,
+	modifiedTime,
 	author = 'Miguel Marin Vermelho',
 	noindex = false,
+	lang = 'en',
+	tags,
 } = Astro.props;
 
-const siteUrl = 'https://thevoid-five.vercel.app';
+const siteUrl = 'https://thevoid.garden';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = image.startsWith('http')
 	? image
 	: new URL(image, siteUrl).toString();
+
+const personSchema = {
+	'@type': 'Person',
+	'@id': `${siteUrl}/#person`,
+	name: 'Miguel Marin Vermelho',
+	url: siteUrl,
+	jobTitle: 'CTO',
+	worksFor: { '@type': 'Organization', name: 'FLOWN' },
+	sameAs: [
+		'https://github.com/kiily',
+		'https://www.linkedin.com/in/miguel-marin-vermelho-09805185/',
+		'https://twitter.com/kiily95',
+		'https://bsky.app/profile/kiily95.bsky.social',
+	],
+};
+
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	'@id': `${siteUrl}/#website`,
+	name: 'The Void',
+	url: `${siteUrl}/`,
+	description: 'A personal digital garden by Miguel Marin Vermelho',
+	author: personSchema,
+	potentialAction: {
+		'@type': 'SearchAction',
+		target: {
+			'@type': 'EntryPoint',
+			urlTemplate: `${siteUrl}/api/search?q={search_term_string}`,
+		},
+		'query-input': 'required name=search_term_string',
+	},
+};
+
+const articleSchema =
+	type === 'article'
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'BlogPosting',
+				headline: title,
+				description,
+				url: canonicalUrl,
+				mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+				author: personSchema,
+				publisher: personSchema,
+				datePublished: publishedTime,
+				dateModified: modifiedTime ?? publishedTime,
+				image: ogImageUrl,
+				...(tags && tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+			}
+		: null;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/void.svg" />
@@ -41,6 +98,12 @@ const ogImageUrl = image.startsWith('http')
 		<meta name="generator" content={Astro.generator} />
 
 		<link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="The Void — Garden"
+			href="/rss.xml"
+		/>
 
 		<!-- SEO -->
 		<title>{title}</title>
@@ -81,6 +144,22 @@ const ogImageUrl = image.startsWith('http')
 		<Font cssVariable="--font-inter" preload />
 		<Font cssVariable="--font-source-serif-4" preload />
 		<Font cssVariable="--font-cormorant-garamond" preload />
+
+		<!-- Structured Data (JSON-LD) -->
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(websiteSchema)}
+		/>
+		{
+			articleSchema && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify(articleSchema)}
+				/>
+			)
+		}
+
+		<slot name="head" />
 
 		<!-- Theme initialization - must run before body renders to prevent flash -->
 		<script is:inline>

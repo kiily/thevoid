@@ -31,7 +31,7 @@ function formatDate(date: Date) {
 					frontmatter.image ? (
 						<Image
 							src={frontmatter.image}
-							alt=""
+							alt={frontmatter.title}
 							widths={[400, 600, 800, 1200]}
 							sizes="(max-width: 768px) 100vw, 800px"
 							class="object-cover w-full h-full"
