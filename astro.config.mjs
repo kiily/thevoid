@@ -9,7 +9,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://thevoid-five.vercel.app/',
+  site: 'https://thevoid.garden/',
 
   // Enable prefetch for View Transitions to preload linked pages
   prefetch: {
@@ -59,7 +59,22 @@ export default defineConfig({
       }
     }),
     tailwind(),
-    sitemap()
+    sitemap({
+      filter: (page) => !page.includes('/b-30'),
+      serialize(item) {
+        if (item.url.includes('/garden/') || item.url.includes('/projects/')) {
+          item.changefreq = 'monthly';
+          item.priority = 0.8;
+        } else if (item.url.endsWith('thevoid.garden/')) {
+          item.changefreq = 'weekly';
+          item.priority = 1.0;
+        } else {
+          item.changefreq = 'monthly';
+          item.priority = 0.5;
+        }
+        return item;
+      }
+    })
   ],
 
   adapter: vercel(),

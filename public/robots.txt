@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /b-30
+
+# AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+Sitemap: https://thevoid.garden/sitemap-index.xml

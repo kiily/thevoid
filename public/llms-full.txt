@@ -1,0 +1,211 @@
+# The Void — Full LLM Context
+
+## Site Identity
+
+- **Name:** The Void
+- **Author:** Miguel Marin Vermelho
+- **URL:** https://thevoid.garden/
+- **Description:** Personal digital garden and portfolio — a contemplative, multilingual space exploring Buddhism, meditation, neuroscience, software engineering, and human connection.
+- **Languages used in content:** English, Portuguese, Spanish, French, Japanese (and occasional Italian, German, Luxembourgish, Persian in UI)
+
+---
+
+## Architecture
+
+**Framework:** Astro 5 (static site generation; one dynamic SSR route for search)
+**Package manager:** Bun
+**Styling:** Tailwind CSS 3 — custom `garden` colour namespace; no `@apply`
+**Content:** MDX via `@astrojs/mdx` with Zod-validated content collections
+**Search:** Fuse.js (fuzzy, weighted) via `/api/search` endpoint
+**Data viz:** D3 + family-chart library
+**Deployment:** Vercel with Analytics and Speed Insights
+**View transitions:** Astro View Transitions API with viewport prefetching
+
+**Fonts (Astro experimental font API):**
+- `--font-inter` — Inter, UI weight 400–800
+- `--font-source-serif-4` — Source Serif 4, body weight 300–700 incl. italic
+- `--font-cormorant-garamond` — Cormorant Garamond, display weight 400–600 incl. italic
+
+**Theme system:** CSS custom properties + Tailwind `dark:` variant. Persisted in `localStorage`. Inline preload script prevents flash.
+
+**Custom colours (`garden` namespace in tailwind.config.mjs):**
+
+| Token | Light | Dark |
+|---|---|---|
+| primary | #2D3A3A | #E1E1E1 |
+| secondary | #374151 | #C9C9C9 |
+| accent | #006400 | #90EE90 |
+| background | #F7F7F2 | #1A1A1A |
+| surface | #FFFFFF | #2D2D2D |
+
+**Semantic utility classes:** `.text-body`, `.text-body-strong`, `.text-muted`, `.text-label`
+
+---
+
+## Directory Structure
+
+```
+src/
+├── pages/
+│   ├── index.astro                   # Homepage
+│   ├── heart-sutra.astro             # Standalone bunkobon (large, inline styles)
+│   ├── focus-and-flow.astro          # Standalone bunkobon (large, inline styles)
+│   ├── b-30.astro                    # Password-protected, noindex
+│   ├── family-tree.astro             # D3 family tree visualisation
+│   ├── tags.astro                    # All tags index
+│   ├── garden/[...page].astro        # Paginated garden listing
+│   ├── garden/[...slug].astro        # Individual post
+│   ├── projects/[...slug].astro      # Individual project
+│   ├── tag/[tag].astro               # Posts by tag
+│   ├── category/[category].astro     # Posts by category
+│   └── api/search.ts                 # Dynamic full-text search endpoint
+├── layouts/
+│   ├── Layout.astro                  # Root: Header, theme toggle, analytics, view transitions
+│   ├── PostLayout.astro              # Wraps Layout; post metadata, tags, Connected Notes
+│   └── ProjectLayout.astro          # Wraps Layout; project metadata
+├── components/                       # 22 components
+├── content/
+│   ├── config.ts                     # Zod schemas for both collections
+│   ├── garden/                       # ~50 MDX posts
+│   └── projects/                     # 6 MDX project entries
+├── lib/
+│   ├── data-service.ts               # Centralised cached getCollection wrapper
+│   └── technologies.ts               # 80+ technology items with proficiency levels
+public/
+├── void.svg                          # Site icon / favicon
+├── enso.svg                          # Zen enso circle
+├── og-image.jpg                      # OG social preview (1024×541)
+├── robots.txt                        # Crawl directives
+├── llms.txt                          # LLM context summary
+└── llms-full.txt                     # Full LLM context (this file)
+```
+
+---
+
+## Content Collections
+
+### garden
+
+Schema fields:
+- `title` (string, required)
+- `description` (string, required)
+- `publishDate` (date, required)
+- `updateDate` (date, optional)
+- `category` (string — e.g. "Philosophy", "Meditation")
+- `tags` (string[], optional)
+- `image` (string, optional — path to image asset)
+- `connections` (array of `{ label, href }`, optional — related links)
+
+Sample posts (representative, not exhaustive):
+- *Emptiness* — dependent origination, Buddhist philosophy
+- *Lessons from the mountains* — Yamabushi monks in Japan
+- *Corporate enlightenment* — mindfulness in the workplace
+- *Hemispatial Neglect* — neurology narrative
+- *Hyperreality in a square* — perception meditation
+- *Constant meditation* — meditation without closing eyes
+- *Have You Ever Seen a Tree?* — questioning perception
+- *Think like Nāgārjuna* — Madhyamaka Buddhist philosophy
+- *Dying every day* — impermanence and letting go
+- *Mon père* — French poem for father
+- *Amor de mãe* — Portuguese reflection on mothers
+- *Para la Yaya* — Spanish poem for grandmother's 103rd birthday
+- *A ilha* — St. Lucia sunset reflection
+- *Loops on a train* — short fiction
+- *O Búzio* — seashell meditation
+- *Sol y canciones* — Spanish songs reflection
+
+### projects
+
+Schema fields:
+- `title`, `description`, `image`, `link`, `website`, `github`
+- `status` (enum: "current" | "completed" | "archived")
+- `startDate`, `endDate`
+- `tags[]`
+- `features[]` (string descriptions)
+- `techStack[]` (`{ category, items[] }`)
+- `challenges[]`, `learnings[]`
+- `gallery[]` (`{ image, caption }`)
+
+Projects:
+1. **FLOWN** (current) — Science-backed deep work platform; author is CTO. Virtual coworking and expert-led focus sessions.
+2. **Heart Sutra Bunkobon** (completed) — Interactive bilingual Buddhist text with sumi-e illustrations, furigana/romaji toggles, animated Enso circle.
+3. **Pokemon Recall** (completed) — Memory training game.
+4. **Personal website v1** (archived) — First Astro site.
+5. **Omniago** (archived) — Crowdsourced debate platform for climate misinformation.
+6. **Readium** (archived) — Reading tracking app.
+
+---
+
+## Data Layer
+
+**`DataService`** (`src/lib/data-service.ts`) — always use this, never call `getCollection()` directly:
+
+- `DataService.getGardenPosts()` — all posts
+- `DataService.getProjects()` — all projects
+- `DataService.getCategories()` — unique categories
+- `DataService.getTags()` — unique tags
+- `DataService.getPostsByCategory(category)`
+- `DataService.getPostsByTag(tag)`
+- `DataService.getSearchData()` — search index (posts + categories + tags)
+- `DataService.clearCache()` — development use
+
+---
+
+## Search
+
+Endpoint: `GET /api/search?q={query}&filter={all|garden-only|projects-only}`
+
+- Powered by Fuse.js
+- Not prerendered (dynamic SSR)
+- Scoring weights: title 0.4, description 0.3, category 0.15, tags 0.1
+- Returns results with score and content-type metadata
+
+---
+
+## Special Pages
+
+### `/heart-sutra`
+Self-contained, 1000+ line `.astro` file.
+- Hand-painted Enso SVG with conic-mask reveal animation and ink-splash particles
+- Washi-paper aesthetic (cream backgrounds, traditional ink tones)
+- Bilingual Heart Sutra (Japanese with furigana + English translation)
+- Toggle controls for furigana and romaji visibility
+- Full dark mode support
+
+### `/focus-and-flow`
+Large self-contained bunkobon page.
+- Concentric ripple SVG circles (stone-drop visualisation)
+- Research from FLOWN, Cal Newport (*Deep Work*), Csikszentmihalyi (*Flow*)
+- Bunkobon-style book layout
+- Dark mode support
+
+---
+
+## Author Profile
+
+**Miguel Marin Vermelho**
+Polyglot biologist turned software engineer. CTO at FLOWN.
+
+Languages: English, Portuguese, Spanish, French, Luxembourgish, Japanese
+
+Technology proficiency (from `technologies.ts`):
+
+| Level | Technologies |
+|---|---|
+| Expert | TypeScript, JavaScript, HTML, CSS, React, Next.js, Node.js, MongoDB, Stripe, Vercel, Claude Code, Cursor |
+| Advanced | Bash, Webpack, PostgreSQL, MySQL, Docker, Datadog, Bitrise, Customer.io, Segment |
+| Intermediate | Angular, Bun, Vite, AWS, Digital Ocean, Cloudflare, Statsig |
+| Basic | Python, Flutter, Kubernetes |
+
+---
+
+## Key Conventions for AI Assistance
+
+1. Use `DataService` — never `getCollection()` directly
+2. Use Astro's `<Image>` component for all images
+3. Use `garden-*` colour tokens, not raw Tailwind colours
+4. No `@apply` — Tailwind utilities directly or scoped `<style>` blocks
+5. Only use `client:*` directives for genuinely interactive components (currently: Search, TextCycler, ThemeToggle)
+6. Large special pages (`heart-sutra.astro`, `focus-and-flow.astro`, `b-30.astro`) use inline styles — treat with care
+7. No test runner or linting scripts; TypeScript checked via `astro check`
+8. Fonts via CSS variables: `--font-inter`, `--font-source-serif-4`, `--font-cormorant-garamond`
