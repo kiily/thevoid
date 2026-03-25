@@ -19,10 +19,12 @@ export const GET: APIRoute = async ({ url }) => {
 		);
 	}
 
-	const posts = await DataService.getGardenPosts();
-	const projects = await DataService.getProjects();
-	const categories = await DataService.getCategories();
-	const tags = await DataService.getTags();
+	const [posts, projects, categories, tags] = await Promise.all([
+		DataService.getGardenPosts(),
+		DataService.getProjects(),
+		DataService.getCategories(),
+		DataService.getTags(),
+	]);
 
 	let searchItems: {
 		title: string;
