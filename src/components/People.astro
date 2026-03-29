@@ -1,0 +1,53 @@
+---
+import { DataService } from '../lib/data-service';
+import SectionNumber from './SectionNumber.astro';
+import SectionTitle from './SectionTitle.astro';
+import SectionDescription from './SectionDescription.astro';
+import PersonCard from './PersonCard.astro';
+
+const people = await DataService.getPeople();
+const sortedPeople = [...people].sort((a, b) =>
+	a.data.name.localeCompare(b.data.name)
+);
+const displayPeople = sortedPeople.slice(0, 6);
+const hasMore = sortedPeople.length > 6;
+---
+
+<section id="people" class="py-24 md:py-32">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8">
+		<SectionNumber number={8} />
+		<SectionTitle>People</SectionTitle>
+		<SectionDescription class="mb-12">
+			Cool people worth following — creators, collaborators, and kindred spirits
+			doing interesting things.
+		</SectionDescription>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				displayPeople.map((person) => (
+					<PersonCard
+						name={person.data.name}
+						description={person.data.description}
+						website={person.data.website}
+						avatar={person.data.avatar}
+						role={person.data.role}
+						tags={person.data.tags}
+					/>
+				))
+			}
+		</div>
+
+		{
+			hasMore && (
+				<div class="mt-10 text-center">
+					<a
+						href="/people"
+						class="text-garden-accent dark:text-garden-dark-accent hover:opacity-70 transition-opacity font-ui text-sm underline underline-offset-2"
+					>
+						See all people &rarr;
+					</a>
+				</div>
+			)
+		}
+	</div>
+</section>

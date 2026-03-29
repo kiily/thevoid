@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { DataService } from '../lib/data-service';
+import PersonCard from '../components/PersonCard.astro';
+
+const people = await DataService.getPeople();
+const sortedPeople = [...people].sort((a, b) =>
+	a.data.name.localeCompare(b.data.name)
+);
+---
+
+<Layout
+	title="People | The Void"
+	description="Cool people worth following — creators, collaborators, and kindred spirits doing interesting things."
+>
+	<div class="py-24 md:py-32">
+		<div class="container mx-auto max-w-5xl px-6 md:px-8">
+			<a
+				href="/"
+				class="inline-flex items-center gap-1 text-sm text-garden-accent dark:text-garden-dark-accent hover:opacity-70 transition-opacity font-ui mb-8"
+			>
+				<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+				</svg>
+				Back
+			</a>
+
+			<h1 class="text-4xl md:text-5xl font-bold text-garden-primary dark:text-garden-dark-primary font-display mb-4">
+				People
+			</h1>
+			<p class="text-body font-body text-lg leading-relaxed mb-12 max-w-2xl">
+				Cool people worth following — creators, collaborators, and kindred spirits doing interesting things.
+			</p>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{
+					sortedPeople.map((person) => (
+						<PersonCard
+							name={person.data.name}
+							description={person.data.description}
+							website={person.data.website}
+							avatar={person.data.avatar}
+							role={person.data.role}
+							tags={person.data.tags}
+						/>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</Layout>

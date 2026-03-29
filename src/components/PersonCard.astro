@@ -1,0 +1,85 @@
+---
+import Badge from './Badge.astro';
+import { Image } from 'astro:assets';
+
+export interface Props {
+	name: string;
+	description: string;
+	website: string;
+	avatar?: ImageMetadata;
+	role?: string;
+	tags?: string[];
+}
+
+const { name, description, website, avatar, role, tags } = Astro.props;
+
+const initial = name.charAt(0).toUpperCase();
+
+const roleLabels: Record<string, string> = {
+	creator: 'Creator',
+	collaborator: 'Collaborator',
+	inspiration: 'Inspiration',
+	community: 'Community',
+};
+---
+
+<article class="group">
+	<a
+		href={website}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="block p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-garden-accent dark:hover:border-garden-dark-accent transition-all duration-300"
+	>
+		<div class="flex items-start gap-4">
+			<div class="shrink-0">
+				{avatar ? (
+					<Image
+						src={avatar}
+						alt={name}
+						width={48}
+						height={48}
+						class="w-12 h-12 rounded-full object-cover"
+						quality={80}
+						format="webp"
+					/>
+				) : (
+					<div class="w-12 h-12 rounded-full bg-garden-accent/10 dark:bg-garden-dark-accent/10 flex items-center justify-center">
+						<span class="text-lg font-semibold text-garden-accent dark:text-garden-dark-accent font-ui">
+							{initial}
+						</span>
+					</div>
+				)}
+			</div>
+
+			<div class="min-w-0 flex-1">
+				<div class="flex items-center gap-2 mb-1">
+					<h3 class="text-base font-semibold text-garden-primary dark:text-garden-dark-primary font-ui group-hover:text-garden-accent dark:group-hover:text-garden-dark-accent transition-colors truncate">
+						{name}
+					</h3>
+					<svg
+						class="w-4 h-4 shrink-0 text-gray-400 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+					</svg>
+				</div>
+
+				<p class="text-sm text-body font-body leading-relaxed line-clamp-2 mb-3">
+					{description}
+				</p>
+
+				<div class="flex items-center gap-2 flex-wrap">
+					{role && (
+						<Badge size="sm">{roleLabels[role] || role}</Badge>
+					)}
+					{tags && tags.slice(0, 3).map((tag) => (
+						<span class="text-xs text-gray-500 dark:text-gray-400 font-ui">#{tag}</span>
+					))}
+				</div>
+			</div>
+		</div>
+	</a>
+</article>
