@@ -17,8 +17,7 @@ export default defineConfig({
     defaultStrategy: 'viewport'
   },
 
-  experimental: {
-    fonts: [
+  fonts: [
       {
         provider: fontProviders.google(),
         name: 'Inter',
@@ -46,8 +45,7 @@ export default defineConfig({
         display: 'swap',
         fallbacks: ['Georgia', 'serif']
       }
-    ]
-  },
+  ],
 
   integrations: [
     mdx({

@@ -101,7 +101,7 @@ export class DataService {
 			description: post.data.description,
 			tags: post.data.tags || [],
 			category: post.data.category,
-			url: `/garden/${post.slug}`,
+			url: `/garden/${post.id}`,
 			type: 'post' as const,
 		}));
 

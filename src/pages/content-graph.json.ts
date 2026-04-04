@@ -6,10 +6,10 @@ export async function GET() {
 	const posts = await DataService.getGardenPosts();
 
 	const nodes = posts.map((post) => ({
-		id: post.slug,
+		id: post.id,
 		title: post.data.title,
 		description: post.data.description,
-		url: `https://thevoid.garden/garden/${post.slug}/`,
+		url: `https://thevoid.garden/garden/${post.id}/`,
 		category: post.data.category,
 		tags: post.data.tags ?? [],
 		lang: post.data.lang ?? 'en',
@@ -21,7 +21,7 @@ export async function GET() {
 
 	const edges = posts.flatMap((post) =>
 		(post.data.connections ?? []).map((conn) => ({
-			from: post.slug,
+			from: post.id,
 			to: conn.url,
 			label: conn.title,
 		})),

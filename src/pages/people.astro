@@ -34,7 +34,7 @@ const sortedPeople = [...people].sort((a, b) =>
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				{
-					sortedPeople.map((person) => (
+					sortedPeople.map((person, i) => (
 						<PersonCard
 							name={person.data.name}
 							description={person.data.description}
@@ -42,6 +42,7 @@ const sortedPeople = [...people].sort((a, b) =>
 							avatar={person.data.avatar}
 							role={person.data.role}
 							tags={person.data.tags}
+							index={i}
 						/>
 					))
 				}

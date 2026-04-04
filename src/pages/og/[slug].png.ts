@@ -7,7 +7,7 @@ export const prerender = true;
 export async function getStaticPaths() {
 	const posts = await DataService.getGardenPosts();
 	return posts.map((post) => ({
-		params: { slug: post.slug },
+		params: { slug: post.id },
 		props: {
 			title: post.data.title,
 			category: post.data.category,
