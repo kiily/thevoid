@@ -63,7 +63,7 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 	<button
 		type="button"
 		id="modal-close"
-		class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+		class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-garden-accent dark:focus:ring-garden-dark-accent rounded-lg p-1"
 		aria-label="Close modal"
 	>
 		<svg
@@ -85,7 +85,7 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 			id="modal-logo"
 			src=""
 			alt=""
-			class="w-12 h-12 object-contain"
+			class="w-12 h-12 object-contain dark:bg-white dark:rounded-lg dark:p-1"
 			loading="lazy"
 		/>
 		<h3
@@ -97,7 +97,7 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 
 	<div class="mb-4">
 		<div class="flex items-center gap-2 mb-2">
-			<span class="text-sm text-body font-ui uppercase tracking-wide"
+			<span class="text-sm text-body dark:text-white font-ui uppercase tracking-wide"
 				>Proficiency</span
 			>
 			<div id="modal-level" class="flex gap-1"></div>
@@ -163,6 +163,10 @@ const sortedTech = [...technologies].sort((a, b) => b.level - a.level);
 	.tech-dialog::backdrop {
 		background: rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(4px);
+	}
+
+	:global(.dark) .tech-dialog {
+		color-scheme: dark;
 	}
 </style>
 

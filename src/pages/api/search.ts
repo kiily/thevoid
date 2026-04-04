@@ -41,7 +41,7 @@ export const GET: APIRoute = async ({ url }) => {
 			...posts.map((post) => ({
 				title: post.data.title,
 				description: post.data.description,
-				url: `/garden/${post.slug}`,
+				url: `/garden/${post.id}`,
 				type: 'post' as const,
 				category: post.data.category,
 				tags: post.data.tags || [],
@@ -55,7 +55,7 @@ export const GET: APIRoute = async ({ url }) => {
 			...projects.map((project) => ({
 				title: project.data.title,
 				description: project.data.description,
-				url: `/projects/${project.slug}`,
+				url: `/projects/${project.id}`,
 				type: 'post' as const,
 				category: 'Projects',
 				tags: project.data.tags || [],

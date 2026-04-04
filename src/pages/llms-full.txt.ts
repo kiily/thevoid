@@ -14,7 +14,7 @@ export async function GET() {
 		.map((post) => {
 			const lang = post.data.lang ? ` [${post.data.lang}]` : '';
 			const tags = post.data.tags?.length ? ` — ${post.data.tags.slice(0, 4).join(', ')}` : '';
-			return `- [${post.data.title}${lang}](https://thevoid.garden/garden/${post.slug}) — ${post.data.description}${tags}`;
+			return `- [${post.data.title}${lang}](https://thevoid.garden/garden/${post.id}) — ${post.data.description}${tags}`;
 		})
 		.join('\n');
 

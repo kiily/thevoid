@@ -1,7 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 const garden = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/garden' }),
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
@@ -24,7 +26,7 @@ const garden = defineCollection({
 });
 
 const projects = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/projects' }),
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
@@ -57,7 +59,23 @@ const projects = defineCollection({
 	}),
 });
 
+const people = defineCollection({
+	loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/people' }),
+	schema: ({ image }) =>
+		z.object({
+			name: z.string(),
+			description: z.string(),
+			website: z.string().url(),
+			avatar: image().optional(),
+			role: z
+				.enum(['creator', 'collaborator', 'inspiration', 'community'])
+				.default('inspiration'),
+			tags: z.array(z.string()).optional(),
+		}),
+});
+
 export const collections = {
 	garden,
 	projects,
+	people,
 };
