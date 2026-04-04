@@ -1,6 +1,6 @@
 import { defineConfig, fontProviders } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
@@ -56,7 +56,6 @@ export default defineConfig({
         wrap: true
       }
     }),
-    tailwind(),
     sitemap({
       filter: (page) => !page.includes('/b-30'),
       serialize(item) {
@@ -78,6 +77,7 @@ export default defineConfig({
   adapter: vercel(),
 
   vite: {
+    plugins: [tailwindcss()],
     server: {
       watch: {
         ignored: ['**/.vercel/**']

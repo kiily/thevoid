@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+@plugin "@tailwindcss/typography";
+@variant dark (&:where(.dark, .dark *));
+
+/* Semantic text utility classes */
+@utility text-body {
+  color: var(--color-garden-secondary);
+  &:where(.dark, .dark *) {
+    color: var(--color-garden-dark-secondary);
+  }
+}
+
+@utility text-body-strong {
+  color: var(--color-garden-primary);
+  &:where(.dark, .dark *) {
+    color: var(--color-garden-dark-primary);
+  }
+}
+
+@utility text-muted {
+  color: var(--color-gray-600);
+  &:where(.dark, .dark *) {
+    color: var(--color-gray-400);
+  }
+}
+
+@utility text-label {
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  font-weight: 500;
+  color: var(--color-garden-secondary);
+  font-family: var(--font-ui);
+  &:where(.dark, .dark *) {
+    color: var(--color-garden-dark-secondary);
+  }
+}
+
+/* Badge/tag styling */
+@utility badge {
+  padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+  font-size: var(--text-sm);
+  background-color: var(--color-gray-200);
+  color: var(--color-garden-primary);
+  border-radius: var(--radius-default, 0.25rem);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-gray-700);
+    color: white;
+  }
+}
+
+@utility badge-sm {
+  padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+  font-size: var(--text-xs);
+  background-color: var(--color-gray-200);
+  color: var(--color-garden-primary);
+  border-radius: var(--radius-default, 0.25rem);
+  &:where(.dark, .dark *) {
+    background-color: var(--color-gray-700);
+    color: white;
+  }
+}
