@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entendiendo la Presión Arterial — Guía Completa</title>
+<style>
+  :root {
+    --red: #E24B4A; --red-light: #FCEBEB; --red-dark: #A32D2D;
+    --blue: #378ADD; --blue-light: #E6F1FB; --blue-dark: #185FA5;
+    --teal: #1D9E75; --teal-light: #E1F5EE; --teal-dark: #085041;
+    --green: #639922; --green-light: #EAF3DE; --green-dark: #3B6D11;
+    --amber: #BA7517; --amber-light: #FAEEDA; --amber-dark: #633806;
+    --gray: #5F5E5A; --gray-light: #F1EFE8; --gray-dark: #2C2C2A;
+    --border: #e0ddd6;
+    --text: #1a1a18;
+    --text-muted: #5F5E5A;
+    --bg: #ffffff;
+    --bg2: #f8f7f4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 16px; line-height: 1.75; color: var(--text); background: var(--bg); }
+  .page { max-width: 780px; margin: 0 auto; padding: 60px 40px; }
+  .report-header { border-bottom: 2px solid var(--red); padding-bottom: 32px; margin-bottom: 48px; }
+  .report-tag { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-bottom: 12px; }
+  h1 { font-size: 38px; font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 14px; }
+  .subtitle { font-size: 18px; color: var(--text-muted); font-style: italic; margin-bottom: 20px; }
+  .meta { font-family: Arial, sans-serif; font-size: 13px; color: var(--text-muted); }
+  .toc { background: var(--bg2); border-left: 3px solid var(--red); padding: 24px 28px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+  .toc-title { font-family: Arial, sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; font-weight: 600; }
+  .toc ol { margin-left: 20px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { color: var(--blue-dark); text-decoration: none; font-family: Arial, sans-serif; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+  section { margin-bottom: 56px; }
+  h2 { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 19px; font-weight: 700; color: var(--text); margin: 28px 0 12px; }
+  p { margin-bottom: 16px; }
+  .callout { border-radius: 8px; padding: 18px 22px; margin: 24px 0; }
+  .callout.info { background: var(--blue-light); border-left: 4px solid var(--blue); }
+  .callout.warning { background: #FEF3C7; border-left: 4px solid #D97706; }
+  .callout.tip { background: var(--teal-light); border-left: 4px solid var(--teal); }
+  .callout-title { font-family: Arial, sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; color: var(--blue-dark); }
+  .callout.warning .callout-title { color: #92400E; }
+  .callout.tip .callout-title { color: var(--teal-dark); }
+  .widget-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 28px 0; background: var(--bg); }
+  .widget-label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 10px 16px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+  .widget-inner { padding: 24px 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-family: Arial, sans-serif; font-size: 14px; }
+  th { background: var(--gray-light); padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+  .mem-table td:first-child { font-weight: 600; color: var(--text); width: 46%; }
+  .mem-table td { font-family: Arial, sans-serif; }
+  .report-footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); font-family: Arial, sans-serif; font-size: 12px; color: var(--text-muted); text-align: center; }
+  @media print { .page { padding: 30px 20px; } .widget-wrap { break-inside: avoid; } }
+  input[type=range] { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: #ddd; outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--red); cursor: pointer; }
+  input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--red); cursor: pointer; border: none; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="report-header">
+    <div class="report-tag">Informe de Educación para la Salud</div>
+    <h1>Entendiendo la Presión Arterial</h1>
+    <p class="subtitle">Una guía visual completa: qué significa, por qué importa y cómo leerla</p>
+    <div class="meta">Con diagramas interactivos &nbsp;·&nbsp; Rangos de referencia &nbsp;·&nbsp; Explicaciones en lenguaje sencillo</div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">Contenido</div>
+    <ol>
+      <li><a href="#que-es">¿Qué es la presión arterial?</a></li>
+      <li><a href="#unidades">¿Por qué milímetros de mercurio (mmHg)?</a></li>
+      <li><a href="#sistolica-diastolica">Presión sistólica y diastólica explicadas</a></li>
+      <li><a href="#ciclo">El ciclo cardíaco — interactivo</a></li>
+      <li><a href="#rangos">Rangos normales — interactivo</a></li>
+      <li><a href="#causas">¿Qué controla la presión arterial?</a></li>
+      <li><a href="#memoria">Guía rápida de referencia y memoria</a></li>
+    </ol>
+  </nav>
+
+  <section id="que-es">
+    <h2>1. ¿Qué es la presión arterial?</h2>
+    <p>El corazón es una bomba. Cada vez que late, exprime sangre hacia las arterias. Esa sangre <em>empuja contra las paredes</em> de esos vasos. <strong>La presión arterial es simplemente la medida de esa fuerza de empuje.</strong></p>
+    <p>Piensa en una manguera de jardín: cuando el agua fluye por ella, las paredes se abomban ligeramente bajo la presión. Tus arterias hacen lo mismo — son tubos elásticos y musculares que se expanden y se contraen con cada latido. La presión que experimentan es lo que medimos y llamamos presión arterial.</p>
+    <div class="callout info">
+      <div class="callout-title">Por qué importa</div>
+      La presión arterial alta crónica (hipertensión) daña silenciosamente las paredes de las arterias, el corazón, los riñones y el cerebro. Es una de las principales causas prevenibles de accidente cerebrovascular y enfermedad cardíaca — y no tiene síntomas, por eso es tan importante medirla con regularidad.
+    </div>
+  </section>
+
+  <section id="unidades">
+    <h2>2. ¿Por qué milímetros de mercurio (mmHg)?</h2>
+    <p>Esta unidad suena arcaica — y lo es. Históricamente, la presión arterial se medía con un <em>esfigmomanómetro</em> (el manguito inflable del brazo), que usaba una columna de mercurio líquido. La presión sanguínea era suficientemente fuerte para elevar esa columna de mercurio cierta altura en milímetros.</p>
+    <p>Una lectura de <strong>120 mmHg</strong> significa que la presión era suficiente para empujar una columna de mercurio 120 milímetros hacia arriba en un tubo de vidrio. Hemos conservado la unidad aunque los aparatos modernos son completamente digitales — es como seguir diciendo "caballos de fuerza" para los motores de automóviles.</p>
+    <div class="callout tip">
+      <div class="callout-title">Truco para recordarlo</div>
+      mmHg = milímetros de mercurio. Imagina un tubo de vidrio como un termómetro: la presión de tu corazón empuja el líquido hacia arriba. 120 mm de altura = 120 mmHg.
+    </div>
+  </section>
+
+  <section id="sistolica-diastolica">
+    <h2>3. Presión sistólica y diastólica</h2>
+    <p>El corazón no bombea de forma continua — se contrae y se relaja rítmicamente. Hay dos momentos de presión distintos en cada ciclo:</p>
+    <h3>Presión sistólica (el número de arriba)</h3>
+    <p>Del griego <em>systolē</em>, que significa "contracción". Es la presión <em>durante</em> un latido, cuando el músculo cardíaco exprime la sangre hacia las arterias. Siempre es el <strong>número más alto</strong>. En una lectura de 120/80, la sistólica es <strong>120</strong>.</p>
+    <h3>Presión diastólica (el número de abajo)</h3>
+    <p>Del griego <em>diastolē</em>, que significa "dilatación" o "expansión". Es la presión <em>entre</em> latidos, cuando el corazón se relaja y se llena de nuevo. Siempre es el <strong>número más bajo</strong>. En 120/80, la diastólica es <strong>80</strong>.</p>
+    <div class="callout info">
+      <div class="callout-title">Cómo leer una medición de presión arterial</div>
+      Una lectura siempre se escribe <strong>sistólica / diastólica</strong>. Así, 120/80 mmHg significa: 120 mmHg cuando el corazón se contrae, 80 mmHg cuando descansa. También se puede decir "ciento veinte sobre ochenta."
+    </div>
+    <p>La cifra diastólica es especialmente reveladora: si permanece alta incluso mientras el corazón descansa, significa que las arterias están crónicamente bajo demasiada presión — por eso los médicos le prestan especial atención.</p>
+  </section>
+
+  <section id="ciclo">
+    <h2>4. El ciclo cardíaco</h2>
+    <p>El diagrama a continuación muestra un único latido del corazón. Observa la animación: durante la sístole (contracción) la presión sube; durante la diástole (relajación) cae hasta la línea de base. La forma de onda en la parte inferior es una versión simplificada de lo que registraría un sensor de presión en tu arteria en tiempo real.</p>
+
+    <div class="widget-wrap">
+      <div class="widget-label">Diagrama interactivo — Ciclo cardíaco y onda de presión</div>
+      <div class="widget-inner">
+<style>
+@keyframes hb_es{0%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}50%{transform:scale(1.05)}65%{transform:scale(1)}100%{transform:scale(1)}}
+@keyframes pr_es{0%{r:40;opacity:.5}60%{r:62;opacity:0}100%{r:62;opacity:0}}
+@media(prefers-reduced-motion:no-preference){#hrt_es{animation:hb_es 1.5s ease-in-out infinite;transform-origin:310px 195px}#pring_es{animation:pr_es 1.5s ease-in-out infinite;transform-origin:310px 195px}}
+</style>
+<svg width="100%" viewBox="0 0 680 420" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Ciclo cardíaco y onda de presión arterial</title>
+  <desc>Diagrama animado que muestra la presión sistólica durante la contracción del corazón y la presión diastólica durante la relajación.</desc>
+  <defs>
+    <marker id="arr_es" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <text font-family="Arial,sans-serif" font-size="12" fill="#888" x="340" y="26" text-anchor="middle">Un ciclo cardíaco completo</text>
+  <circle id="pring_es" cx="310" cy="195" r="40" fill="none" stroke="#E24B4A" stroke-width="1.5" opacity="0.4"/>
+  <g id="hrt_es">
+    <path d="M310,225 C270,200 240,170 240,150 C240,130 258,117 275,117 C290,117 305,130 310,143 C315,130 330,117 345,117 C362,117 380,130 380,150 C380,170 350,200 310,225 Z" fill="#E24B4A" opacity="0.85"/>
+  </g>
+  <!-- Sístole -->
+  <rect x="22" y="125" width="180" height="66" rx="8" fill="#FCEBEB" stroke="#E8BBBB" stroke-width="0.5"/>
+  <text font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#A32D2D" x="112" y="147" text-anchor="middle">Sístole</text>
+  <text font-family="Arial,sans-serif" font-size="12" fill="#5F5E5A" x="112" y="165" text-anchor="middle">"Contracción"</text>
+  <text font-family="Arial,sans-serif" font-size="11" fill="#5F5E5A" x="112" y="183" text-anchor="middle">Corazón se contrae → presión alta</text>
+  <line x1="202" y1="165" x2="236" y2="173" stroke="#888" stroke-width="1" marker-end="url(#arr_es)"/>
+  <!-- Diástole -->
+  <rect x="450" y="125" width="205" height="66" rx="8" fill="#E6F1FB" stroke="#B5D4F4" stroke-width="0.5"/>
+  <text font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#185FA5" x="552" y="147" text-anchor="middle">Diástole</text>
+  <text font-family="Arial,sans-serif" font-size="12" fill="#5F5E5A" x="552" y="165" text-anchor="middle">"Relajación"</text>
+  <text font-family="Arial,sans-serif" font-size="11" fill="#5F5E5A" x="552" y="183" text-anchor="middle">Corazón se llena → presión baja</text>
+  <line x1="450" y1="165" x2="384" y2="173" stroke="#888" stroke-width="1" marker-end="url(#arr_es)"/>
+  <!-- Forma de onda -->
+  <text font-family="Arial,sans-serif" font-size="11" fill="#aaa" x="340" y="265" text-anchor="middle">Presión en tu arteria a lo largo del tiempo</text>
+  <text font-family="Arial,sans-serif" font-size="10" fill="#A32D2D" x="56" y="292" text-anchor="end">120</text>
+  <text font-family="Arial,sans-serif" font-size="10" fill="#185FA5" x="56" y="370" text-anchor="end">80</text>
+  <line x1="60" y1="286" x2="640" y2="286" stroke="#eee" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="60" y1="366" x2="640" y2="366" stroke="#eee" stroke-width="1" stroke-dasharray="3 4"/>
+  <path d="M64 366 C80 366,90 366,100 358 C108 352,110 308,118 288 C124 276,128 282,132 290 C138 302,142 308,148 314 C158 324,168 338,180 348 C195 360,210 366,225 366 C255 366,260 366,270 358 C278 352,280 308,288 288 C294 276,298 282,302 290 C308 302,312 308,318 314 C328 324,338 338,350 348 C365 360,385 366,400 366 C430 366,435 366,445 358 C453 352,455 308,463 288 C469 276,473 282,477 290 C483 302,487 308,493 314 C503 324,513 338,525 348 C540 360,560 366,575 366 C605 366,610 366,620 358 C628 352,630 308,638 288" fill="none" stroke="#E24B4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="118" y1="288" x2="118" y2="268" stroke="#E24B4A" stroke-width="1" stroke-dasharray="2 2"/>
+  <text font-family="Arial,sans-serif" font-size="11" fill="#A32D2D" x="120" y="264">Sistólica 120</text>
+  <line x1="225" y1="366" x2="225" y2="388" stroke="#185FA5" stroke-width="1" stroke-dasharray="2 2"/>
+  <text font-family="Arial,sans-serif" font-size="11" fill="#185FA5" x="225" y="403" text-anchor="middle">Diastólica 80</text>
+  <text font-family="Arial,sans-serif" font-size="10" fill="#bbb" x="30" y="328" text-anchor="middle">mmHg</text>
+</svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="rangos">
+    <h2>5. Rangos normales</h2>
+    <p>La presión arterial se clasifica en seis categorías según la Asociación Americana del Corazón. Usa la herramienta interactiva a continuación para explorar cómo se clasifican diferentes lecturas y qué significa cada categoría clínicamente.</p>
+
+    <div class="widget-wrap">
+      <div class="widget-label">Interactivo — Ajusta los controles para ver la clasificación de tu lectura</div>
+      <div class="widget-inner">
+<style>
+.bpr_es{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.bpr_es .num{font-size:34px;font-weight:700;font-family:Arial,sans-serif}
+.bpr_es .unit{font-size:13px;color:#888;font-family:Arial,sans-serif}
+.badge_es{display:inline-block;padding:4px 14px;border-radius:8px;font-size:13px;font-weight:600;font-family:Arial,sans-serif;transition:background .3s,color .3s}
+.srow_es{display:flex;align-items:center;gap:10px;margin:8px 0;font-family:Arial,sans-serif;font-size:13px}
+.slbl_es{min-width:78px;color:#888}
+.sval_es{min-width:32px;text-align:right;font-weight:600}
+.btrack_es{position:relative;width:100%;height:36px;border-radius:8px;overflow:hidden;margin:10px 0 4px}
+.bseg_es{position:absolute;top:0;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;font-family:Arial,sans-serif}
+.bneedle_es{position:absolute;top:-4px;width:3px;height:44px;background:#222;border-radius:2px;transform:translateX(-50%);transition:left .3s;pointer-events:none}
+.bneedle_es::after{content:'▼';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:11px;color:#222}
+.axlbl_es{display:flex;justify-content:space-between;font-size:10px;color:#aaa;padding:0 2px;font-family:Arial,sans-serif}
+.catbox_es{margin-top:16px;padding:14px 18px;background:#f8f7f4;border-radius:8px;border:1px solid #e8e5e0}
+.catname_es{font-family:Arial,sans-serif;font-size:14px;font-weight:700;margin-bottom:4px}
+.catdesc_es{font-family:Arial,sans-serif;font-size:13px;color:#5F5E5A;line-height:1.5}
+</style>
+<div class="bpr_es">
+  <span class="num" id="rout_es">120 / 80</span>
+  <span class="unit">mmHg (sistólica / diastólica)</span>
+  <span class="badge_es" id="cbadge_es">Normal</span>
+</div>
+<div class="srow_es"><span class="slbl_es">Sistólica</span><input type="range" min="80" max="200" value="120" id="ss_es" style="flex:1" oninput="upd_es()"><span class="sval_es" id="sv_es">120</span></div>
+<div class="srow_es"><span class="slbl_es">Diastólica</span><input type="range" min="40" max="130" value="80" id="sd_es" style="flex:1" oninput="upd_es()"><span class="sval_es" id="dv_es">80</span></div>
+<div style="margin-top:14px">
+  <div style="font-size:10px;color:#aaa;font-family:Arial,sans-serif;margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em">SISTÓLICA</div>
+  <div style="position:relative;height:36px">
+    <div class="btrack_es">
+      <div class="bseg_es" style="left:0;width:14%;background:#4B9FE1;color:#042C53">Baja</div>
+      <div class="bseg_es" style="left:14%;width:20%;background:#5DCAA5;color:#04342C">Normal</div>
+      <div class="bseg_es" style="left:34%;width:17%;background:#97C459;color:#173404">Elevada</div>
+      <div class="bseg_es" style="left:51%;width:19%;background:#FAC775;color:#412402">Etapa 1</div>
+      <div class="bseg_es" style="left:70%;width:19%;background:#F09595;color:#501313">Etapa 2</div>
+      <div class="bseg_es" style="left:89%;width:11%;background:#E24B4A;color:#fff">Crisis</div>
+    </div>
+    <div class="bneedle_es" id="sn_es" style="left:33%"></div>
+  </div>
+  <div class="axlbl_es"><span>80</span><span>90</span><span>108</span><span>120</span><span>130</span><span>140</span><span>160</span><span>180</span><span>200</span></div>
+</div>
+<div style="margin-top:14px">
+  <div style="font-size:10px;color:#aaa;font-family:Arial,sans-serif;margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em">DIASTÓLICA</div>
+  <div style="position:relative;height:36px">
+    <div class="btrack_es">
+      <div class="bseg_es" style="left:0;width:13%;background:#4B9FE1;color:#042C53">Baja</div>
+      <div class="bseg_es" style="left:13%;width:24%;background:#5DCAA5;color:#04342C">Normal</div>
+      <div class="bseg_es" style="left:37%;width:16%;background:#97C459;color:#173404">Elevada</div>
+      <div class="bseg_es" style="left:53%;width:16%;background:#FAC775;color:#412402">Etapa 1</div>
+      <div class="bseg_es" style="left:69%;width:18%;background:#F09595;color:#501313">Etapa 2</div>
+      <div class="bseg_es" style="left:87%;width:13%;background:#E24B4A;color:#fff">Crisis</div>
+    </div>
+    <div class="bneedle_es" id="dn_es" style="left:44%"></div>
+  </div>
+  <div class="axlbl_es"><span>40</span><span>50</span><span>60</span><span>80</span><span>90</span><span>100</span><span>120</span><span>130</span></div>
+</div>
+<div class="catbox_es">
+  <div class="catname_es" id="cn_es">Normal</div>
+  <div class="catdesc_es" id="cd_es">Sistólica &lt;120 y diastólica &lt;80. Rango ideal. Sigue haciendo lo que haces: mantente activo/a, come bien y maneja el estrés.</div>
+</div>
+<script>
+const cats_es=[
+  {n:"Baja (hipotensión)",b:"#4B9FE1",bt:"#042C53",d:"Sistólica por debajo de 90 o diastólica por debajo de 60. Puede causar mareos o desmayos. Puede ser normal en atletas muy en forma. Vale la pena investigar si hay síntomas."},
+  {n:"Normal",b:"#5DCAA5",bt:"#04342C",d:"Sistólica <120 y diastólica <80. Rango ideal. Sigue haciendo lo que haces: mantente activo/a, come bien y maneja el estrés."},
+  {n:"Elevada",b:"#97C459",bt:"#173404",d:"Sistólica 120–129 con diastólica aún <80. Todavía no es hipertensión, pero es una señal de alerta. Se recomiendan cambios de estilo de vida."},
+  {n:"Hipertensión etapa 1",b:"#FAC775",bt:"#412402",d:"Sistólica 130–139 o diastólica 80–89. El médico puede recomendar cambios de estilo de vida o medicación, según otros factores de riesgo."},
+  {n:"Hipertensión etapa 2",b:"#F09595",bt:"#501313",d:"Sistólica 140–179 o diastólica 90–119. Generalmente se necesita medicación y cambios de estilo de vida. Mayor riesgo de accidente cerebrovascular y enfermedad cardíaca."},
+  {n:"Crisis hipertensiva",b:"#E24B4A",bt:"#fff",d:"Sistólica ≥180 o diastólica ≥120. Busca atención de urgencias de inmediato. Puede causar accidente cerebrovascular, infarto o daño a órganos."}
+];
+function cls_es(s,d){if(s<90||d<60)return 0;if(s<120&&d<80)return 1;if(s<130&&d<80)return 2;if(s<140||d<90)return 3;if(s<180||d<120)return 4;return 5;}
+function s2p_es(v){return Math.min(100,Math.max(0,(v-80)/120*100)).toFixed(1)+'%';}
+function d2p_es(v){return Math.min(100,Math.max(0,(v-40)/90*100)).toFixed(1)+'%';}
+function upd_es(){
+  const s=+document.getElementById('ss_es').value,d=+document.getElementById('sd_es').value;
+  document.getElementById('sv_es').textContent=s;document.getElementById('dv_es').textContent=d;
+  document.getElementById('rout_es').textContent=s+' / '+d;
+  document.getElementById('sn_es').style.left=s2p_es(s);document.getElementById('dn_es').style.left=d2p_es(d);
+  const c=cats_es[cls_es(s,d)];
+  const b=document.getElementById('cbadge_es');b.textContent=c.n;b.style.background=c.b;b.style.color=c.bt;
+  document.getElementById('cn_es').textContent=c.n;document.getElementById('cd_es').textContent=c.d;
+}
+upd_es();
+</script>
+      </div>
+    </div>
+
+    <h3>Tabla de referencia completa</h3>
+    <table>
+      <thead>
+        <tr><th>Categoría</th><th>Sistólica (mmHg)</th><th>Diastólica (mmHg)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#4B9FE1"></span>Baja (hipotensión)</td><td>&lt; 90</td><td>&lt; 60</td></tr>
+        <tr><td><span class="dot" style="background:#5DCAA5"></span>Normal</td><td>&lt; 120</td><td>&lt; 80</td></tr>
+        <tr><td><span class="dot" style="background:#97C459"></span>Elevada</td><td>120 – 129</td><td>&lt; 80</td></tr>
+        <tr><td><span class="dot" style="background:#FAC775"></span>Hipertensión etapa 1</td><td>130 – 139</td><td>80 – 89</td></tr>
+        <tr><td><span class="dot" style="background:#F09595"></span>Hipertensión etapa 2</td><td>140 – 179</td><td>90 – 119</td></tr>
+        <tr><td><span class="dot" style="background:#E24B4A"></span>Crisis hipertensiva</td><td>≥ 180</td><td>≥ 120</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="causas">
+    <h2>6. ¿Qué controla la presión arterial?</h2>
+    <p>Tres factores fisiológicos determinan tu presión arterial. Piensa en ello como la presión del agua en una instalación de tuberías:</p>
+    <h3>1. Gasto cardíaco — qué tan fuerte late el corazón</h3>
+    <p>Más latidos por minuto, o una contracción más fuerte por latido, significa más sangre empujada hacia las arterias cada segundo — y por lo tanto mayor presión. Por eso el ejercicio, la adrenalina y el estrés aumentan temporalmente la presión arterial: el corazón late más rápido y con más fuerza.</p>
+    <h3>2. Resistencia vascular — qué tan anchas están las arterias</h3>
+    <p>Las arterias más estrechas hacen que la sangre tenga que empujar con más fuerza para pasar — exactamente como pellizcar una manguera aumenta la presión en el pellizco. Las placas de colesterol, el endurecimiento arterial con la edad, el tabaquismo y el estrés crónico estrechan las arterias, aumentando la resistencia y la presión.</p>
+    <h3>3. Volumen sanguíneo — cuánto líquido hay en el sistema</h3>
+    <p>Más fluido en el sistema circulatorio significa más presión sobre las paredes. La sal en la dieta hace que los riñones retengan agua, aumentando el volumen sanguíneo. Por eso una dieta alta en sal eleva la presión arterial, y reducir el consumo de sal es una de las intervenciones sin medicamentos más efectivas para la hipertensión.</p>
+    <div class="callout warning">
+      <div class="callout-title">El daño silencioso de la alta resistencia</div>
+      Las arterias crónicamente rígidas o estrechas hacen que el corazón trabaje más en cada latido — durante décadas. Con el tiempo, esto agranda y debilita el músculo cardíaco, y la presión alta constante erosiona los delicados revestimientos de las arterias del cerebro, los ojos y los riñones.
+    </div>
+  </section>
+
+  <section id="memoria">
+    <h2>7. Guía rápida de referencia y memoria</h2>
+    <p>Todo lo que tiende a olvidarse, en una sola tabla:</p>
+    <table class="mem-table">
+      <thead><tr><th>Pregunta</th><th>Respuesta</th></tr></thead>
+      <tbody>
+        <tr><td>¿Por qué dos números?</td><td>Dos momentos: corazón contrayéndose (sistólica) y corazón descansando (diastólica)</td></tr>
+        <tr><td>¿Cuál es más alto?</td><td>La sistólica siempre es mayor — es durante la contracción</td></tr>
+        <tr><td>¿Por qué mercurio?</td><td>Los antiguos manómetros de tubo de vidrio elevaban literalmente una columna de mercurio; la unidad se quedó</td></tr>
+        <tr><td>Rango normal</td><td>Por debajo de 120/80 mmHg (con límite inferior ~90/60)</td></tr>
+        <tr><td>¿Qué es 120/80?</td><td>El clásico "normal del libro de texto" — el límite superior de lo saludable</td></tr>
+        <tr><td>¿Por qué la sal sube la PA?</td><td>Sal → retención de agua → más volumen sanguíneo → más presión</td></tr>
+        <tr><td>¿Por qué el estrés sube la PA?</td><td>Adrenalina → arterias se estrechan + corazón late más rápido → mayor presión</td></tr>
+        <tr><td>¿Qué mide la diastólica?</td><td>Presión de referencia entre latidos — lo que experimentan las arterias en reposo</td></tr>
+        <tr><td>Etimología de sistólica</td><td>Griego <em>systolē</em> = contracción</td></tr>
+        <tr><td>Etimología de diastólica</td><td>Griego <em>diastolē</em> = dilatación / expansión</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="report-footer">
+    <p>Este documento es solo para fines educativos y no constituye asesoramiento médico.<br>Consulta siempre a un profesional de la salud cualificado para orientación médica personal.</p>
+  </footer>
+
+</div>
+</body>
+</html>

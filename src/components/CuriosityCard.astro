@@ -1,0 +1,62 @@
+---
+import { format } from 'date-fns';
+
+interface Props {
+	title: string;
+	description: string;
+	publishDate: Date;
+	url: string;
+	type: 'mdx' | 'artifact';
+	tags?: string[];
+}
+
+const { title, description, publishDate, url, type, tags } = Astro.props;
+
+const truncatedDescription =
+	description.length > 120 ? description.slice(0, 120) + '...' : description;
+---
+
+<article class="group">
+	<a href={url} class="block">
+		<div class="aspect-[16/10] mb-4 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center relative">
+			<span class="text-4xl opacity-30">{type === 'artifact' ? '🔮' : '🌀'}</span>
+			{type === 'artifact' && (
+				<span class="absolute top-3 right-3 text-xs font-medium px-2 py-1 rounded-full bg-garden-accent/10 text-garden-accent dark:bg-garden-dark-accent/10 dark:text-garden-dark-accent font-ui">
+					Interactive
+				</span>
+			)}
+		</div>
+		<h2 class="text-lg font-semibold text-garden-primary dark:text-garden-dark-primary group-hover:text-garden-accent dark:group-hover:text-garden-dark-accent transition-colors font-ui mb-2">
+			{title}
+		</h2>
+	</a>
+	<p class="text-sm text-body mb-3 leading-relaxed line-clamp-2">
+		{truncatedDescription}
+	</p>
+	<div class="flex items-center gap-3">
+		<time
+			datetime={publishDate.toISOString()}
+			class="text-xs text-gray-600 dark:text-gray-400 font-ui uppercase tracking-wide"
+		>
+			{format(publishDate, 'MMM d, yyyy')}
+		</time>
+		{tags && tags.length > 0 && (
+			<div class="flex gap-2">
+				{tags.slice(0, 3).map((tag) => (
+					<span class="text-xs text-gray-500 dark:text-gray-500 font-ui">
+						#{tag}
+					</span>
+				))}
+			</div>
+		)}
+	</div>
+</article>
+
+<style>
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+</style>

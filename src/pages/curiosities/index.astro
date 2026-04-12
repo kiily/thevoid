@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CuriosityCard from '../../components/CuriosityCard.astro';
+import { DataService } from '../../lib/data-service';
+
+const curiosities = await DataService.getCuriosities();
+const sorted = curiosities.sort(
+	(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+function getCuriosityUrl(item: typeof sorted[number]) {
+	if (item.data.type === 'artifact' && item.data.artifactFile) {
+		return `/curiosities/${item.data.artifactFile}`;
+	}
+	return `/curiosities/${item.id}`;
+}
+---
+
+<Layout title="Curiosities | Miguel Marin">
+	<div class="container mx-auto max-w-5xl px-6 md:px-8 py-20">
+		<header class="mb-10">
+			<h1 class="text-garden-primary dark:text-garden-dark-primary mb-3">Curiosities</h1>
+			<p class="text-lg text-body">A collection of interesting things — interactive artifacts, explorations, and odd finds.</p>
+		</header>
+
+		<div class="mb-6 text-sm text-gray-600 dark:text-gray-400 font-ui">
+			{sorted.length} {sorted.length === 1 ? 'curiosity' : 'curiosities'}
+		</div>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+			{sorted.map((item) => (
+				<CuriosityCard
+					title={item.data.title}
+					description={item.data.description}
+					publishDate={item.data.publishDate}
+					url={getCuriosityUrl(item)}
+					type={item.data.type}
+					tags={item.data.tags}
+				/>
+			))}
+		</div>
+	</div>
+</Layout>

@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 export type GardenPost = CollectionEntry<'garden'>;
 export type Project = CollectionEntry<'projects'>;
 export type Person = CollectionEntry<'people'>;
+export type Curiosity = CollectionEntry<'curiosities'>;
 
 /**
  * Centralized data service to prevent redundant collection fetching
@@ -13,6 +14,7 @@ export class DataService {
 	private static gardenCache: GardenPost[] | null = null;
 	private static projectsCache: Project[] | null = null;
 	private static peopleCache: Person[] | null = null;
+	private static curiositiesCache: Curiosity[] | null = null;
 	private static categoriesCache: string[] | null = null;
 	private static tagsCache: string[] | null = null;
 
@@ -44,6 +46,16 @@ export class DataService {
 			this.peopleCache = await getCollection('people');
 		}
 		return this.peopleCache;
+	}
+
+	/**
+	 * Get all curiosities with caching
+	 */
+	static async getCuriosities(): Promise<Curiosity[]> {
+		if (!this.curiositiesCache) {
+			this.curiositiesCache = await getCollection('curiosities');
+		}
+		return this.curiositiesCache;
 	}
 
 	/**
@@ -129,6 +141,7 @@ export class DataService {
 		this.gardenCache = null;
 		this.projectsCache = null;
 		this.peopleCache = null;
+		this.curiositiesCache = null;
 		this.categoriesCache = null;
 		this.tagsCache = null;
 	}

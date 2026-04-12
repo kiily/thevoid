@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BackButton from '../../components/BackButton.astro';
+import { format } from 'date-fns';
+
+export async function getStaticPaths() {
+	const curiosities = await getCollection('curiosities');
+	return curiosities
+		.filter((item) => item.data.type === 'mdx')
+		.map((item) => ({
+			params: { slug: item.id },
+			props: { item },
+		}));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<Layout
+	title={item.data.title}
+	description={item.data.description}
+	lang={item.data.lang ?? 'en'}
+>
+	<article class="max-w-4xl mx-auto">
+		<BackButton href="/curiosities" label="Back to Curiosities" />
+
+		<header class="my-8">
+			<h1 class="text-garden-primary dark:text-garden-dark-primary mb-4">
+				{item.data.title}
+			</h1>
+
+			{item.data.tags && item.data.tags.length > 0 && (
+				<div class="flex flex-wrap gap-2 mb-4">
+					{item.data.tags.map((tag: string) => (
+						<span class="tag px-2 py-1 text-sm rounded-md font-ui">
+							{tag}
+						</span>
+					))}
+				</div>
+			)}
+
+			<div class="text-body font-ui">
+				<time datetime={item.data.publishDate.toISOString()}>
+					{format(item.data.publishDate, 'MMMM d, yyyy')}
+				</time>
+			</div>
+		</header>
+
+		<div class="prose prose-lg dark:prose-dark max-w-none">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.tag {
+		background-color: #f0f0f0;
+		color: #666666;
+	}
+	.dark .tag {
+		background-color: #333333;
+		color: #cccccc;
+	}
+</style>

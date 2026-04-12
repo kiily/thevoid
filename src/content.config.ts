@@ -74,8 +74,24 @@ const people = defineCollection({
 		}),
 });
 
+const curiosities = defineCollection({
+	loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/curiosities' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			publishDate: z.date(),
+			type: z.enum(['mdx', 'artifact']).default('mdx'),
+			artifactFile: z.string().optional(),
+			tags: z.array(z.string()).optional(),
+			lang: z.enum(['en', 'pt', 'es', 'fr', 'ja']).optional(),
+			image: image().optional(),
+		}),
+});
+
 export const collections = {
 	garden,
 	projects,
 	people,
+	curiosities,
 };
