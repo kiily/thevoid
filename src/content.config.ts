@@ -89,9 +89,22 @@ const curiosities = defineCollection({
 		}),
 });
 
+const prisms = defineCollection({
+	loader: glob({ pattern: '**/[^_]*.md', base: './src/content/prisms' }),
+	schema: z.object({
+		name: z.string(),
+		description: z.string(),
+		type: z.enum(['analytical', 'epistemic', 'interpretive', 'generative']),
+		steps: z.number(),
+		inspiration: z.string().optional(),
+		order: z.number().optional(),
+	}),
+});
+
 export const collections = {
 	garden,
 	projects,
 	people,
 	curiosities,
+	prisms,
 };

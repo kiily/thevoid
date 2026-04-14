@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const prisms = await getCollection('prisms');
+  return prisms.map((prism) => ({
+    params: { slug: prism.id },
+    props: { prism },
+  }));
+};
+
+const { prism } = Astro.props;
+const { Content } = await render(prism);
+const rawBody = prism.body ?? '';
+---
+
+<Layout
+  title={`${prism.data.name} — prism | The Void`}
+  description={prism.data.description}
+>
+  <article class="max-w-3xl mx-auto py-20 px-6">
+
+    <nav class="mb-10">
+      <a
+        href="/prisms"
+        class="font-ui text-xs tracking-widest uppercase text-gray-500 dark:text-gray-500 hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors inline-flex items-center gap-2"
+      >
+        <span>←</span> Prisms
+      </a>
+    </nav>
+
+    <header class="mb-10">
+      <p class="font-ui text-xs font-medium tracking-[0.22em] uppercase text-garden-accent dark:text-garden-dark-accent mb-4">
+        {prism.data.type} · {prism.data.steps} steps
+      </p>
+      <h1 class="text-garden-primary dark:text-garden-dark-primary mb-5 font-display">{prism.data.name}</h1>
+      <p class="text-muted font-body text-lg leading-snug max-w-2xl">{prism.data.description}</p>
+    </header>
+
+    <div class="relative md:grid md:grid-cols-[minmax(0,1fr)_auto] md:gap-10 md:items-start">
+
+      <div class="prism-body prose prose-lg dark:prose-dark max-w-none order-2 md:order-1">
+        <Content />
+      </div>
+
+      <aside class="not-prose order-1 md:order-2 mb-8 md:mb-0 md:sticky md:top-28">
+        <button
+          type="button"
+          id="copy-prism"
+          data-prism-body={rawBody}
+          class="copy-btn inline-flex items-center gap-2.5 px-5 py-3 font-ui text-sm font-medium bg-garden-primary text-white dark:bg-garden-dark-primary dark:text-garden-dark-background hover:bg-garden-accent dark:hover:bg-garden-dark-accent transition-colors"
+        >
+          <svg data-copy-icon width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="9" height="10" rx="1"></rect>
+            <path d="M7 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v8"></path>
+          </svg>
+          <span data-copy-label>Copy prism</span>
+        </button>
+        {prism.data.inspiration && (
+          <p class="font-ui text-[0.68rem] tracking-widest uppercase text-gray-500 dark:text-gray-500 mt-4 max-w-[14rem]">
+            after <span class="normal-case tracking-normal font-body italic">{prism.data.inspiration}</span>
+          </p>
+        )}
+      </aside>
+
+    </div>
+
+  </article>
+</Layout>
+
+<script>
+  const btn = document.getElementById('copy-prism') as HTMLButtonElement | null;
+  if (btn) {
+    const body = btn.dataset.prismBody ?? '';
+    const label = btn.querySelector('[data-copy-label]') as HTMLElement | null;
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(body);
+        if (label) {
+          const original = label.textContent;
+          label.textContent = 'Copied';
+          btn.classList.add('is-copied');
+          setTimeout(() => {
+            if (label) label.textContent = original;
+            btn.classList.remove('is-copied');
+          }, 1500);
+        }
+      } catch {
+        if (label) label.textContent = 'Copy failed';
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Operational step treatment — each h2 becomes a procedure marker, not an article heading. */
+  .prism-body :global(h2) {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-garden-primary, #1a1a1a);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  :global(.dark) .prism-body :global(h2) {
+    color: var(--color-garden-dark-primary, #f7f7f2);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* First h2 (no preamble here, but keep tight spacing if it opens the body) */
+  .prism-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  /* Paragraphs inside steps — slightly tighter line height than default prose */
+  .prism-body :global(h2 + p) {
+    margin-top: 0.75rem;
+  }
+
+  /* Heading level 3 (subsections inside `draft`) */
+  .prism-body :global(h3) {
+    font-family: var(--font-cormorant-garamond), ui-serif, serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .copy-btn.is-copied {
+    background-color: var(--color-garden-accent, #006400);
+  }
+</style>

@@ -1,0 +1,13 @@
+[
+  {
+    "type": "conservation_law",
+    "claim": "Between Impossibilities",
+    "source_file": "/src/pages/garden",
+    "prism": "l12_universal",
+    "model": "sonnet",
+    "confidence": "STRUCTURAL",
+    "timestamp": "2026-04-14T20:10:19",
+    "falsifiable": "Find a modification that improves BOTH sides of the trade-off simultaneously",
+    "verified": false
+  }
+]

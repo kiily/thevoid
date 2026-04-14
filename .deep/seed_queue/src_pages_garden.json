@@ -1,0 +1,9 @@
+[
+  {
+    "question": "What structural property does /src/pages/garden have?",
+    "answer": "problem is **routing ambiguity by type erasure**: the file system cannot distinguish *content identity* (`/garden/my-post`) from *pagination position* (`/garden/2`) at compile time. Disambiguation is delegated entirely to `getStaticPaths()` runtime logic, meaning the route tree has no intrinsic structure — only emergent structure produced by data.",
+    "topic": "code-analysis",
+    "type": "fact",
+    "source": "prism-analysis:/src/pages/garden"
+  }
+]

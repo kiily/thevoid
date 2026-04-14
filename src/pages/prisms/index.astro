@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const prisms = await getCollection('prisms');
+const sorted = prisms.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const groupOrder: Array<{ key: string; label: string; blurb: string }> = [
+  {
+    key: 'analytical',
+    label: 'Diagnostic',
+    blurb: 'Attack a claim. Find the trade-off that cannot be written away.',
+  },
+  {
+    key: 'epistemic',
+    label: 'Epistemic',
+    blurb: 'Test whether a claim survives its counter-experience.',
+  },
+  {
+    key: 'interpretive',
+    label: 'Interpretive',
+    blurb: 'Read the piece against what it refuses to say.',
+  },
+  {
+    key: 'generative',
+    label: 'Generative',
+    blurb: 'The one that outputs prose. Use last, or not at all.',
+  },
+];
+
+const grouped = groupOrder
+  .map((group) => ({
+    ...group,
+    items: sorted.filter((p) => p.data.type === group.key),
+  }))
+  .filter((g) => g.items.length > 0);
+---
+
+<Layout
+  title="Prisms | The Void"
+  description="Markdown prompts that run a model through a fixed sequence of operations on a piece of contemplative prose."
+>
+  <article class="max-w-3xl mx-auto py-20 px-6">
+
+    <header class="mb-16">
+      <p class="text-garden-accent dark:text-garden-dark-accent font-ui text-sm font-medium tracking-widest uppercase mb-4">Prisms</p>
+      <h1 class="text-garden-primary dark:text-garden-dark-primary mb-5">A drawer of instruments</h1>
+      <p class="text-muted font-body text-lg leading-snug max-w-2xl">
+        Imperative prompts. Paste one, paste your draft, read what the sequence surfaces. They will not flatter the piece.
+      </p>
+    </header>
+
+    <div class="space-y-16">
+      {grouped.map((group) => (
+        <section>
+          <div class="flex items-baseline justify-between gap-6 mb-6 pb-3 border-b border-gray-200 dark:border-gray-800">
+            <h2 class="font-ui text-xs font-semibold tracking-[0.22em] uppercase text-garden-primary dark:text-garden-dark-primary m-0">
+              {group.label}
+            </h2>
+            <p class="font-body text-sm text-muted italic text-right max-w-sm m-0">
+              {group.blurb}
+            </p>
+          </div>
+
+          <ul class="not-prose m-0 p-0 list-none">
+            {group.items.map((p) => (
+              <li class="border-b border-gray-100 dark:border-gray-900 last:border-b-0">
+                <a
+                  href={`/prisms/${p.id}`}
+                  class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-x-10 gap-y-2 py-6 group"
+                >
+                  <div>
+                    <h3 class="font-display text-3xl leading-none text-garden-primary dark:text-garden-dark-primary group-hover:text-garden-accent dark:group-hover:text-garden-dark-accent transition-colors m-0">
+                      {p.data.name}
+                    </h3>
+                    <span class="block font-ui text-[0.68rem] tracking-widest uppercase text-gray-500 dark:text-gray-500 mt-2">
+                      {p.data.steps} steps
+                    </span>
+                  </div>
+                  <p class="font-body text-base leading-snug text-body m-0">
+                    {p.data.description}
+                  </p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <details class="mt-20 group">
+      <summary class="cursor-pointer font-ui text-sm tracking-widest uppercase text-gray-500 dark:text-gray-500 hover:text-garden-accent dark:hover:text-garden-dark-accent transition-colors inline-flex items-center gap-2 list-none prisms-summary">
+        <span class="inline-block transition-transform group-open:rotate-90">→</span>
+        About prisms
+      </summary>
+      <div class="prose prose-base dark:prose-dark max-w-2xl mt-6 space-y-6">
+        <p>
+          A prism is a markdown system prompt that acts as a small cognitive program. Instead of asking a model to reason <em>about</em> a piece of prose, it instructs the model to construct something — a claim, a falsification, a counter-experience, a rewrite — and observe what breaks. The format carries the analytical power. The vocabulary only chooses the domain.
+        </p>
+        <p>
+          The upstream set was built for code. This set is built for essays that attempt to say something true about experience. The moves are the same: make a claim, attack it, find the trade-off that cannot be written away. The vocabulary has shifted from <em>bugs</em> and <em>API surface</em> to <em>blindspots</em> and <em>borrowed authority</em>.
+        </p>
+        <p>
+          To use one: open a prism, copy its body, paste it into a capable model, paste the essay immediately after. Read the output against the essay. The prism's job is to make the piece legible to itself, not to improve it. <code>draft</code> is the exception — it outputs rewritten prose rather than analysis. Use it last, or not at all.
+        </p>
+      </div>
+    </details>
+
+    <footer class="mt-16 pt-6 border-t border-gray-200 dark:border-gray-800">
+      <p class="font-ui text-xs text-gray-500 dark:text-gray-500 m-0">
+        Format and imperative voice adapted from <a href="https://github.com/Cranot/agi-in-md" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-garden-accent dark:hover:text-garden-dark-accent">Cranot/agi-in-md</a>. For code, use the originals.
+      </p>
+    </footer>
+
+  </article>
+</Layout>
+
+<style>
+  .prisms-summary::-webkit-details-marker { display: none; }
+  .prisms-summary::marker { display: none; content: ''; }
+</style>
