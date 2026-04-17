@@ -454,29 +454,17 @@ import Layout from '../layouts/Layout.astro';
 					<li class="itinerary-item">
 						<span class="item-time">Evening</span>
 						<div class="item-content">
-							<h3 class="item-title">Dinner at La Fine Bouche</h3>
-						</div>
-					</li>
-					<li class="itinerary-item">
-						<span class="item-time">Night</span>
-						<div class="item-content">
 							<h3 class="item-title">
-								Drive to Libourne <svg
-									class="icon"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									aria-hidden="true"
-									><path d="M8 21l8 0"></path><path d="M12 15l0 6"></path><path
-										d="M17 3l1 7c0 3.012 -2.686 5 -6 5s-6 -1.988 -6 -5l1 -7h10"
-									></path><path d="M6 10a5 5 0 0 1 6 0a5 5 0 0 0 6 0"
-									></path></svg
+								Dinner at <a
+									href="https://www.thefork.com/restaurant/cosy-tourny-r431655"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="item-link">Cosy Tourny &nearr;</a
 								>
 							</h3>
-							<p class="item-desc">Relaxamoles after a long day.</p>
+							<p class="item-desc">
+								Garden terrace dinner in Libourne. Relaxamoles after a long day.
+							</p>
 						</div>
 					</li>
 					<li class="itinerary-item itinerary-item-stay">
@@ -545,10 +533,16 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 					</li>
 					<li class="itinerary-item">
-						<span class="item-time">Midday</span>
+						<span class="item-time">Lunch</span>
 						<div class="item-content">
 							<h3 class="item-title">
-								Winery Tour & Lunch <svg
+								Lunch at <a
+									href="https://www.troplong-mondot.com/en/les-belles-perdrix-restaurant/"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="item-link"
+									>Les Belles Perdrix de Troplong Mondot &nearr;</a
+								> at 13h00 <svg
 									class="icon"
 									viewBox="0 0 24 24"
 									fill="none"
@@ -564,15 +558,52 @@ import Layout from '../layouts/Layout.astro';
 								>
 							</h3>
 							<p class="item-desc">
-								Taste the terroir, then a proper French lunch in the village.
+								Taste the terroir, then a proper French lunch on the
+								ch&acirc;teau estate.
+							</p>
+						</div>
+					</li>
+					<li class="itinerary-item">
+						<span class="item-time">Afternoon</span>
+						<div class="item-content">
+							<h3 class="item-title">
+								Clo&icirc;tre des Cordeliers &amp; Ch&acirc;teau Guadet <svg
+									class="icon"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+									><path d="M8 21l8 0"></path><path d="M12 15l0 6"></path><path
+										d="M17 3l1 7c0 3.012 -2.686 5 -6 5s-6 -1.988 -6 -5l1 -7h10"
+									></path><path d="M6 10a5 5 0 0 1 6 0a5 5 0 0 0 6 0"
+									></path></svg
+								>
+							</h3>
+							<p class="item-desc">
+								Sparkling cr&eacute;mant in a medieval cloister, then a Grand
+								Cru Class&eacute; tasting in underground limestone galleries.
+								All walkable from the village.
 							</p>
 						</div>
 					</li>
 					<li class="itinerary-item">
 						<span class="item-time">Evening</span>
 						<div class="item-content">
-							<h3 class="item-title">Dinner</h3>
-							<p class="item-desc">Maison Mulatô dinner?</p>
+							<h3 class="item-title">
+								Dinner at <a
+									href="https://www.envers-dudecor.com/en/"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="item-link">L'Envers du D&eacute;cor &nearr;</a
+								>
+							</h3>
+							<p class="item-desc">
+								St. Emilion's iconic wine bar &amp; bistro. Secret garden
+								terrace, 500+ wines, classic French cooking.
+							</p>
 						</div>
 					</li>
 					<li class="itinerary-item itinerary-item-stay">
@@ -625,9 +656,19 @@ import Layout from '../layouts/Layout.astro';
 					<li class="itinerary-item">
 						<span class="item-time">Morning</span>
 						<div class="item-content">
-							<h3 class="item-title">Cruise Brunch</h3>
+							<h3 class="item-title">Libourne market</h3>
 							<p class="item-desc">
-								Brunch on the Garonne. A fitting farewell.
+								A lovely Dordogne-side market town with local produce, cheese,
+								charcuterie — great for picking up gifts and provisions.
+							</p>
+						</div>
+					</li>
+					<li class="itinerary-item">
+						<span class="item-time">Lunch</span>
+						<div class="item-content">
+							<h3 class="item-title">Lunch at La Fine Bouche</h3>
+							<p class="item-desc">
+								A proper farewell meal before the journey home.
 							</p>
 						</div>
 					</li>
@@ -1052,6 +1093,9 @@ import Layout from '../layouts/Layout.astro';
 	}
 	.revealed .itinerary-item:nth-child(6) {
 		transition-delay: 0.6s;
+	}
+	.revealed .itinerary-item:nth-child(7) {
+		transition-delay: 0.7s;
 	}
 
 	/* Hero wine fill reveal */
