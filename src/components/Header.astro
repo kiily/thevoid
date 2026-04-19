@@ -34,7 +34,7 @@ const isHomePage = currentPath === '/';
 				The void
 			</a>
 
-			<div class="flex items-center gap-6">
+			<div class="flex items-center gap-4 md:gap-6">
 				<ul class="hidden md:flex items-center gap-6">
 					{
 						navItems.map((item) => (
@@ -50,7 +50,42 @@ const isHomePage = currentPath === '/';
 					}
 				</ul>
 				<ThemeToggle />
+				<button
+					id="mobile-menu-toggle"
+					type="button"
+					class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md text-garden-secondary hover:text-garden-primary dark:text-garden-dark-secondary dark:hover:text-garden-dark-primary transition-colors"
+					aria-label="Toggle navigation menu"
+					aria-expanded="false"
+					aria-controls="mobile-menu"
+				>
+					<svg id="mobile-menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+					<svg id="mobile-menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6" />
+					</svg>
+				</button>
 			</div>
+		</div>
+
+		<div
+			id="mobile-menu"
+			class="md:hidden hidden mt-4 pb-2"
+		>
+			<ul class="flex flex-col gap-1">
+				{
+					navItems.map((item) => (
+						<li>
+							<a
+								href={isHomePage ? item.href : `/${item.href.slice(1)}`}
+								class="mobile-nav-link block px-3 py-3 text-base font-medium text-garden-secondary hover:text-garden-primary dark:text-garden-dark-secondary dark:hover:text-garden-dark-primary hover:bg-gray-100/50 dark:hover:bg-gray-800/50 rounded-md transition-colors font-ui"
+							>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
 		</div>
 	</nav>
 </header>
@@ -60,6 +95,29 @@ const isHomePage = currentPath === '/';
 	document.addEventListener('DOMContentLoaded', () => {
 		const isHomePage = window.location.pathname === '/';
 		const navLinks = document.querySelectorAll('header nav a[href*="#"]');
+
+		// Mobile menu toggle
+		const toggleBtn = document.getElementById('mobile-menu-toggle');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const iconOpen = document.getElementById('mobile-menu-icon-open');
+		const iconClose = document.getElementById('mobile-menu-icon-close');
+
+		const setMenuOpen = (open: boolean) => {
+			if (!toggleBtn || !mobileMenu || !iconOpen || !iconClose) return;
+			toggleBtn.setAttribute('aria-expanded', String(open));
+			mobileMenu.classList.toggle('hidden', !open);
+			iconOpen.classList.toggle('hidden', open);
+			iconClose.classList.toggle('hidden', !open);
+		};
+
+		toggleBtn?.addEventListener('click', () => {
+			const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+			setMenuOpen(!isOpen);
+		});
+
+		mobileMenu?.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => setMenuOpen(false));
+		});
 
 		navLinks.forEach((link) => {
 			link.addEventListener('click', (e) => {
