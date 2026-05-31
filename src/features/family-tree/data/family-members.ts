@@ -73,7 +73,7 @@ export const familyMembers: FamilyMember[] = [
 		},
 	},
 
-	// Generation 2 - Grandparents
+	// Generation 2 - Grandparents; Yaya's fam
 	{
 		id: '4',
 		data: {
@@ -88,6 +88,86 @@ export const familyMembers: FamilyMember[] = [
 			parents: ['6', '7'],
 			spouses: ['5'],
 			children: ['3'],
+		},
+	},
+	{
+		id: '13',
+		data: {
+			gender: 'F',
+			first_name: 'Carmen',
+			last_name: 'Navarro Cervantes',
+			birthday: '1917-09-28',
+			avatar: '',
+			location: 'Cartagena, Spain',
+		},
+		rels: {
+			parents: ['6', '7'],
+			spouses: [],
+			children: [],
+		},
+	},
+	{
+		id: '14',
+		data: {
+			gender: 'F',
+			first_name: 'Francisca',
+			last_name: 'Navarro Cervantes',
+			birthday: '1920-09-28',
+			avatar: '',
+			location: 'Cartagena, Spain',
+		},
+		rels: {
+			parents: ['6', '7'],
+			spouses: [],
+			children: [],
+		},
+	},
+	{
+		id: '15',
+		data: {
+			gender: 'F',
+			first_name: 'Antonia',
+			last_name: 'Navarro Cervantes',
+			birthday: '1921-09-28',
+			avatar: '',
+			location: 'Cartagena, Spain',
+		},
+		rels: {
+			parents: ['6', '7'],
+			spouses: [],
+			children: [],
+		},
+	},
+	{
+		id: '16',
+		data: {
+			gender: 'M',
+			first_name: 'Antonio',
+			last_name: 'Navarro Cervantes',
+			birthday: '1922-09-28',
+			avatar: '',
+			location: 'Cartagena, Spain',
+		},
+		rels: {
+			parents: ['6', '7'],
+			spouses: [],
+			children: [],
+		},
+	},
+	{
+		id: '17',
+		data: {
+			gender: 'M',
+			first_name: 'Juan',
+			last_name: 'Navarro Cervantes',
+			birthday: '1936-09-28',
+			avatar: '',
+			location: 'Cartagena, Spain',
+		},
+		rels: {
+			parents: ['6', '7'],
+			spouses: [],
+			children: [],
 		},
 	},
 	{
