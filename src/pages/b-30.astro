@@ -401,11 +401,11 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 					</li>
 					<li class="itinerary-item">
-						<span class="item-time">Morning</span>
+						<span class="item-time">Early rise</span>
 						<div class="item-content">
 							<h3 class="item-title">Dune du Pilat</h3>
 							<p class="item-desc">
-								Europe's tallest sand dune. The views are unreal.
+								Europe's tallest sand dune. Early start needed to get there with time — the views are unreal.
 							</p>
 						</div>
 					</li>
@@ -456,14 +456,14 @@ import Layout from '../layouts/Layout.astro';
 						<div class="item-content">
 							<h3 class="item-title">
 								Dinner at <a
-									href="https://www.thefork.com/restaurant/cosy-tourny-r431655"
+									href="https://www.lamaisonmulato.com/en"
 									target="_blank"
 									rel="noopener noreferrer"
-									class="item-link">Cosy Tourny &nearr;</a
-								>
+									class="item-link">La Maison Mulato &nearr;</a
+								> at 20h00
 							</h3>
 							<p class="item-desc">
-								Garden terrace dinner in Libourne. Relaxamoles after a long day.
+								Table for 2 booked at 20h00 on July 31st. Eat where you sleep — always sound advice.
 							</p>
 						</div>
 					</li>
@@ -595,11 +595,18 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 					</li>
 					<li class="itinerary-item">
-						<span class="item-time">Evening - 20:00</span>
+						<span class="item-time">Evening</span>
 						<div class="item-content">
-							<h3 class="item-title">Dinner at La Maison Mulato</h3>
+							<h3 class="item-title">
+								Dinner at <a
+									href="https://www.envers-dudecor.com/"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="item-link">L’Envers du Décor &nearr;</a
+								> at 20h30
+							</h3>
 							<p class="item-desc">
-								Eat where you sleep as always been sound advice.
+								Birthday dinner in Saint-Émilion. Table for 2 booked at 20h30.
 							</p>
 						</div>
 					</li>
@@ -663,7 +670,7 @@ import Layout from '../layouts/Layout.astro';
 					<li class="itinerary-item">
 						<span class="item-time">Lunch</span>
 						<div class="item-content">
-							<h3 class="item-title">Lunch at Les Drôles at 13h30</h3>
+							<h3 class="item-title">Lunch at <a href="https://www.restaurantlesdroles.fr/en/" target="_blank" rel="noopener noreferrer">Les Drôles</a> at 13h30</h3>
 							<p class="item-desc">
 								A proper farewell meal before the journey home.
 							</p>
@@ -763,6 +770,17 @@ import Layout from '../layouts/Layout.astro';
 	/* Force light theme on body for this page — always cream */
 	:global(html.b30-page-active body) {
 		background-color: #faf6f0 !important;
+	}
+
+	/* Hide global site header on this page */
+	:global(html.b30-page-active body > header) {
+		display: none !important;
+	}
+	:global(html.b30-page-active body > .flex) {
+		padding-top: 0 !important;
+	}
+	:global(html.b30-page-active body > .flex > main) {
+		padding: 0 !important;
 	}
 
 	/* Flicker-free auth state via early inline script */
